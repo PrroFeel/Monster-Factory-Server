@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.application.
 
 import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationError;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.RegistProjectRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.SaveProjectRequestDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,4 +41,17 @@ public class ProjectRequestValidator {
         return errors;
     }
 
+
+    public List<ValidationError> validate(SaveProjectRequestDTO saveProjectRequest) {
+
+        List<ValidationError> errors = new ArrayList<>();
+        if (saveProjectRequest == null) {
+            errors.add(ValidationError.of("required"));
+        } else {
+            if (saveProjectRequest.getProjectId() == null){
+                errors.add(ValidationError.of("projectId", "required"));
+            }
+        }
+        return errors;
+    }
 }
