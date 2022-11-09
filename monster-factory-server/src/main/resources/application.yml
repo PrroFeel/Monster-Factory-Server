@@ -1,1 +1,71 @@
 
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+
+spring:
+  profiles:
+    group:
+      "local": "local, common"
+      "development": "development, common"
+    active: local
+
+---
+# ??
+spring:
+  config:
+    activate:
+      on-profile: "common"
+  jpa:
+    generate-ddl: false
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        show-sql: true
+  servlet:
+    multipart:
+      file-size-threshold: 1MB
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+logging:
+  level:
+    root: info
+    com:
+      amazonaws:
+        util:
+          # ?? ?? ?? ?? ??
+          EC2MetadataUtils: error
+
+
+---
+# ?? ??? ??
+spring:
+  environment: "local"
+  config:
+    activate:
+      on-profile: "local"
+  file-dir: /src/main/resources/files/
+
+---
+# ?? ??? ??
+spring:
+  environment: "development"
+  config:
+    activate:
+      on-profile: "development"
+  file-dir: /src/ec2-user/files/
+
+
+
