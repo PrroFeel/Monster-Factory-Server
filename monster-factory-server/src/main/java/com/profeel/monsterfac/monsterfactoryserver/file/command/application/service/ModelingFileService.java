@@ -48,7 +48,7 @@ public class ModelingFileService {
 
         FileInfo fileInfo = fileService.createFileInfo(multipartFile, dirName);
 
-        s3UploaderService.modelUpload(fileService.convertToFile(multipartFile), dirName, fileInfo.getFilePath());
+        //s3UploaderService.modelUpload(fileService.convertToFile(multipartFile), dirName, fileInfo.getFilePath());
 
         ModelingFileInfo modelingFileInfo = new ModelingFileInfo(
                 fileInfo.getOriginalName(),
