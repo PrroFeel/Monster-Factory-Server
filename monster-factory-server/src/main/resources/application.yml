@@ -1,4 +1,3 @@
-
 server:
   port: 8080
   servlet:
@@ -39,6 +38,9 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
 
+jwt:
+  secret: asdfjp298pafo1320efqw0udvnh0er0h412r08byfdq9dsvh02143908hfeqwn80fdqs0nfdqs0n412013rq0nqefn08dfas0das730732g86923
+
 logging:
   level:
     root: info
@@ -66,6 +68,5 @@ spring:
     activate:
       on-profile: "development"
   file-dir: /src/ec2-user/files/
-
 
 
