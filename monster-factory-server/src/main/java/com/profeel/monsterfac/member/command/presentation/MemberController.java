@@ -2,6 +2,7 @@ package com.profeel.monsterfac.member.command.presentation;
 
 
 import com.profeel.monsterfac.common.dto.ResponseDTO;
+import com.profeel.monsterfac.member.command.application.dto.LoginDTO;
 import com.profeel.monsterfac.member.command.application.dto.SignUpDTO;
 import com.profeel.monsterfac.member.command.application.service.ReqMemberService;
 import org.springframework.http.HttpStatus;
@@ -42,6 +43,12 @@ public class MemberController {
         System.out.println("controller : "+ signupinfo);
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.CREATED.value(), "회원 가입 성공", memberService.registMember(signupinfo)));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO logininfo) {
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "로그인 성공", memberService.login(logininfo)));
     }
 
 }
