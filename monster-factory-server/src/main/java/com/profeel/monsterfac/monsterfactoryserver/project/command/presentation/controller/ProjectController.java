@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.presentation
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.ProjectResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.RegistProjectRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.SaveProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.io.IOException;
 
 /**
  * <pre>
@@ -53,6 +56,25 @@ public class ProjectController {
                         HttpStatus.OK.value()
                         , "프로젝트 생성 성공"
                         , results
+                )
+        );
+    }
+
+    @PostMapping("/projects/save")
+    ResponseEntity<ResponseDTO> saveProjet(SaveProjectRequestDTO storeProjectRequest) throws IOException {
+        System.out.println("[ProjectController]");
+        System.out.println("put 요청 들어옴 -- saveProjet 메소드");
+
+        System.out.println("storeProjectRequest.projectId : " + storeProjectRequest.getProjectId());
+        System.out.println("storeProjectRequest.modelList : " + storeProjectRequest.getObjectList());
+
+        //ProjectResponseDTO result = storeProjectService.saveProject(storeProjectRequest);
+//        System.out.println(result);
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        , "프로젝트 저장 성공"
+                        ,  ""
                 )
         );
     }

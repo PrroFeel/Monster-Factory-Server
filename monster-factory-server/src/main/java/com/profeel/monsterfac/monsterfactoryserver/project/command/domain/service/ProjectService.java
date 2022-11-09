@@ -19,7 +19,6 @@ import java.io.IOException;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 public interface ProjectService {
     Editor createEditor(String userId);

@@ -20,7 +20,6 @@ import javax.persistence.Embeddable;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 
 @Embeddable
