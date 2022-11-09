@@ -5,6 +5,7 @@ import com.profeel.monsterfac.monsterfactoryserver.project.command.application.d
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.RegistProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.SaveProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.SaveProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +36,11 @@ import java.io.IOException;
 public class ProjectController {
 
     private RegistProjectService registProjectService;
-
+    private SaveProjectService saveProjectService;
     @Autowired
-    public ProjectController(RegistProjectService registProjectService) {
+    public ProjectController(RegistProjectService registProjectService, SaveProjectService saveProjectService ) {
         this.registProjectService = registProjectService;
-//        this.storeProjectService = storeProjectService;
+        this.saveProjectService = saveProjectService;
     }
 
     @PostMapping("/projects")
@@ -68,8 +69,8 @@ public class ProjectController {
         System.out.println("storeProjectRequest.projectId : " + storeProjectRequest.getProjectId());
         System.out.println("storeProjectRequest.modelList : " + storeProjectRequest.getObjectList());
 
-        //ProjectResponseDTO result = storeProjectService.saveProject(storeProjectRequest);
-//        System.out.println(result);
+        ProjectResponseDTO result = saveProjectService.saveProject(storeProjectRequest);
+        System.out.println(result);
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
