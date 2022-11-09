@@ -1,12 +1,15 @@
 package com.profeel.monsterfac.monsterfactoryserver.jwt;
 
 import com.profeel.monsterfac.monsterfactoryserver.jwt.exception.TokenException;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.TokenDTO;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -36,6 +40,7 @@ import java.util.stream.Collectors;
  */
 
 @Component
+@PropertySource("classpath:aws.yml")
 public class TokenProvider {
 
     private static final Logger log = LoggerFactory.getLogger(TokenProvider.class);
@@ -58,27 +63,25 @@ public class TokenProvider {
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
-//    public TokenDTO generateTokenDto(Member member) {
-//
-////        List<String> roles = Collections.singletonList(member.getAuth());
-//
-//        Claims claims = Jwts
-//                .claims()
-//                .setSubject(member.getMemberId());
-////        claims.put(AUTHORITIES_KEY, roles);
-//
-//        long now = (new Date()).getTime();
-//
-//        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
-//
-//        String accessToken = Jwts.builder()
-//                .setClaims(claims)
-//                .setExpiration(accessTokenExpiresIn)
-//                .signWith(key, SignatureAlgorithm.HS512)
-//                .compact();
-//
-//        return new TokenDTO(BEARER_TYPE, member.getMemberId(), accessToken, accessTokenExpiresIn.getTime());
-//    }
+    public TokenDTO generateTokenDto(Member member) {
+
+        Claims claims = Jwts
+                .claims()
+                .setSubject(member.getMemberId());
+
+
+        long now = (new Date()).getTime();
+
+        Date accessTokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
+
+        String accessToken = Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(accessTokenExpiresIn)
+                .signWith(key, SignatureAlgorithm.HS512)
+                .compact();
+
+        return new TokenDTO(BEARER_TYPE, member.getMemberId(), accessToken, accessTokenExpiresIn.getTime());
+    }
 
     public String getMemberId(String accessToken) {
         return Jwts
