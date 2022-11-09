@@ -1,4 +1,4 @@
-package com.profeel.monsterfac.file.query.service;
+package com.profeel.monsterfac.file.command.domain.service;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
