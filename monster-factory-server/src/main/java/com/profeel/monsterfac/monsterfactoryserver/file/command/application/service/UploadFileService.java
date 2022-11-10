@@ -41,7 +41,7 @@ public class UploadFileService {
         this.modelingFileRepository =modelingFileRepository;
     }
 
-    public ModelingFileInfo uploadModelingFile(MultipartFile multipartFile, String type) throws IOException {
+    public ModelingFileInfo uploadModelingFile(MultipartFile multipartFile) throws IOException {
         ModelingFileInfo fileInfo = fileService.createModelingFileInfo(multipartFile);
 
         // s3 업로드
@@ -50,7 +50,7 @@ public class UploadFileService {
         return fileInfo;
     }
 
-    public ImageFileInfo uploadImageFile(MultipartFile multipartFile, String type) throws IOException {
+    public ImageFileInfo uploadImageFile(MultipartFile multipartFile) throws IOException {
         ImageFileInfo fileInfo = fileService.createImageFileInfo(multipartFile);
         String url = s3UploaderService.imageUpload(fileService.convertToFile(multipartFile), fileInfo.getSavePath());
         fileInfo = new ImageFileInfo(fileInfo, url);

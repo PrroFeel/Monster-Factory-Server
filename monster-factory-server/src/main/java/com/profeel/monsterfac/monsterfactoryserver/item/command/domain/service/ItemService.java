@@ -1,8 +1,10 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.command.domain.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
-import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * <pre>
@@ -22,5 +24,5 @@ import org.springframework.web.multipart.MultipartFile;
 @DomainService
 public interface ItemService {
 
-    Object registItem(MultipartFile image, Item item);
+    ImageFileInfo uploadFile(MultipartFile itemImgFile) throws IOException;
 }

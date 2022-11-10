@@ -26,7 +26,7 @@ import java.io.IOException;
 @DomainService
 public class TowerServiceImpl implements TowerService {
 
-    UploadFileService uploadFileService;
+    private final UploadFileService uploadFileService;
 
     @Autowired
     public TowerServiceImpl(UploadFileService uploadFileService){
@@ -34,7 +34,7 @@ public class TowerServiceImpl implements TowerService {
     }
 
     public ModelingFileInfo uploadFile(MultipartFile multipartFile) throws IOException {
-        return uploadFileService.uploadModelingFile(multipartFile, "model");
+        return uploadFileService.uploadModelingFile(multipartFile);
     }
 
 
