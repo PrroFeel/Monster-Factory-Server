@@ -1,17 +1,12 @@
 package com.profeel.monsterfac.monsterfactoryserver.file.command.application.service;
 
 
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.repository.ModelingFileRepository;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.FileService;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.S3UploaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 /**
  * <pre>
@@ -44,23 +39,4 @@ public class ModelingFileService {
         this.modelingFileRepository =modelingFileRepository;
     }
 
-    public Integer uploadAndRegistModelingFile(MultipartFile multipartFile) throws IOException {
-
-        FileInfo fileInfo = fileService.createFileInfo(multipartFile, dirName);
-
-        //s3UploaderService.modelUpload(fileService.convertToFile(multipartFile), dirName, fileInfo.getFilePath());
-
-        ModelingFileInfo modelingFileInfo = new ModelingFileInfo(
-                fileInfo.getOriginalName(),
-                fileInfo.getExtension(),
-                fileInfo.getFilePath(),
-                fileInfo.getUploadDatetime()
-        );
-
-        modelingFileInfo =  modelingFileRepository.save(modelingFileInfo);
-        System.out.println("modelingFileInfo : " + modelingFileInfo );
-
-        return modelingFileInfo.getId();
-
-    }
 }
