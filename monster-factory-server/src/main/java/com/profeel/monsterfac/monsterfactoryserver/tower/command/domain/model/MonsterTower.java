@@ -1,6 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.model;
 
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileInfo;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 
 import javax.persistence.*;
 
@@ -28,11 +28,11 @@ public class MonsterTower {
     private Integer id;
 
     @Column(name="tower_name")
-    private String TowerName;
+    private String towerName;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="tower_file_id", unique = true)
-    private ModelingFileInfo towerModelingFileInfo;
+    private FileInfo towerModelingFileInfo;
 
 
 
@@ -41,16 +41,15 @@ public class MonsterTower {
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="monster_file_id", unique = true)
-    private ModelingFileInfo monsterModelingFileInfo;
+    private FileInfo monsterModelingFileInfo;
 
 
     @Column(name="ability")
     private String ability;
 
     protected MonsterTower() {}
-    public MonsterTower(Integer id, String towerName, ModelingFileInfo towerModelingFileInfo, String monsterName, ModelingFileInfo monsterModelingFileInfo, String ability) {
-        this.id = id;
-        TowerName = towerName;
+    public MonsterTower(String towerName, FileInfo towerModelingFileInfo, String monsterName, FileInfo monsterModelingFileInfo, String ability) {
+        this.towerName = towerName;
         this.towerModelingFileInfo = towerModelingFileInfo;
         this.monsterName = monsterName;
         this.monsterModelingFileInfo = monsterModelingFileInfo;
@@ -62,10 +61,10 @@ public class MonsterTower {
     }
 
     public String getTowerName() {
-        return TowerName;
+        return towerName;
     }
 
-    public ModelingFileInfo getTowerModelingFileInfo() {
+    public FileInfo getTowerModelingFileInfo() {
         return towerModelingFileInfo;
     }
 
@@ -73,7 +72,7 @@ public class MonsterTower {
         return monsterName;
     }
 
-    public ModelingFileInfo getMonsterModelingFileInfo() {
+    public FileInfo getMonsterModelingFileInfo() {
         return monsterModelingFileInfo;
     }
 
@@ -85,7 +84,7 @@ public class MonsterTower {
     public String toString() {
         return "MonsterTower{" +
                 "id=" + id +
-                ", TowerName='" + TowerName + '\'' +
+                ", towerName='" + towerName + '\'' +
                 ", towerModelingFileInfo=" + towerModelingFileInfo +
                 ", monsterName='" + monsterName + '\'' +
                 ", monsterModelingFileInfo=" + monsterModelingFileInfo +

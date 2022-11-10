@@ -1,7 +1,7 @@
-package com.profeel.monsterfac.monsterfactoryserver.object.command.domain.repostiory;
+package com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.repostiory;
 
 
-import com.profeel.monsterfac.monsterfactoryserver.object.command.domain.model.ProjectObject;
+import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.model.MonsterTower;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -19,5 +19,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1
  * @see 참고할 class 또는 외부 url
  */
-public interface ObjectRepository extends JpaRepository<ProjectObject, Integer> {
+public interface TowerRepository extends JpaRepository<MonsterTower, Integer> {
 }
