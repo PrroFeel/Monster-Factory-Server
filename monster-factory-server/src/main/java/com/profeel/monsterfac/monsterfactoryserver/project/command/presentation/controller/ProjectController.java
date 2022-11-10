@@ -104,4 +104,21 @@ public class ProjectController {
                 )
         );
     }
+
+    @DeleteMapping("/projects/{id}")
+    ResponseEntity<ResponseDTO> deleteProject(@PathVariable("id") Integer ProjectId){
+        System.out.println("[ProjectController] deleteProject -- Delete");
+        System.out.println("ProjectId : " + ProjectId);
+
+        // 프로젝트 삭제 서비스
+
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"프로젝트 삭제 성공"
+                        , null
+                )
+        );
+    }
 }
