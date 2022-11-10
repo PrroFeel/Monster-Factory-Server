@@ -1,6 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.category.command.domain.repository;
 
-import com.profeel.monsterfac.category.command.domain.model.Category;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.domain.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

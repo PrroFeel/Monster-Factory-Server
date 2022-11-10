@@ -1,6 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.category.command.domain.service;
 
-import com.profeel.monsterfac.common.annotation.DomainService;
+import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
 
 /**
  * <pre>

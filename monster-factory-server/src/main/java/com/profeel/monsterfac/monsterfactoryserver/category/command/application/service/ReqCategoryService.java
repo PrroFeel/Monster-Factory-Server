@@ -1,9 +1,9 @@
 package com.profeel.monsterfac.monsterfactoryserver.category.command.application.service;
 
-import com.profeel.monsterfac.category.command.application.dto.CategoryDTO;
-import com.profeel.monsterfac.category.command.application.dto.ReqCategoryDTO;
-import com.profeel.monsterfac.category.command.domain.model.Category;
-import com.profeel.monsterfac.category.command.domain.repository.CategoryRepository;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.application.dto.CategoryDTO;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.application.dto.ReqCategoryDTO;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.domain.model.Category;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.domain.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

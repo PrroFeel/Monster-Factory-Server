@@ -1,8 +1,8 @@
 package com.profeel.monsterfac.monsterfactoryserver.category.command.presentation;
 
-import com.profeel.monsterfac.category.command.application.dto.ReqCategoryDTO;
-import com.profeel.monsterfac.category.command.application.service.ReqCategoryService;
-import com.profeel.monsterfac.common.dto.ResponseDto;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.application.dto.ReqCategoryDTO;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.application.service.ReqCategoryService;
+import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,8 +38,8 @@ public class CategoryController {
     }
 
     @PostMapping("/regist")
-    public ResponseEntity<ResponseDto> registCategory(@RequestBody @Valid ReqCategoryDTO reqCategoryinfo) {
+    public ResponseEntity<ResponseDTO> registCategory(@RequestBody @Valid ReqCategoryDTO reqCategoryinfo) {
 
-        return ResponseEntity.ok().body(new ResponseDto(HttpStatus.OK.value(), "카테고리 추가 성공", categoryService.registCategory(reqCategoryinfo)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "카테고리 추가 성공", categoryService.registCategory(reqCategoryinfo)));
     }
 }

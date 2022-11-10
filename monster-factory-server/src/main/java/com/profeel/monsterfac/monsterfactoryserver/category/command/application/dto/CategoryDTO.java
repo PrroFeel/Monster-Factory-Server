@@ -1,6 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.category.command.application.dto;
 
-import com.profeel.monsterfac.category.command.domain.model.Category;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.domain.model.Category;
 
 /**
  * <pre>

@@ -1,7 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.category.command.infra.service;
 
-import com.profeel.monsterfac.category.command.domain.service.CategoryService;
-import com.profeel.monsterfac.common.annotation.DomainService;
+import com.profeel.monsterfac.monsterfactoryserver.category.command.domain.service.CategoryService;
+import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
 
 /**
  * <pre>
