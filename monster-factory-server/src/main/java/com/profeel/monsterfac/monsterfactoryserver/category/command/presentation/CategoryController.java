@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.category.command.presentatio
 import com.profeel.monsterfac.monsterfactoryserver.category.command.application.dto.ReqCategoryDTO;
 import com.profeel.monsterfac.monsterfactoryserver.category.command.application.service.ReqCategoryService;
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @ApiOperation(value = "카테고리 추가", notes = "프론트에선 사용하지 않는 api!!!")
     @PostMapping("/regist")
     public ResponseEntity<ResponseDTO> registCategory(@RequestBody @Valid ReqCategoryDTO reqCategoryinfo) {
 

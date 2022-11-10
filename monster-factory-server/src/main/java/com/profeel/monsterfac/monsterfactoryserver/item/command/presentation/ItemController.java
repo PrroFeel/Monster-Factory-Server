@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.item.command.presentation;
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.service.ItemService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,6 +42,7 @@ public class ItemController {
         this.itemService = itemService;
     }
 
+    @ApiOperation(value = "아이템 추가", notes = "아이템을 추가(등록)하는 api")
     @PostMapping(value = "/regist", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResponseDTO> registItem(HttpServletRequest request, @RequestBody MultipartFile image, Item item) {
 

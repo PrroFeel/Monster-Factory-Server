@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model;
 
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.exception.ItemPriceException;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 
@@ -23,20 +24,25 @@ import javax.persistence.*;
 @Table(name = "tbl_items")
 public class Item {
 
+    @ApiModelProperty(value="아이템 아이디", example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "item_id")
     private int itemId;
 
+    @ApiModelProperty(value="아이템 이름", example = "단검")
     @Column(name = "item_name")
     private String itemName;
 
+    @ApiModelProperty(value="아이템 가격", example = "100")
     @Column(name = "item_price")
     private int itemPrice;
 
+    @ApiModelProperty(value="아이템 url", example = "http://~~")
     @Column(name = "item_img_url")
     private String itemImgUrl;
 
+    @ApiModelProperty(value="아이템이 속한 카테고리 아이디", example = "1")
     @Embedded
     private ItemCategory categoryId;
 

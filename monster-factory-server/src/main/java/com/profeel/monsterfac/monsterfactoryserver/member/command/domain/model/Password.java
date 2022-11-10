@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model;
 
+import io.swagger.annotations.ApiParam;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
