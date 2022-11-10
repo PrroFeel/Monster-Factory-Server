@@ -77,6 +77,7 @@ public class S3UploaderService {
     public void modelUpload(File uploadFile, String dirName, String filePath) throws IOException {
         amazonS3Client.putObject(new PutObjectRequest(this.bucket, filePath, uploadFile));
         removeFile(uploadFile);
+        System.out.println("s3 url : " + amazonS3Client.getUrl(this.bucket, filePath).toString());
     }
 
     public String imageUpload(File uploadFile, String dirName, String filePath){

@@ -22,6 +22,10 @@ import java.io.IOException;
  */
 public interface ProjectService {
     Editor createEditor(String userId);
-    Integer uploadAndRegistModelingFile(MultipartFile modelingFile) throws IOException;
+//    Integer uploadAndRegistModelingFile(MultipartFile modelingFile) throws IOException;
     ProjectId createProjectId(Integer projectId);
+
+//    Integer uploadAndRegistObject(MultipartFile modelingFile, String transform);
+
+    Integer uploadAndRegistObject(MultipartFile modelingFile, ProjectId projectId, String transform) throws IOException;
 }

@@ -61,8 +61,9 @@ public class SaveProjectService {
 
         // 요청 들어온 ModelList를 하나씩 읽어 s3 업로드 및 파일 정보 저장 -> 각 파일 id와 model 정보를 담는 Model객체 List 구축
         for(ProjectObject object : saveProjectRequest.getObjectList()){
+            System.out.println("object :" + object );
             // 모델링 파일 s3 업로드 및 파일 정보 저장
-            Integer fileId = projectService.uploadAndRegistModelingFile(object.getModelingFile());
+            Integer objectId = projectService.uploadAndRegistObject(object.getModelingFile(), projectId, object.getTransform());
 
             // Model 객체 생성 후 modelList에 추가
 //            projectService.registObjectInfo(fileId, object.getTransform(), projectId);
