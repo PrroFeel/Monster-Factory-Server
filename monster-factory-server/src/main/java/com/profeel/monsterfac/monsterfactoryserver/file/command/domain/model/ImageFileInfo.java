@@ -21,12 +21,12 @@ import javax.persistence.*;
 @Inheritance(strategy =  InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type")
 @Table(name="tbl_modeing_file")
-public abstract class ModelingFileInfo extends FileInfo {
+public abstract class ImageFileInfo extends FileInfo {
 
-    public ModelingFileInfo() {
+    public ImageFileInfo() {
 
     }
-    public ModelingFileInfo(String originalName, String extension, String filePath, String uploadDatetime) {
+    public ImageFileInfo(String originalName, String extension, String filePath, String uploadDatetime) {
         super(originalName, extension, filePath, uploadDatetime);
     }
 

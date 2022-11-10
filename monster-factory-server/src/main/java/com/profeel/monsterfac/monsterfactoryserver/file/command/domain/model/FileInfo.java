@@ -17,10 +17,8 @@ import javax.persistence.*;
  * @version 1
  */
 @Entity
-@Table(name="tbl_file")
-@Inheritance(strategy =  InheritanceType.JOINED)
-@DiscriminatorColumn(name="type")
-public class FileInfo {
+@Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
+public abstract class FileInfo {
 
     @Id
     @Column(name="file_id")
