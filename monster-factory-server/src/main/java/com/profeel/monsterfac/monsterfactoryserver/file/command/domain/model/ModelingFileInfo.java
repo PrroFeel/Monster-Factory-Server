@@ -19,11 +19,10 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy =  InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type")
-@Table(name="tbl_modeing_file")
-public abstract class ModelingFileInfo extends FileInfo {
+@Table(name="tbl_modeing_files")
+public class ModelingFileInfo extends FileInfo {
 
-    public ModelingFileInfo() {
+    protected ModelingFileInfo() {
 
     }
     public ModelingFileInfo(String originalName, String extension, String filePath, String uploadDatetime) {

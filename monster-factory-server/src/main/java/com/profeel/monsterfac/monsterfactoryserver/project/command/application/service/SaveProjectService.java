@@ -63,7 +63,7 @@ public class SaveProjectService {
         for(ProjectObject object : saveProjectRequest.getObjectList()){
             System.out.println("object :" + object );
             // 모델링 파일 s3 업로드 및 파일 정보 저장
-            Integer objectId = projectService.uploadAndRegistObject(object.getModelingFile(), projectId, object.getTransform());
+            //Integer objectId = projectService.uploadAndRegistObject(object.getModelingFile(), projectId, object.getTransform());
 
             // Model 객체 생성 후 modelList에 추가
 //            projectService.registObjectInfo(fileId, object.getTransform(), projectId);

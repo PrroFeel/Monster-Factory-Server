@@ -31,16 +31,17 @@ public abstract class FileInfo {
     @Column(name="filename_extension")
     private String extension;       // 확장자
 
-    @Column(name="file_path")
-    private String filePath;
+    @Column(name="save_path")
+    private String savePath;
 
     @Column(name="upload_datetime")
     private String uploadDatetime;  // 업로드 일시
 
-    public FileInfo(String originalName, String extension, String filePath, String uploadDatetime) {
+
+    public FileInfo(String originalName, String extension, String savePath, String uploadDatetime) {
         this.originalName = originalName;
         this.extension = extension;
-        this.filePath = filePath;
+        this.savePath = savePath;
         this.uploadDatetime = uploadDatetime;
     }
 
@@ -59,8 +60,8 @@ public abstract class FileInfo {
         return extension;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getSavePath() {
+        return savePath;
     }
 
     public String getUploadDatetime() {
@@ -74,7 +75,7 @@ public abstract class FileInfo {
                 "id=" + id +
                 ", originalName='" + originalName + '\'' +
                 ", extension='" + extension + '\'' +
-                ", filePath='" + filePath + '\'' +
+                ", savePath='" + savePath + '\'' +
                 ", uploadDatetime='" + uploadDatetime + '\'' +
                 '}';
     }

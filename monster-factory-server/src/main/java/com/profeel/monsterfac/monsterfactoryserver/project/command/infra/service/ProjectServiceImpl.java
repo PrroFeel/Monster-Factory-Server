@@ -2,18 +2,14 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.infra.servic
 
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.application.service.ModelingFileService;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.application.service.UploadFileService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
-import com.profeel.monsterfac.monsterfactoryserver.object.command.application.dto.RegistObjectDTO;
-import com.profeel.monsterfac.monsterfactoryserver.object.command.application.service.RegistObjectService;
+import com.profeel.monsterfac.monsterfactoryserver.tower.command.application.service.RegistTowerService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectId;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 /**
  * <pre>
@@ -34,12 +30,12 @@ import java.io.IOException;
 public class ProjectServiceImpl implements ProjectService {
 
     private MemberQueryService memberQueryService;
-    private ModelingFileService modelingFileService;
+    private UploadFileService modelingFileService;
 
-    private RegistObjectService registObjectService;
+    private RegistTowerService registObjectService;
 
     @Autowired
-    public ProjectServiceImpl(MemberQueryService memberQueryService, ModelingFileService modelingFileService, RegistObjectService registObjectService){
+    public ProjectServiceImpl(MemberQueryService memberQueryService, UploadFileService modelingFileService, RegistTowerService registObjectService){
         this.memberQueryService = memberQueryService;
         this.modelingFileService = modelingFileService;
         this.registObjectService = registObjectService;
@@ -53,22 +49,6 @@ public class ProjectServiceImpl implements ProjectService {
     public ProjectId createProjectId(Integer projectId) {
         return new ProjectId(projectId);
     }
-
-    @Override
-    public Integer uploadAndRegistObject(MultipartFile modelingFile, ProjectId projectId, String transform) throws IOException {
-        return registObjectService.registObject(new RegistObjectDTO(modelingFile, projectId, transform));
-    }
-//    @Override
-//    public Integer uploadAndRegistModelingFile(MultipartFile modelingFile) throws IOException {
-//        return modelingFileService.uploadAndRegistModelingFile(modelingFile);
-//    }
-
-
-
-//    @Override
-//    public Integer uploadAndRegistObject(MultipartFile modelingFile, String transform) {
-//        return null;
-//    }
 
 
 }

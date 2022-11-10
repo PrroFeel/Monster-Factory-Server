@@ -61,8 +61,6 @@ public class S3UploaderService {
     }
 
 
-
-
     // 임시 저장 경로에 저장된 파일을 지우는 메소드
     private void removeFile(File targetFile){
         if(targetFile.delete()){
@@ -73,22 +71,23 @@ public class S3UploaderService {
     }
 
 
+
+
     // multipart 파일을 s3 특정 폴더에 업로드 하기 위한 메소드
-    public void modelUpload(File uploadFile, String dirName, String filePath) throws IOException {
-        amazonS3Client.putObject(new PutObjectRequest(this.bucket, filePath, uploadFile));
+    public void modelUpload(File uploadFile, String savePath) throws IOException {
+        amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile));
         removeFile(uploadFile);
-        System.out.println("s3 url : " + amazonS3Client.getUrl(this.bucket, filePath).toString());
+        System.out.println("s3 url : " + amazonS3Client.getUrl(this.bucket, savePath).toString());
     }
 
-    public String imageUpload(File uploadFile, String dirName, String filePath){
+    public String imageUpload(File uploadFile, String savePath){
         // S3 버킷 폴더에 업로드
-        amazonS3Client.putObject(new PutObjectRequest(this.bucket, filePath, uploadFile)
+        amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         // 임시 저장된 File 객체 제거
         removeFile(uploadFile);
         // 업로드 url 반환
-        return amazonS3Client.getUrl(this.bucket, filePath).toString();
+        return amazonS3Client.getUrl(this.bucket, savePath).toString();
     }
-
 
 }

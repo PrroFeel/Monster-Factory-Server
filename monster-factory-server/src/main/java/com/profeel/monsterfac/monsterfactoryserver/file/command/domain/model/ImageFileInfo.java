@@ -19,12 +19,19 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy =  InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type")
-@Table(name="tbl_modeing_file")
-public abstract class ImageFileInfo extends FileInfo {
+@Table(name="tbl_image_files")
+public class ImageFileInfo extends FileInfo {
 
-    public ImageFileInfo() {
+    @Column(name="file_url")
+    private String url;
 
+    protected ImageFileInfo() {
+
+    }
+
+    public ImageFileInfo(FileInfo fileInfo, String url) {
+        this(fileInfo.getOriginalName(), fileInfo.getExtension(), fileInfo.getFilePath(), fileInfo.getUploadDatetime());
+        this.url = url;
     }
     public ImageFileInfo(String originalName, String extension, String filePath, String uploadDatetime) {
         super(originalName, extension, filePath, uploadDatetime);

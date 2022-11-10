@@ -1,8 +1,8 @@
 package com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service;
 
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.common.service.DateService;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +29,12 @@ import java.util.UUID;
  */
 @Service
 public class FileService {
+
+    @Value("models")
+    private String modelDir;
+    @Value("images")
+    private String imageDir;
+
     // 현재 프로파일 ( local / development )
     @Value("${spring.environment}")
     private String environment;
@@ -51,17 +57,42 @@ public class FileService {
             this.filePath = this.fileDir;
         }
     }
+    public String createSavePath(String dirName, String saveFileName){
+        return String.format("%s/%s", dirName, saveFileName);
+    }
 
-    public FileInfo createFileInfo(MultipartFile multipartFile, String dirName){
+    public ModelingFileInfo createModelingFileInfo(MultipartFile multipartFile){
         String originalFilename = multipartFile.getOriginalFilename();
         String ext = extractExt(originalFilename);
         return new ModelingFileInfo(
                 originalFilename,
                 ext,
-                createFilePath(dirName, createSaveFilename(ext)),
+                createSavePath(modelDir, createSaveFilename(originalFilename)),
                 DateService.getCurrentDatetimeWithFormating()
         );
     }
+
+    public ImageFileInfo createImageFileInfo(MultipartFile multipartFile){
+        String originalFilename = multipartFile.getOriginalFilename();
+        String ext = extractExt(originalFilename);
+        return new ImageFileInfo(
+                originalFilename,
+                ext,
+                createSavePath(imageDir, createSaveFilename(ext)),
+                DateService.getCurrentDatetimeWithFormating()
+        );
+    }
+
+//    public FileInfo createFileInfo(MultipartFile multipartFile, String dirName){
+//        String originalFilename = multipartFile.getOriginalFilename();
+//        String ext = extractExt(originalFilename);
+//        return new ModelingFileInfo(
+//                originalFilename,
+//                ext,
+//                createFilePath(dirName, createSaveFilename(ext)),
+//                DateService.getCurrentDatetimeWithFormating()
+//        );
+//    }
 
     private static void mkdirResource(String fileDir){
         File Folder = new File(fileDir);
@@ -77,9 +108,6 @@ public class FileService {
         return uuid + "." + ext;
     }
 
-    public String createFilePath(String dirName, String saveFileName){
-        return String.format("%s/%s", dirName, saveFileName);
-    }
 
     // 파일 확장자 추출 메소드
     public String extractExt(String originalFilename) {
@@ -105,6 +133,8 @@ public class FileService {
 
         return Optional.of(file);
     }
+
+
 
 }
 
