@@ -1,7 +1,5 @@
 package com.profeel.monsterfac.monsterfactoryserver.object.command.domain.model;
 
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileId;
-
 import javax.persistence.*;
 
 /**
@@ -17,7 +15,6 @@ import javax.persistence.*;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 @Entity
 @Table(name="tbl_objects")
@@ -28,8 +25,9 @@ public class ProjectObject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="modeling_file_id")
-    private ModelingFileId modelingFileId;
+    @OneToOne
+    @JoinColumn(name="object_file_id", unique = true)
+    private ObjectFileInfo objectFileInfo;
 
 
     @Column(name = "object_transform")
@@ -40,15 +38,10 @@ public class ProjectObject {
 
     protected ProjectObject() {
     }
-    public ProjectObject(ModelingFileId modelingFileId, String transform, Project project) {
-        this.modelingFileId = modelingFileId;
+    public ProjectObject(ObjectFileInfo objectFileInfo, String transform, Project project) {
+        this.objectFileInfo = objectFileInfo;
         this.transform = transform;
         this.project = project;
-    }
-
-    public ProjectObject(Integer id, ModelingFileId modelingFileId, String transform, Project project) {
-        this(modelingFileId, transform, project);
-        this.id = id;
     }
 
 
@@ -56,8 +49,8 @@ public class ProjectObject {
         return id;
     }
 
-    public ModelingFileId getModelingFileId() {
-        return modelingFileId;
+    public ObjectFileInfo getObjectFileInfo() {
+        return objectFileInfo;
     }
 
     public String getTransform() {
@@ -72,7 +65,7 @@ public class ProjectObject {
     public String toString() {
         return "ProjectObject{" +
                 "id=" + id +
-                ", modelingFileId=" + modelingFileId +
+                ", objectFileInfo=" + objectFileInfo +
                 ", transform=" + transform +
                 ", project=" + project +
                 '}';

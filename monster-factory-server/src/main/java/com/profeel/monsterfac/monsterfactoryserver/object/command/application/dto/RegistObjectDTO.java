@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.object.command.application.dto;
 
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectId;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * <pre>
@@ -17,48 +18,37 @@ import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.
  * @version 1
  */
 public class RegistObjectDTO {
-    private Integer modelingFileId;
+
+    MultipartFile multipartFile;
     private ProjectId projectId;
     private String transform;
 
     protected RegistObjectDTO() {}
 
-    public RegistObjectDTO(Integer modelingFileId, String transform, ProjectId projectId) {
-        this.modelingFileId = modelingFileId;
-        this.transform = transform;
+    public RegistObjectDTO(MultipartFile multipartFile, ProjectId projectId, String transform) {
+        this.multipartFile = multipartFile;
         this.projectId = projectId;
-    }
-
-    public Integer getModelingFileId() {
-        return modelingFileId;
-    }
-
-    public void setModelingFileId(Integer modelingFileId) {
-        this.modelingFileId = modelingFileId;
-    }
-
-    public String getTransform() {
-        return transform;
-    }
-
-    public void setTransform(String transform) {
         this.transform = transform;
+    }
+
+    public MultipartFile getMultipartFile() {
+        return multipartFile;
     }
 
     public ProjectId getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(ProjectId projectId) {
-        this.projectId = projectId;
+    public String getTransform() {
+        return transform;
     }
 
     @Override
     public String toString() {
-        return "RegistObjectRequestDTO{" +
-                "modelingFileId=" + modelingFileId +
-                ", info='" + transform + '\'' +
+        return "RegistObjectDTO{" +
+                "multipartFile=" + multipartFile +
                 ", projectId=" + projectId +
+                ", transform='" + transform + '\'' +
                 '}';
     }
 }

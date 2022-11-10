@@ -70,4 +70,14 @@ public class FileInfo {
     }
 
 
+    @Override
+    public String toString() {
+        return "FileInfo{" +
+                "id=" + id +
+                ", originalName='" + originalName + '\'' +
+                ", extension='" + extension + '\'' +
+                ", filePath='" + filePath + '\'' +
+                ", uploadDatetime='" + uploadDatetime + '\'' +
+                '}';
+    }
 }
