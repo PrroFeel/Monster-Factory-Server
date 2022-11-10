@@ -4,6 +4,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 import static com.profeel.monsterfac.monsterfactoryserver.common.service.DateService.getCurrentDatetimeWithFormating;
 
@@ -47,6 +48,11 @@ public class Project {
 
     @Embedded
     private Editor editor;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name="tbl_placed_towers", joinColumns = @JoinColumn(name="placed_tower_id"))
+    @OrderColumn(name="tower_idx")
+    private List<PlacedTower> placedTowers;
 
     protected Project(){}
 
