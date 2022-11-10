@@ -54,7 +54,9 @@ public class FileService {
 
     public FileInfo createFileInfo(MultipartFile multipartFile, String dirName){
         String originalFilename = multipartFile.getOriginalFilename();
+        // 확장자 추출하는 메소드
         String ext = extractExt(originalFilename);
+        // 오리지널 파일 이름, 확장자, S3 파일 경로, 업로드 시간 저장
         return new ModelingFileInfo(
                 originalFilename,
                 ext,
