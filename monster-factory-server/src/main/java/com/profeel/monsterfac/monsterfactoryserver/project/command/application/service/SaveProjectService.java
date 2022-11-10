@@ -66,7 +66,7 @@ public class SaveProjectService {
         for(ProjectPlacedTower placedTower : saveProjectRequest.getProjectPlacedTowerList()){
             // tower id 검증
             TowerId towerId = projectService.isValid(placedTower.getTowerId());
-            placedTowerList.add(new PlacedTower(towerId, placedTower.getAbility(), placedTower.getPattern(), placedTower.getTransform()));
+            placedTowerList.add(new PlacedTower(towerId, placedTower.getAbility().toString(), placedTower.getPattern().toString(), placedTower.getTransform().toString()));
         }
 
         // project save

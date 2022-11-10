@@ -62,20 +62,20 @@ public class ProjectController {
     }
 
     @PostMapping("/projects/save")
-    ResponseEntity<ResponseDTO> saveProjet(SaveProjectRequestDTO storeProjectRequest) throws IOException {
+    ResponseEntity<ResponseDTO> saveProjet(@RequestBody SaveProjectRequestDTO saveProjectRequest) throws IOException {
         System.out.println("[ProjectController]");
         System.out.println("put 요청 들어옴 -- saveProjet 메소드");
 
-        System.out.println("storeProjectRequest.projectId : " + storeProjectRequest.getProjectId());
-        System.out.println("storeProjectRequest.modelList : " + storeProjectRequest.getObjectList());
+        System.out.println("storeProjectRequest.projectId : " + saveProjectRequest.getProjectId());
+        System.out.println("storeProjectRequest.modelList : " + saveProjectRequest.getProjectPlacedTowerList());
 
-        ProjectResponseDTO result = saveProjectService.saveProject(storeProjectRequest);
+        ProjectResponseDTO result = saveProjectService.saveProject(saveProjectRequest);
         System.out.println(result);
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "프로젝트 저장 성공"
-                        ,  ""
+                        ,  result
                 )
         );
     }
