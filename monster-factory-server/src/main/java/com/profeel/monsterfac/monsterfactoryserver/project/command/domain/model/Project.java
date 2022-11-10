@@ -108,4 +108,8 @@ public class Project {
     private void inProgress(){
         this.status = ProjectStatus.IN_PROGRESS;
     }
+
+    public void changeName(String newName) {
+        this.name = newName;
+    }
 }

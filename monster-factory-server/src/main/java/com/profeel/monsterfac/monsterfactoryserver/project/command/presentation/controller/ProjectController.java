@@ -8,7 +8,7 @@ import com.profeel.monsterfac.monsterfactoryserver.project.command.application.d
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.SaveProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectRequestValidator;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
-import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.SaveProjectService;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.UpdateProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,16 +35,14 @@ import java.util.List;
 @Controller
 @RequestMapping("/test")
 public class ProjectController {
-
-    private RegistProjectService registProjectService;
-    private SaveProjectService saveProjectService;
-
     private ProjectRequestValidator projectRequestValidator;
+    private RegistProjectService registProjectService;
+    private UpdateProjectService updateProjectService;
     @Autowired
-    public ProjectController(ProjectRequestValidator projectRequestValidator, RegistProjectService registProjectService, SaveProjectService saveProjectService ) {
+    public ProjectController(ProjectRequestValidator projectRequestValidator, RegistProjectService registProjectService, UpdateProjectService updateProjectService ) {
         this.projectRequestValidator = projectRequestValidator;
         this.registProjectService = registProjectService;
-        this.saveProjectService = saveProjectService;
+        this.updateProjectService =updateProjectService;
     }
 
     @PostMapping("/projects")
@@ -82,17 +80,17 @@ public class ProjectController {
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "프로젝트 저장 성공"
-                        ,  saveProjectService.saveProject(projectId, saveProjectRequest.getProjectPlacedTowerList())
+                        ,  updateProjectService.saveProject(projectId, saveProjectRequest.getProjectPlacedTowerList())
                 )
         );
     }
 
     @PutMapping("/projects/{id}")
-    ResponseEntity<ResponseDTO> updateNameOfProject(@PathVariable("id") Integer projectId, @RequestParam("name") String projectName){
+    ResponseEntity<ResponseDTO> updateNameOfProject(@PathVariable("id") Integer projectId, @RequestParam("name") String newName){
         System.out.println("[ProjectController] updateNameOfProject -- PUT");
-        System.out.println("projectName : " + projectName);
+        System.out.println("newName : " + newName);
 
-        List<ValidationError> errors = projectRequestValidator.validate(projectName);
+        List<ValidationError> errors = projectRequestValidator.validate(newName);
         if (!errors.isEmpty()) {
             throw new ValidationErrorException(errors);
         }
@@ -102,7 +100,7 @@ public class ProjectController {
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         ,"프로젝트 이름 수정 성공"
-                        , "수정된 프로젝트 id: "+projectId
+                        , updateProjectService.upadteNameOfProject(projectId, newName)
                 )
         );
     }
