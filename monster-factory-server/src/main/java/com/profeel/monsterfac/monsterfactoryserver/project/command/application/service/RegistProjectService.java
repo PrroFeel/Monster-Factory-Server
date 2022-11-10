@@ -1,8 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.application.service;
 
 
-import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationError;
-import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationErrorException;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.ProjectResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.RegistProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
@@ -13,8 +11,6 @@ import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.servic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static com.profeel.monsterfac.monsterfactoryserver.common.service.DateService.getCurrentDatetimeWithFormating;
 
@@ -44,17 +40,9 @@ public class RegistProjectService {
         this.projectService = projectService;
     }
 
-    private List<ValidationError> validateOrderRequest(RegistProjectRequestDTO registProjectRequest) {
-
-        return new ProjectRequestValidator().validate(registProjectRequest);
-    }
 
     @Transactional
     public ProjectResponseDTO registProject(RegistProjectRequestDTO registProjectRequest){
-        // 필수 데이터 유무 검사
-        List<ValidationError> errors = validateOrderRequest(registProjectRequest);
-        if (!errors.isEmpty()) throw new ValidationErrorException(errors);
-
         // userId 유효성 검사
         Editor editor = projectService.createEditor(registProjectRequest.getUserId());
 
