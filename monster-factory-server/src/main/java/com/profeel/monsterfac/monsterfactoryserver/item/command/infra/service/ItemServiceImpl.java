@@ -1,15 +1,12 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.command.infra.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.FileService;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.S3UploaderService;
-import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
-import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.repository.ItemRepository;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.application.service.UploadFileService;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * <pre>
@@ -29,30 +26,15 @@ import org.springframework.web.multipart.MultipartFile;
 @DomainService
 public class ItemServiceImpl implements ItemService {
 
-    private final ItemRepository itemRepository;
+    private final UploadFileService uploadFileService;
 
-    private S3UploaderService s3UploaderService;
-
-    private FileService fileService;
-
-    @Autowired
-    public ItemServiceImpl(ItemRepository itemRepository, S3UploaderService s3UploaderService, FileService fileService) {
-        this.itemRepository = itemRepository;
-        this.s3UploaderService = s3UploaderService;
-        this.fileService = fileService;
+    public ItemServiceImpl(UploadFileService uploadFileService) {
+        this.uploadFileService = uploadFileService;
     }
 
     @Override
-    @Transactional
-    public Object registItem(MultipartFile itemImage, Item item) {
+    public ImageFileInfo uploadFile(MultipartFile itemImgFile) throws IOException {
 
-        if(!itemImage.isEmpty()) {
-            FileInfo storedItemImgFile = fileService.createFileInfo(itemImage, "itemImages");
-
-            return storedItemImgFile;
-        }
-
-        //임시로
-        return null;
+        return uploadFileService.uploadImageFile(itemImgFile);
     }
 }

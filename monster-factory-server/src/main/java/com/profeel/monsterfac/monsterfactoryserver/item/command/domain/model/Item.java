@@ -1,5 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model;
 
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.exception.ItemPriceException;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -38,9 +39,9 @@ public class Item {
     @Column(name = "item_price")
     private int itemPrice;
 
-    @ApiModelProperty(value="아이템 url", example = "http://~~")
-    @Column(name = "item_img_url")
-    private String itemImgUrl;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="item_img_id", unique = true)
+    private FileInfo itemImgInfo;
 
     @ApiModelProperty(value="아이템이 속한 카테고리 아이디", example = "1")
     @Embedded
@@ -48,11 +49,10 @@ public class Item {
 
     public Item() {}
 
-    public Item(int itemId, String itemName, int itemPrice, String itemImgUrl, ItemCategory categoryId) {
-        this.itemId = itemId;
+    public Item(String itemName, int itemPrice, FileInfo itemImgInfo, ItemCategory categoryId) {
         this.itemName = itemName;
         validateNegativePrice(itemPrice);
-        this.itemImgUrl = itemImgUrl;
+        this.itemImgInfo = itemImgInfo;
         this.categoryId = categoryId;
     }
 
@@ -68,8 +68,8 @@ public class Item {
         return itemPrice;
     }
 
-    public String getItemImgUrl() {
-        return itemImgUrl;
+    public FileInfo getItemImgUrl() {
+        return itemImgInfo;
     }
 
     public ItemCategory getCategoryId() {
@@ -82,7 +82,7 @@ public class Item {
                 "itemId=" + itemId +
                 ", itemName='" + itemName + '\'' +
                 ", itemPrice=" + itemPrice +
-                ", itemImgUrl='" + itemImgUrl + '\'' +
+                ", itemImgUrl='" + itemImgInfo + '\'' +
                 ", categoryId=" + categoryId +
                 '}';
     }

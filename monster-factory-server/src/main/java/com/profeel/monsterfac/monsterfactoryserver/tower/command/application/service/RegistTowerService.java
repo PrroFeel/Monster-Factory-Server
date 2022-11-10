@@ -60,39 +60,5 @@ public class RegistTowerService {
         // 생성된 monserTower id 반환
         return monsterTower.getId();
     }
-//    @Transactional
-//    public Integer registObject(RegistTowerRequestDTO registObject) throws IOException {
-//        System.out.println("registObject : "+ registObject);
-//
-//        // 모델링 파일 등록
-//
-//        ObjectFileInfo objectFileInfo = new ObjectFileInfo(
-//                fileInfo.getOriginalName(),
-//                fileInfo.getExtension(),
-//                fileInfo.getFilePath(),
-//                fileInfo.getUploadDatetime()
-//        );
-//        System.out.println("objectFileInfo : " + objectFileInfo );
-//
-//        ObjectFileInfo result =  objectFileRepository.save(objectFileInfo);
-//        System.out.println("objectFileInfo save result : " + result );
-//
-//
-//        // project 검증
-//        Project project = objectService.createProject(registObject.getProjectId());
-//
-//        // projetObject 객체 생성
-//        ProjectObject projectObject = new ProjectObject(
-//                result,
-//                registObject.getTransform(),
-//                project
-//        );
-//        System.out.println("prjectObject : " + projectObject);
-//        // projetObject insert
-//        objectRepository.save(projectObject);
-//
-//        return projectObject.getId();
-//    }
-
 
 }
