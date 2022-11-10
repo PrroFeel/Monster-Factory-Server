@@ -34,7 +34,7 @@ public class PlacedTower {
     private String pattern;  // 공격 패턴
 
     @Column(name = "tower_transform")
-    private String transform;
+    private String transform; // 위치, 스케일, mat
 
     protected PlacedTower() {}
 

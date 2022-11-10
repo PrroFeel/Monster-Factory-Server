@@ -34,7 +34,7 @@ public class TowerServiceImpl implements TowerService {
     }
 
     public ModelingFileInfo uploadFile(MultipartFile multipartFile) throws IOException {
-        return uploadFileService.uploadModelingFile(multipartFile, "model");
+        return uploadFileService.uploadModelingFile(multipartFile);
     }
 
 

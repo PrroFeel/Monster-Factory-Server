@@ -31,6 +31,10 @@ public class TowerId implements Serializable {
 
     protected TowerId() {}
 
+    public TowerId(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }

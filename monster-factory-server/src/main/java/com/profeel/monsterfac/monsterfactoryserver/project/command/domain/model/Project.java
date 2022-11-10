@@ -91,11 +91,21 @@ public class Project {
         return editor;
     }
 
-    public void changeRecentUpdateDatetime(){
+    public void saveProject(List<PlacedTower> placedTowerList){
+        this.placedTowers =placedTowerList;
+        changeRecentUpdateDatetime();
+        inProgress();
+    }
+
+    private void changePlacedTowerList(List<PlacedTower> placedTowerList) {
+        this.placedTowers =placedTowerList;
+    }
+
+    private void changeRecentUpdateDatetime(){
         this.recentUpdateDatetime = getCurrentDatetimeWithFormating();
     }
 
-    public void inProgress(){
+    private void inProgress(){
         this.status = ProjectStatus.IN_PROGRESS;
     }
 }
