@@ -2,13 +2,11 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.infra.servic
 
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.application.service.UploadFileService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
-import com.profeel.monsterfac.monsterfactoryserver.tower.command.application.service.RegistTowerService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
-import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectId;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.service.ProjectService;
+import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.model.TowerId;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,25 +28,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ProjectServiceImpl implements ProjectService {
 
     private MemberQueryService memberQueryService;
-    private UploadFileService modelingFileService;
-
-    private RegistTowerService registObjectService;
-
+    @Override
+    public TowerId isValid(Integer towerId) {
+        return new TowerId(towerId);
+    }
     @Autowired
-    public ProjectServiceImpl(MemberQueryService memberQueryService, UploadFileService modelingFileService, RegistTowerService registObjectService){
+    public ProjectServiceImpl(MemberQueryService memberQueryService){
         this.memberQueryService = memberQueryService;
-        this.modelingFileService = modelingFileService;
-        this.registObjectService = registObjectService;
     }
     @Override
     public Editor createEditor(String userId) {
         memberQueryService.isVailable(userId);
         return new Editor(new MemberId(userId));
     }
-    @Override
-    public ProjectId createProjectId(Integer projectId) {
-        return new ProjectId(projectId);
-    }
+//    @Override
+//    public ProjectId createProjectId(Integer projectId) {
+//        return new ProjectId(projectId);
+//    }
+
+
 
 
 }

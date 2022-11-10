@@ -1,5 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto;
 
+
 import java.util.List;
 
 /**
@@ -17,38 +18,26 @@ import java.util.List;
  * @version 1
  */
 public class SaveProjectRequestDTO {
-    private Integer projectId;
-    private List<ProjectObject> objectList;
+    private List<ProjectPlacedTower> projectPlacedTowerList;
     public SaveProjectRequestDTO() {}
-
-    public SaveProjectRequestDTO(Integer projectId, List<ProjectObject> modelList) {
-        this.projectId = projectId;
-        this.objectList = modelList;
+    public SaveProjectRequestDTO(List<ProjectPlacedTower> projectPlacedTowerList) {
+        this.projectPlacedTowerList = projectPlacedTowerList;
     }
 
-    public Integer getProjectId() {
-        return projectId;
+
+    public List<ProjectPlacedTower> getProjectPlacedTowerList() {
+        return projectPlacedTowerList;
     }
 
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
-
-    public List<ProjectObject> getObjectList() {
-        return objectList;
-    }
-
-    public void setObjectList(List<ProjectObject> objectList) {
-        this.objectList = objectList;
+    public void setProjectPlacedTowerList(List<ProjectPlacedTower> projectPlacedTowerList) {
+        this.projectPlacedTowerList = projectPlacedTowerList;
     }
 
     @Override
     public String toString() {
-        return "StoreProjectRequestDTO{" +
-                "projectId=" + projectId +
-                ", modelList=" + objectList +
+        return "SaveProjectRequestDTO{" +
+                ", projectPlacedTowerList=" + projectPlacedTowerList +
                 '}';
     }
-
 }
 
