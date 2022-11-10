@@ -1,13 +1,12 @@
 package com.profeel.monsterfac.monsterfactoryserver.file.command.application.service;
 
 
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.repository.ModelingFileRepository;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.FileService;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.S3UploaderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,39 +27,33 @@ import java.io.IOException;
  * @version 1
  */
 @Service
-public class ModelingFileService {
+public class UploadFileService {
 
-    @Value("models")
-    private String dirName;
     private FileService fileService;
     private S3UploaderService s3UploaderService;
 
     private ModelingFileRepository modelingFileRepository;
 
     @Autowired
-    public ModelingFileService(FileService fileService, S3UploaderService s3UploaderService, ModelingFileRepository modelingFileRepository){
+    public UploadFileService(FileService fileService, S3UploaderService s3UploaderService, ModelingFileRepository modelingFileRepository){
         this.fileService = fileService;
         this.s3UploaderService = s3UploaderService;
         this.modelingFileRepository =modelingFileRepository;
     }
 
-    public Integer uploadAndRegistModelingFile(MultipartFile multipartFile) throws IOException {
+    public ModelingFileInfo uploadModelingFile(MultipartFile multipartFile, String type) throws IOException {
+        ModelingFileInfo fileInfo = fileService.createModelingFileInfo(multipartFile);
 
-        FileInfo fileInfo = fileService.createFileInfo(multipartFile, dirName);
+        // s3 업로드
+        s3UploaderService.modelUpload(fileService.convertToFile(multipartFile), fileInfo.getSavePath());
 
-        s3UploaderService.modelUpload(fileService.convertToFile(multipartFile), dirName, fileInfo.getFilePath());
+        return fileInfo;
+    }
 
-        ModelingFileInfo modelingFileInfo = new ModelingFileInfo(
-                fileInfo.getOriginalName(),
-                fileInfo.getExtension(),
-                fileInfo.getFilePath(),
-                fileInfo.getUploadDatetime()
-        );
-
-        modelingFileInfo =  modelingFileRepository.save(modelingFileInfo);
-        System.out.println("modelingFileInfo : " + modelingFileInfo );
-
-        return modelingFileInfo.getId();
-
+    public ImageFileInfo uploadImageFile(MultipartFile multipartFile, String type) throws IOException {
+        ImageFileInfo fileInfo = fileService.createImageFileInfo(multipartFile);
+        String url = s3UploaderService.imageUpload(fileService.convertToFile(multipartFile), fileInfo.getSavePath());
+        fileInfo = new ImageFileInfo(fileInfo, url);
+        return fileInfo;
     }
 }

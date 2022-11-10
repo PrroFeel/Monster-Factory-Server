@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * <pre>
@@ -17,14 +18,11 @@ import javax.persistence.*;
  * @version 1
  */
 @Entity
-@Table(name="tbl_file")
-@Inheritance(strategy =  InheritanceType.JOINED)
-@DiscriminatorColumn(name="type")
-public class FileInfo {
-
+@Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
+public abstract class FileInfo implements Serializable {
     @Id
-    @Column(name="file_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 dbms에 자동 위임
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "file_id")
     private Integer id;
 
     @Column(name="original_filename")
@@ -33,16 +31,19 @@ public class FileInfo {
     @Column(name="filename_extension")
     private String extension;       // 확장자
 
-    @Column(name="file_path")
-    private String filePath;
+    @Column(name="save_path")
+    private String savePath;
 
     @Column(name="upload_datetime")
     private String uploadDatetime;  // 업로드 일시
 
-    public FileInfo(String originalName, String extension, String filePath, String uploadDatetime) {
+
+
+
+    public FileInfo(String originalName, String extension, String savePath, String uploadDatetime) {
         this.originalName = originalName;
         this.extension = extension;
-        this.filePath = filePath;
+        this.savePath = savePath;
         this.uploadDatetime = uploadDatetime;
     }
 
@@ -61,8 +62,8 @@ public class FileInfo {
         return extension;
     }
 
-    public String getFilePath() {
-        return filePath;
+    public String getSavePath() {
+        return savePath;
     }
 
     public String getUploadDatetime() {
@@ -70,4 +71,14 @@ public class FileInfo {
     }
 
 
+    @Override
+    public String toString() {
+        return "FileInfo{" +
+                "id=" + id +
+                ", originalName='" + originalName + '\'' +
+                ", extension='" + extension + '\'' +
+                ", savePath='" + savePath + '\'' +
+                ", uploadDatetime='" + uploadDatetime + '\'' +
+                '}';
+    }
 }
