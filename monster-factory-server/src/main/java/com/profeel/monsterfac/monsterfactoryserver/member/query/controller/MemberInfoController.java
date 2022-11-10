@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.member.query.controller;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.data.MemberInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.repository.MemberInfoMapper;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberInfoService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,7 @@ public class MemberInfoController {
         this.memberInfoMapper = memberInfoMapper;
     }
 
+    @ApiOperation(value = "회원 한 명 정보 조회", notes = "닉네임에 따른 회원 정보 조회 api이며 닉네임, 성별, 생일, 보유 머니의 금액이 나온다")
     @GetMapping("/{id}")
     public ResponseEntity<?> getMemberInfo(@PathVariable("id") String memberId) {
 

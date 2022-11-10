@@ -1,6 +1,8 @@
 package com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto;
 
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
 /**
@@ -20,10 +22,16 @@ import java.util.Date;
 
 public class SignUpDTO {
 
-    //    private MemberId memberId;
+    @ApiModelProperty(value="사용자의 이름", example = "홍길동")
     private String memberId;
+
+    @ApiModelProperty(value="사용자의 비밀번호", example = "Profeel123!")
     private String password;
+
+    @ApiModelProperty(value="사용자의 성별", example = "남")
     private String gender;
+
+    @ApiModelProperty(value="사용자의 생일", example = "2022-11-10")
     private Date birthday;
 
     public SignUpDTO(String memberId, String password, String gender, Date birthday) {
