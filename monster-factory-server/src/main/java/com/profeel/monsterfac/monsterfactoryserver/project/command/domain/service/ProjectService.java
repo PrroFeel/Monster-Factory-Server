@@ -2,9 +2,6 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.domain.servi
 
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectId;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 /**
  * <pre>
@@ -19,10 +16,10 @@ import java.io.IOException;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 public interface ProjectService {
     Editor createEditor(String userId);
-    Integer uploadAndRegistModelingFile(MultipartFile modelingFile) throws IOException;
     ProjectId createProjectId(Integer projectId);
+
+
 }

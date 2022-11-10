@@ -2,16 +2,14 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.infra.servic
 
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.application.service.ModelingFileService;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.application.service.UploadFileService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
+import com.profeel.monsterfac.monsterfactoryserver.tower.command.application.service.RegistTowerService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectId;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
 
 /**
  * <pre>
@@ -32,27 +30,25 @@ import java.io.IOException;
 public class ProjectServiceImpl implements ProjectService {
 
     private MemberQueryService memberQueryService;
-    private ModelingFileService modelingFileService;
+    private UploadFileService modelingFileService;
+
+    private RegistTowerService registObjectService;
 
     @Autowired
-    public ProjectServiceImpl(MemberQueryService memberQueryService, ModelingFileService modelingFileService){
+    public ProjectServiceImpl(MemberQueryService memberQueryService, UploadFileService modelingFileService, RegistTowerService registObjectService){
         this.memberQueryService = memberQueryService;
         this.modelingFileService = modelingFileService;
+        this.registObjectService = registObjectService;
     }
     @Override
     public Editor createEditor(String userId) {
         memberQueryService.isVailable(userId);
         return new Editor(new MemberId(userId));
     }
-
-
-    @Override
-    public Integer uploadAndRegistModelingFile(MultipartFile modelingFile) throws IOException {
-        return modelingFileService.uploadAndRegistModelingFile(modelingFile);
-    }
-
     @Override
     public ProjectId createProjectId(Integer projectId) {
         return new ProjectId(projectId);
     }
+
+
 }
