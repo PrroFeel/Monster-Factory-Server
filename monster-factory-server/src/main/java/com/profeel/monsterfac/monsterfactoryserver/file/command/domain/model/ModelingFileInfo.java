@@ -18,25 +18,18 @@ import javax.persistence.*;
  */
 
 @Entity
-@Inheritance(strategy =  InheritanceType.SINGLE_TABLE)
-@Table(name="tbl_modeing_files")
+@Table(name="tbl_modeling_files")
 public class ModelingFileInfo extends FileInfo {
-
     protected ModelingFileInfo() {
 
     }
-    public ModelingFileInfo(String originalName, String extension, String filePath, String uploadDatetime) {
-        super(originalName, extension, filePath, uploadDatetime);
+    public ModelingFileInfo(String originalName, String extension, String savePath, String uploadDatetime) {
+        super(originalName, extension, savePath, uploadDatetime);
     }
 
     @Override
     public String toString() {
-        return "FileInfo{" +
-                "id=" + super.getId() +
-                ", originalName='" + super.getOriginalName() + '\'' +
-                ", extension='" + super.getExtension() + '\'' +
-                ", filePath='" + super.getFilePath() + '\'' +
-                ", uploadDatetime='" + super.getUploadDatetime() + '\'' +
-                '}';
+        return "ModelingFileInfo{" +
+                '}' + super.toString();
     }
 }

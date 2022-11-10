@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * <pre>
@@ -18,11 +19,10 @@ import javax.persistence.*;
  */
 @Entity
 @Inheritance(strategy =  InheritanceType.TABLE_PER_CLASS)
-public abstract class FileInfo {
-
+public abstract class FileInfo implements Serializable {
     @Id
-    @Column(name="file_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 생성을 dbms에 자동 위임
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "file_id")
     private Integer id;
 
     @Column(name="original_filename")
@@ -36,6 +36,8 @@ public abstract class FileInfo {
 
     @Column(name="upload_datetime")
     private String uploadDatetime;  // 업로드 일시
+
+
 
 
     public FileInfo(String originalName, String extension, String savePath, String uploadDatetime) {

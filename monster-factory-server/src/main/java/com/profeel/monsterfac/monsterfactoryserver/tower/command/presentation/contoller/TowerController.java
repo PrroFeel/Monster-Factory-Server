@@ -1,6 +1,16 @@
 package com.profeel.monsterfac.monsterfactoryserver.tower.command.presentation.contoller;
 
+import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
+import com.profeel.monsterfac.monsterfactoryserver.tower.command.application.dto.RegistTowerRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.tower.command.application.service.RegistTowerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.io.IOException;
 
 /**
  * <pre>
@@ -15,10 +25,34 @@ import org.springframework.stereotype.Controller;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 
 @Controller
+@RequestMapping("/test")
 public class TowerController {
 
+    private RegistTowerService registTowerService;
+
+    @Autowired
+    public TowerController(RegistTowerService registTowerService){
+        this.registTowerService = registTowerService;
+    }
+
+    @PostMapping("/towers")
+    public ResponseEntity<ResponseDTO> registMonsterTower(RegistTowerRequestDTO registTowerRequest) throws IOException {
+        System.out.println("[TowerController] registMonsterTower");
+        System.out.println("registTowerRequest : " + registTowerRequest);
+
+
+        Integer towerId = registTowerService.registMonsterTower(registTowerRequest);
+
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        , "타워 등록 성공"
+                        , "towerId : "+ towerId
+                )
+        );
+    }
 }

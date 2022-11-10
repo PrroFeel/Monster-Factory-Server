@@ -1,7 +1,5 @@
 package com.profeel.monsterfac.monsterfactoryserver.tower.command.application.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 /**
  * <pre>
  * Class : RegistObjectDTO
@@ -16,40 +14,24 @@ import org.springframework.web.multipart.MultipartFile;
  * @author 최윤서
  * @version 1
  */
-public class RegistTowerRequestDTO {
+public class TowerResponseDTO {
 
     private String towerName;
-    private MultipartFile towerModelingFile;
+    private Integer towerModelingFileId;
 
     private String monsterName;
-    private MultipartFile monsterModelingFile;
+    private Integer monsterModelingFileId;
 
     private String ability;
 
-    protected RegistTowerRequestDTO() {}
+    protected TowerResponseDTO() {}
 
-    public RegistTowerRequestDTO(String towerName, MultipartFile towerModelingFile, String monsterName, MultipartFile monsterModelingFile, String ability) {
+    public TowerResponseDTO(String towerName, Integer towerModelingFileId, String monsterName, Integer monsterModelingFileId, String ability) {
         this.towerName = towerName;
-        this.towerModelingFile = towerModelingFile;
+        this.towerModelingFileId = towerModelingFileId;
         this.monsterName = monsterName;
-        this.monsterModelingFile = monsterModelingFile;
+        this.monsterModelingFileId = monsterModelingFileId;
         this.ability = ability;
-    }
-
-    public MultipartFile getTowerModelingFile() {
-        return towerModelingFile;
-    }
-
-    public void setTowerModelingFile(MultipartFile towerModelingFile) {
-        this.towerModelingFile = towerModelingFile;
-    }
-
-    public MultipartFile getMonsterModelingFile() {
-        return monsterModelingFile;
-    }
-
-    public void setMonsterModelingFile(MultipartFile monsterModelingFile) {
-        this.monsterModelingFile = monsterModelingFile;
     }
 
     public String getTowerName() {
@@ -60,12 +42,28 @@ public class RegistTowerRequestDTO {
         this.towerName = towerName;
     }
 
+    public Integer getTowerModelingFileId() {
+        return towerModelingFileId;
+    }
+
+    public void setTowerModelingFileId(Integer towerModelingFileId) {
+        this.towerModelingFileId = towerModelingFileId;
+    }
+
     public String getMonsterName() {
         return monsterName;
     }
 
     public void setMonsterName(String monsterName) {
         this.monsterName = monsterName;
+    }
+
+    public Integer getMonsterModelingFileId() {
+        return monsterModelingFileId;
+    }
+
+    public void setMonsterModelingFileId(Integer monsterModelingFileId) {
+        this.monsterModelingFileId = monsterModelingFileId;
     }
 
     public String getAbility() {
@@ -78,11 +76,11 @@ public class RegistTowerRequestDTO {
 
     @Override
     public String toString() {
-        return "RegistTowerRequestDTO{" +
+        return "TowerResponseDTO{" +
                 "towerName='" + towerName + '\'' +
-                ", towerModelingFile=" + towerModelingFile +
+                ", towerModelingFileId=" + towerModelingFileId +
                 ", monsterName='" + monsterName + '\'' +
-                ", monsterModelingFile=" + monsterModelingFile +
+                ", monsterModelingFileId=" + monsterModelingFileId +
                 ", ability='" + ability + '\'' +
                 '}';
     }

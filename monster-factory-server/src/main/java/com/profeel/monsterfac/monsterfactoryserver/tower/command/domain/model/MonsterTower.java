@@ -19,7 +19,7 @@ import javax.persistence.*;
  * @version 1
  */
 @Entity
-@Table(name="tbl_tower")
+@Table(name="tbl_towers")
 public class MonsterTower {
 
     @Id
