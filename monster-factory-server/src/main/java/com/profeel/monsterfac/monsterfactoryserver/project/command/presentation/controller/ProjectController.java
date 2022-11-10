@@ -6,6 +6,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationEr
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.ProjectResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.RegistProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.SaveProjectRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.DeleteProjectService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectRequestValidator;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.UpdateProjectService;
@@ -38,11 +39,14 @@ public class ProjectController {
     private ProjectRequestValidator projectRequestValidator;
     private RegistProjectService registProjectService;
     private UpdateProjectService updateProjectService;
+
+    private DeleteProjectService deleteProjectService;
     @Autowired
-    public ProjectController(ProjectRequestValidator projectRequestValidator, RegistProjectService registProjectService, UpdateProjectService updateProjectService ) {
+    public ProjectController(ProjectRequestValidator projectRequestValidator, RegistProjectService registProjectService, UpdateProjectService updateProjectService, DeleteProjectService deleteProjectService) {
         this.projectRequestValidator = projectRequestValidator;
         this.registProjectService = registProjectService;
         this.updateProjectService =updateProjectService;
+        this.deleteProjectService = deleteProjectService;
     }
 
     @PostMapping("/projects")
@@ -106,12 +110,12 @@ public class ProjectController {
     }
 
     @DeleteMapping("/projects/{id}")
-    ResponseEntity<ResponseDTO> deleteProject(@PathVariable("id") Integer ProjectId){
+    ResponseEntity<ResponseDTO> deleteProject(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectController] deleteProject -- Delete");
-        System.out.println("ProjectId : " + ProjectId);
+        System.out.println("projectId : " + projectId);
 
         // 프로젝트 삭제 서비스
-
+        deleteProjectService.deleteProject(projectId);
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
