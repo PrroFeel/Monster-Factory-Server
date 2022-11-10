@@ -28,7 +28,7 @@ public class PlacedTower {
     private TowerId towerId;
 
     @Column(name = "tower_ability")
-    private String ability;  // 고유 능력
+    private String ability;  // 능력
 
     @Column(name = "tower_pattern")
     private String pattern;  // 공격 패턴

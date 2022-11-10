@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
-import java.io.NotActiveException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,18 +36,20 @@ public class SaveProjectService {
     private ProjectRepository projectRepository;
     private ProjectService projectService;
 
+    private ProjectQueryService projectQueryService;
+
     @Autowired
-    public SaveProjectService(ProjectRepository projectRepository, ProjectService projectService){
+    public SaveProjectService(ProjectRepository projectRepository, ProjectService projectService, ProjectQueryService projectQueryService){
+        this.projectQueryService = projectQueryService;
         this.projectRepository = projectRepository;
         this.projectService = projectService;
     }
     private List<ValidationError> validateSaveRequest(SaveProjectRequestDTO saveProjectRequest) {
-
         return new ProjectRequestValidator().validate(saveProjectRequest);
     }
 
     @Transactional
-    public ProjectResponseDTO saveProject(SaveProjectRequestDTO saveProjectRequest) throws IOException {
+    public ProjectResponseDTO saveProject(SaveProjectRequestDTO saveProjectRequest)  {
         // 필수 입력값 유무 검사
         List<ValidationError> errors = validateSaveRequest(saveProjectRequest);
         if (!errors.isEmpty()) {
@@ -57,9 +57,7 @@ public class SaveProjectService {
         }
 
         // project id 검사
-        if(!isValid(saveProjectRequest.getProjectId())){
-            throw new NotActiveException("유효하지 않은 프로젝트 id 입니다");
-        }
+        projectQueryService.isValidable(saveProjectRequest.getProjectId());
 
         // 빈 PlacedTower 객체 리스트 선언
         List<PlacedTower> placedTowerList = new ArrayList<>();
@@ -77,9 +75,7 @@ public class SaveProjectService {
     }
 
 
-    protected  boolean isValid(Integer id){
-         return projectRepository.existsById(id);
-    }
+
 
 
 }
