@@ -1,20 +1,21 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.presentation.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
+import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationError;
+import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationErrorException;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.ProjectResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.RegistProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.SaveProjectRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectRequestValidator;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.SaveProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.util.List;
 
 /**
  * <pre>
@@ -37,20 +38,24 @@ public class ProjectController {
 
     private RegistProjectService registProjectService;
     private SaveProjectService saveProjectService;
+
+    private ProjectRequestValidator projectRequestValidator;
     @Autowired
-    public ProjectController(RegistProjectService registProjectService, SaveProjectService saveProjectService ) {
+    public ProjectController(ProjectRequestValidator projectRequestValidator, RegistProjectService registProjectService, SaveProjectService saveProjectService ) {
+        this.projectRequestValidator = projectRequestValidator;
         this.registProjectService = registProjectService;
         this.saveProjectService = saveProjectService;
     }
 
     @PostMapping("/projects")
-    ResponseEntity<ResponseDTO> createProject(@RequestBody RegistProjectRequestDTO projectRequest) {
-        System.out.println("[ProjectController]");
-        System.out.println("post 요청 들어옴 -- createProject 메소드");
+    ResponseEntity<ResponseDTO> createProject(@RequestBody RegistProjectRequestDTO registProjectRequest) {
+        System.out.println("[ProjectController] createProject 메소드 -- POST");
+        System.out.println("registProjectRequest : " + registProjectRequest);
+        // 필수 데이터 유무 검사
+        List<ValidationError> errors = projectRequestValidator.validate(registProjectRequest);
+        if (!errors.isEmpty()) throw new ValidationErrorException(errors);
 
-        System.out.println("projectRequest : " + projectRequest);
-
-        ProjectResponseDTO results = registProjectService.registProject(projectRequest);
+        ProjectResponseDTO results = registProjectService.registProject(registProjectRequest);
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
@@ -61,21 +66,43 @@ public class ProjectController {
         );
     }
 
-    @PostMapping("/projects/save")
-    ResponseEntity<ResponseDTO> saveProjet(@RequestBody SaveProjectRequestDTO saveProjectRequest) throws IOException {
-        System.out.println("[ProjectController]");
-        System.out.println("put 요청 들어옴 -- saveProjet 메소드");
+    @PostMapping("/projects/{id}/save")
+    ResponseEntity<ResponseDTO> saveProjet(@PathVariable("id") Integer projectId, @RequestBody SaveProjectRequestDTO saveProjectRequest) {
+        System.out.println("[ProjectController] saveProjet -- POST");
+        // 필수 입력값 유무 검사
+        List<ValidationError> errors = projectRequestValidator.validate(saveProjectRequest);
+        if (!errors.isEmpty()) {
+            throw new ValidationErrorException(errors);
+        }
 
-        System.out.println("storeProjectRequest.projectId : " + saveProjectRequest.getProjectId());
+        System.out.println("projectId : " + projectId);
         System.out.println("storeProjectRequest.modelList : " + saveProjectRequest.getProjectPlacedTowerList());
 
-        ProjectResponseDTO result = saveProjectService.saveProject(saveProjectRequest);
-        System.out.println(result);
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "프로젝트 저장 성공"
-                        ,  result
+                        ,  saveProjectService.saveProject(projectId, saveProjectRequest.getProjectPlacedTowerList())
+                )
+        );
+    }
+
+    @PutMapping("/projects/{id}")
+    ResponseEntity<ResponseDTO> updateNameOfProject(@PathVariable("id") Integer projectId, @RequestParam("name") String projectName){
+        System.out.println("[ProjectController] updateNameOfProject -- PUT");
+        System.out.println("projectName : " + projectName);
+
+        List<ValidationError> errors = projectRequestValidator.validate(projectName);
+        if (!errors.isEmpty()) {
+            throw new ValidationErrorException(errors);
+        }
+
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"프로젝트 이름 수정 성공"
+                        , "수정된 프로젝트 id: "+projectId
                 )
         );
     }

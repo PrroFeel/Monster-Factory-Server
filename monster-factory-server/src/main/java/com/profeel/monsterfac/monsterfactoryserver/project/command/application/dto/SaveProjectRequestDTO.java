@@ -18,22 +18,12 @@ import java.util.List;
  * @version 1
  */
 public class SaveProjectRequestDTO {
-    private Integer projectId;
     private List<ProjectPlacedTower> projectPlacedTowerList;
     public SaveProjectRequestDTO() {}
-    public SaveProjectRequestDTO(Integer projectId, List<ProjectPlacedTower> projectPlacedTowerList) {
-        this.projectId = projectId;
+    public SaveProjectRequestDTO(List<ProjectPlacedTower> projectPlacedTowerList) {
         this.projectPlacedTowerList = projectPlacedTowerList;
     }
-    public Integer getProjectId() {
-        return projectId;
-    }
 
-
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
 
     public List<ProjectPlacedTower> getProjectPlacedTowerList() {
         return projectPlacedTowerList;
@@ -46,7 +36,6 @@ public class SaveProjectRequestDTO {
     @Override
     public String toString() {
         return "SaveProjectRequestDTO{" +
-                "projectId=" + projectId +
                 ", projectPlacedTowerList=" + projectPlacedTowerList +
                 '}';
     }

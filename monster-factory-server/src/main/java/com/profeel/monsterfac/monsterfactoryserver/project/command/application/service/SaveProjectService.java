@@ -1,10 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.application.service;
 
-import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationError;
-import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationErrorException;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.ProjectPlacedTower;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.ProjectResponseDTO;
-import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.SaveProjectRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.PlacedTower;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Project;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.repository.ProjectRepository;
@@ -44,32 +41,24 @@ public class SaveProjectService {
         this.projectRepository = projectRepository;
         this.projectService = projectService;
     }
-    private List<ValidationError> validateSaveRequest(SaveProjectRequestDTO saveProjectRequest) {
-        return new ProjectRequestValidator().validate(saveProjectRequest);
-    }
+
 
     @Transactional
-    public ProjectResponseDTO saveProject(SaveProjectRequestDTO saveProjectRequest)  {
-        // 필수 입력값 유무 검사
-        List<ValidationError> errors = validateSaveRequest(saveProjectRequest);
-        if (!errors.isEmpty()) {
-            throw new ValidationErrorException(errors);
-        }
+    public ProjectResponseDTO saveProject(Integer projectId, List<ProjectPlacedTower> projectPlacedTowerList)  {
 
-        // project id 검사
-        projectQueryService.isValidable(saveProjectRequest.getProjectId());
+        // project id 검증
+        Project updateProject = projectQueryService.getProject(projectId);
 
         // 빈 PlacedTower 객체 리스트 선언
         List<PlacedTower> placedTowerList = new ArrayList<>();
-        for(ProjectPlacedTower placedTower : saveProjectRequest.getProjectPlacedTowerList()){
+        for(ProjectPlacedTower placedTower : projectPlacedTowerList){
             // tower id 검증
             TowerId towerId = projectService.isValid(placedTower.getTowerId());
             placedTowerList.add(new PlacedTower(towerId, placedTower.getAbility().toString(), placedTower.getPattern().toString(), placedTower.getTransform().toString()));
         }
 
         // project save
-        Project updateProject = projectRepository.findById(saveProjectRequest.getProjectId()).get();
-        updateProject.saveProject(placedTowerList);
+        updateProject.save(placedTowerList);
 
         return  new ProjectResponseDTO(updateProject.getId(), updateProject.getRecentUpdateDatetime());
     }

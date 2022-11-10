@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.application.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.exception.NotFoundProjectException;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Project;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,17 @@ public class ProjectQueryService {
     public ProjectQueryService(ProjectRepository projectRepository){
         this.projectRepository =projectRepository;
     }
-    protected boolean isValidable(Integer projectId){
+    public boolean isValidable(Integer projectId){
         boolean result =  projectRepository.existsById(projectId);
         if(!result){
             throw new NotFoundProjectException("해당 프로젝트가 존재하지 않습니다");
         }
         return result;
     }
+
+    public Project getProject(Integer projectId){
+        isValidable(projectId);
+        return projectRepository.findById(projectId).get();
+    }
+
 }

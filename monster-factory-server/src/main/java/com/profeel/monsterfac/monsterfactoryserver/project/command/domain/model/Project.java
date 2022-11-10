@@ -91,7 +91,7 @@ public class Project {
         return editor;
     }
 
-    public void saveProject(List<PlacedTower> placedTowerList){
+    public void save(List<PlacedTower> placedTowerList){
         this.placedTowers =placedTowerList;
         changeRecentUpdateDatetime();
         inProgress();
