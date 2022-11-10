@@ -8,6 +8,8 @@ server:
       force: true
 
 
+
+
 spring:
   profiles:
     group:
@@ -37,6 +39,9 @@ spring:
       enabled: true
       max-file-size: 100MB
       max-request-size: 100MB
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 mybatis:
   mapper-locations: mybatis/**/*.xml
 
@@ -67,5 +72,6 @@ spring:
     activate:
       on-profile: "development"
   file-dir: /src/ec2-user/files/
+
 
 

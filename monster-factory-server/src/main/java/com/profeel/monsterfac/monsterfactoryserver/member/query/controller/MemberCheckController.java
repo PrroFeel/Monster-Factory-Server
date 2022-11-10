@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.member.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.member.query.exception.BadRequestException;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +34,7 @@ public class MemberCheckController {
         this.memberQueryService = memberQueryService;
     }
 
+    @ApiOperation(value = "닉네임 중복 검사", notes = "닉네임 중복인지 아닌지 판별하는 api")
     @GetMapping("/duplicated/{id}")
     public ResponseEntity<?> existsByMemberId(@PathVariable("id") String memberId) throws BadRequestException {
         System.out.println(memberId);

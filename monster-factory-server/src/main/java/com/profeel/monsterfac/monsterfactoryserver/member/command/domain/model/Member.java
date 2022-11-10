@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.model.Money;
+import io.swagger.annotations.ApiParam;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -23,7 +24,6 @@ import java.util.Date;
 @Entity
 @Table(name="tbl_members")
 public class Member {
-
     @Id
     @Column(name="member_id")
     private String memberId;

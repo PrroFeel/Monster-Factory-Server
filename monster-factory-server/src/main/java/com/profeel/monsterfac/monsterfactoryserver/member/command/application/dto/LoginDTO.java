@@ -2,6 +2,8 @@ package com.profeel.monsterfac.monsterfactoryserver.member.command.application.d
 
 
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Password;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 
 /**
  * <pre>
@@ -19,7 +21,10 @@ import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.P
  */
 public class LoginDTO {
 
+    @ApiModelProperty(value="사용자의 이름", example = "프로필")
     private String memberId;
+
+    @ApiModelProperty(value="사용자의 비밀번호", example = "Profeel123!")
     private Password password;
 
     public LoginDTO(String memberId, Password password) {

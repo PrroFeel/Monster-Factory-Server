@@ -26,7 +26,7 @@ import java.io.IOException;
 @DomainService
 public class TowerServiceImpl implements TowerService {
 
-    UploadFileService uploadFileService;
+    private final UploadFileService uploadFileService;
 
     @Autowired
     public TowerServiceImpl(UploadFileService uploadFileService){
