@@ -1,6 +1,5 @@
 package com.profeel.monsterfac.monsterfactoryserver.tower.command.application.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -19,17 +18,12 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class RegistTowerRequestDTO {
 
-    @JsonProperty("tower_name")
     private String towerName;
-    @JsonProperty("tower_modeling_file")
     private MultipartFile towerModelingFile;
 
-    @JsonProperty("monster_name")
     private String monsterName;
-    @JsonProperty("monster_modeling_file")
     private MultipartFile monsterModelingFile;
 
-    @JsonProperty("default_ability")
     private String ability;
 
     protected RegistTowerRequestDTO() {}

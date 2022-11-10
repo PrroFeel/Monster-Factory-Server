@@ -18,7 +18,6 @@ import javax.persistence.*;
  */
 
 @Entity
-@Inheritance(strategy =  InheritanceType.SINGLE_TABLE)
 @Table(name="tbl_image_files")
 public class ImageFileInfo extends FileInfo {
 
@@ -30,21 +29,22 @@ public class ImageFileInfo extends FileInfo {
     }
 
     public ImageFileInfo(FileInfo fileInfo, String url) {
-        this(fileInfo.getOriginalName(), fileInfo.getExtension(), fileInfo.getFilePath(), fileInfo.getUploadDatetime());
+        this(fileInfo.getOriginalName(), fileInfo.getExtension(), fileInfo.getSavePath(), fileInfo.getUploadDatetime());
         this.url = url;
     }
     public ImageFileInfo(String originalName, String extension, String filePath, String uploadDatetime) {
         super(originalName, extension, filePath, uploadDatetime);
     }
 
+
+    public String getUrl() {
+        return url;
+    }
+
     @Override
     public String toString() {
-        return "FileInfo{" +
-                "id=" + super.getId() +
-                ", originalName='" + super.getOriginalName() + '\'' +
-                ", extension='" + super.getExtension() + '\'' +
-                ", filePath='" + super.getFilePath() + '\'' +
-                ", uploadDatetime='" + super.getUploadDatetime() + '\'' +
-                '}';
+        return "ImageFileInfo{" +
+                ", url='" + url + '\'' +
+                '}' + super.toString();
     }
 }
