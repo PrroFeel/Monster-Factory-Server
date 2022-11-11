@@ -51,7 +51,7 @@ public class Project {
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name="tbl_placed_towers", joinColumns = @JoinColumn(name="project_id"))
-    @OrderColumn(name="tower_idx")
+    @OrderColumn(name="placed_tower_idx")
     private List<PlacedTower> placedTowers;
 
     protected Project(){}
