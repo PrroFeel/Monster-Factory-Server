@@ -22,17 +22,17 @@ import javax.persistence.Embedded;
  */
 
 @Embeddable
-public class GameProject {
+public class DevelopProject {
     @Embedded
     private ProjectId projectId;
 
     @Embedded
     private Editor editor;
 
-    protected  GameProject(){
+    protected DevelopProject(){
     }
 
-    public GameProject(ProjectId projectId, Editor editor) {
+    public DevelopProject(ProjectId projectId, Editor editor) {
         this.projectId = projectId;
         this.editor = editor;
     }

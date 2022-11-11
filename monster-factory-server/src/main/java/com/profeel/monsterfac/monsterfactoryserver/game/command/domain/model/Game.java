@@ -30,8 +30,11 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Embedded
-    private GameInfo gameInfo;
+    @Column(name="game_name")
+    private String name;
+
+    @Column(name="game_description")
+    private String description;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="thumbnail_file_id", unique = true)
@@ -46,19 +49,18 @@ public class Game {
     private GameStatus gameStatus;
 
     @Embedded
-    private GameProject gameProject;
+    private DevelopProject developProject;
 
 
     protected Game() {}
 
-    public Game(GameInfo gameInfo, FileInfo thumbnail, GameProject gameProject) {
-        this.gameInfo = gameInfo;
+    public Game( FileInfo thumbnail, DevelopProject developProject) {
         this.thumbnail = thumbnail;
-        this.gameProject = gameProject;
+        this.developProject = developProject;
     }
 
-    public Game(GameInfo gameInfo, FileInfo thumbnail, Reward reward, GameStatus gameStatus, GameProject gameProject) {
-        this(gameInfo, thumbnail, gameProject);
+    public Game(FileInfo thumbnail, Reward reward, GameStatus gameStatus, DevelopProject developProject) {
+        this(thumbnail, developProject);
         this.reward = reward;
         this.gameStatus = gameStatus;
     }
@@ -67,9 +69,6 @@ public class Game {
         return id;
     }
 
-    public GameInfo getGameInfo() {
-        return gameInfo;
-    }
 
     public FileInfo getThumbnail() {
         return thumbnail;
@@ -83,7 +82,7 @@ public class Game {
         return gameStatus;
     }
 
-    public GameProject getGameProject() {
-        return gameProject;
+    public DevelopProject getDevelopProject() {
+        return developProject;
     }
 }
