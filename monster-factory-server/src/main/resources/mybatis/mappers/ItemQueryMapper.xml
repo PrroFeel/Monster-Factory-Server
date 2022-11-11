@@ -26,4 +26,13 @@
           LEFT JOIN tbl_item_category C ON(M.item_category_id = C.item_category_id)
           LEFT JOIN tbl_image_files F ON(M.item_img_id = F.file_id)
     </select>
+
+    <select id="findItemById" resultMap="itemResultMap">
+        SELECT
+               *
+          FROM tbl_items M
+          LEFT JOIN tbl_item_category C ON(M.item_category_id = C.item_category_id)
+          LEFT JOIN tbl_image_files F ON(M.item_img_id = F.file_id)
+         WHERE M.item_id = #{itemId}
+    </select>
 </mapper>

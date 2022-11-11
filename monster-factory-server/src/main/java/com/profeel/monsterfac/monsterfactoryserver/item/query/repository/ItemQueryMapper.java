@@ -24,4 +24,6 @@ import java.util.List;
 public interface ItemQueryMapper {
 
     List<ItemData> findItem();
+
+    List<ItemData> findItemById(String itemId);
 }

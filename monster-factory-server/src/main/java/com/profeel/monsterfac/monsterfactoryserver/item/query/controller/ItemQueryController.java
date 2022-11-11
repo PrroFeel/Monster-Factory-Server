@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +43,15 @@ public class ItemQueryController {
     public ResponseEntity<?> findItem() {
 
         List<ItemData> itemDataList = itemQueryService.findItem();
+
+        return ResponseEntity.ok().body(itemDataList);
+    }
+
+    @ApiOperation(value = "아이템 상세 조회", notes = "아이템 하나의 정보가 나오는 api이다")
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findItemById(@PathVariable("id") String itemId) {
+
+        List<ItemData> itemDataList = itemQueryService.findItemById(itemId);
 
         return ResponseEntity.ok().body(itemDataList);
     }
