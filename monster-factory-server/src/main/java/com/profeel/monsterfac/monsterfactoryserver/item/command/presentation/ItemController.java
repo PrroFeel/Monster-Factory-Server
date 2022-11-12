@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.item.command.presentation;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.dto.RegistItemRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.DeleteItemService;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.RegistItemService;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.UpdateItemService;
 import io.swagger.annotations.ApiOperation;
@@ -33,11 +34,13 @@ public class ItemController {
 
     private final RegistItemService registItemService;
     private final UpdateItemService updateItemService;
+    private final DeleteItemService deleteItemService;
 
     @Autowired
-    public ItemController(RegistItemService registItemService, UpdateItemService updateItemService) {
+    public ItemController(RegistItemService registItemService, UpdateItemService updateItemService, DeleteItemService deleteItemService) {
         this.registItemService = registItemService;
         this.updateItemService = updateItemService;
+        this.deleteItemService = deleteItemService;
     }
 
     @ApiOperation(value = "아이템 추가", notes = "아이템을 추가(등록)하는 api")
@@ -50,10 +53,17 @@ public class ItemController {
     }
 
     @ApiOperation(value = "아이템 정보 수정", notes = "아이템 정보를 수정하는 api")
-    @PutMapping(value = "/{id}/update")
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity<ResponseDTO> updateItem(@PathVariable("id") int itemId, RegistItemRequestDTO registItemRequestInfo) throws IOException {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "아이템 정보 수정 성공", updateItemService.updateItemInfo(itemId, registItemRequestInfo)));
+    }
+
+    @ApiOperation(value = "아이템 정보 삭제", notes = "아이템 정보를 삭제하는 api")
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<ResponseDTO> deleteItem(@PathVariable("id") int itemId) {
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "아이템 삭제 성공", deleteItemService.deleteItem(itemId)));
     }
 
 }

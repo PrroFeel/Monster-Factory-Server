@@ -1,10 +1,8 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.query.service;
 
-import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.repository.ItemRepository;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.repository.ItemQueryMapper;
-import com.profeel.monsterfac.monsterfactoryserver.member.query.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +42,6 @@ public class ItemQueryService {
     }
 
     public List<ItemData> findItemById(int itemId) {
-
-//        if(itemId == null) {
-//            throw new BadRequestException("아이디가 존재하지 않습니다");
-//        }
 
         return itemQueryMapper.findItemById(itemId);
     }
