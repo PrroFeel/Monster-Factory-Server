@@ -28,23 +28,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ProjectServiceImpl implements ProjectService {
 
     private MemberQueryService memberQueryService;
-    @Override
-    public TowerId isValid(Integer towerId) {
-        return new TowerId(towerId);
-    }
+
     @Autowired
     public ProjectServiceImpl(MemberQueryService memberQueryService){
         this.memberQueryService = memberQueryService;
+    }
+
+    @Override
+    public TowerId isValid(Integer towerId) {
+        return new TowerId(towerId);
     }
     @Override
     public Editor createEditor(String userId) {
         memberQueryService.isVailable(userId);
         return new Editor(new MemberId(userId));
     }
-//    @Override
-//    public ProjectId createProjectId(Integer projectId) {
-//        return new ProjectId(projectId);
-//    }
 
 
 
