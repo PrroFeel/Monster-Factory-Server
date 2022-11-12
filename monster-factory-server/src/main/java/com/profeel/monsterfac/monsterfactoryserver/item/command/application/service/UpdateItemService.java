@@ -4,6 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.Ima
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.dto.ItemResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.dto.RegistItemRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
+import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.ItemCategory;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.service.ItemService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +46,8 @@ public class UpdateItemService {
         targetItem.changeItem(
                 registItemRequestInfo.getItemName(),
                 registItemRequestInfo.getItemPrice(),
-                itemFileInfo
+                itemFileInfo,
+                new ItemCategory(registItemRequestInfo.getItemCategoryCode())
         );
 
         ItemResponseDTO itemResponseDTO = new ItemResponseDTO(

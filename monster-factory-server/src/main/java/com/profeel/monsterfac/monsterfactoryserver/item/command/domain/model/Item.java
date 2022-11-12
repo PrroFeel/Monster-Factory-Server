@@ -26,7 +26,6 @@ import javax.persistence.*;
 @Table(name = "tbl_items")
 public class Item {
 
-
     @ApiModelProperty(value="아이템 아이디", example = "1")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -95,9 +94,10 @@ public class Item {
         }
     }
 
-    public void changeItem(String itemName, int itemPrice, ImageFileInfo itemImgFile) {
+    public void changeItem(String itemName, int itemPrice, ImageFileInfo itemImgFile, ItemCategory itemCategoryCode) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemImgInfo = itemImgFile;
+        this.categoryId = itemCategoryCode;
     };
 }
