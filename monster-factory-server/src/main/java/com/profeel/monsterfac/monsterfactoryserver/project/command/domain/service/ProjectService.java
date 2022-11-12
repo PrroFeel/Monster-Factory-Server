@@ -1,6 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.domain.service;
 
-import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Developer;
 import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.model.TowerId;
 
 /**
@@ -18,7 +18,7 @@ import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.model.To
  * @version 1
  */
 public interface ProjectService {
-    Editor createEditor(String userId);
+    Developer createEditor(String userId);
    // ProjectId createProjectId(Integer projectId);
 
 
