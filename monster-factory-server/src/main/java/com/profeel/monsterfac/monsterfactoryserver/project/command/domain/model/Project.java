@@ -4,6 +4,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+
 import java.util.List;
 
 import static com.profeel.monsterfac.monsterfactoryserver.common.service.DateService.getCurrentDatetimeWithFormating;
@@ -47,24 +48,27 @@ public class Project {
     private ProjectStatus status;
 
     @Embedded
-    private Editor editor;
+    private Developer developer;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name="tbl_placed_towers", joinColumns = @JoinColumn(name="project_id"))
-    @OrderColumn(name="placed_tower_idx")
-    private List<PlacedTower> placedTowers;
+//    @ElementCollection(fetch = FetchType.LAZY)
+//    @CollectionTable(name="tbl_placed_towers", joinColumns = @JoinColumn(name="project_id"))
+//    @OrderColumn(name="placed_tower_idx")
+//    private List<PlacedTower> placedTowers;
 
+
+    @Embedded
+    private PlacedObjects placedObjects;
     protected Project(){}
 
-    public Project(String name, String createDatetime, String recentUpdateDatetime, Editor editor, ProjectStatus status) {
+    public Project(String name, String createDatetime, String recentUpdateDatetime, Developer editor, ProjectStatus status) {
         this(name, createDatetime, recentUpdateDatetime, editor);
         this.status = status;
     }
-    public Project(String name, String createDatetime, String recentUpdateDatetime, Editor editor) {
+    public Project(String name, String createDatetime, String recentUpdateDatetime, Developer developer) {
         this.name = name;
         this.createDatetime = createDatetime;
         this.recentUpdateDatetime = recentUpdateDatetime;
-        this.editor = editor;
+        this.developer = developer;
     }
 
     public Integer getId() {
@@ -87,29 +91,63 @@ public class Project {
         return status;
     }
 
-    public Editor getEditor() {
-        return editor;
+    public Developer getEditor() {
+        return developer;
     }
 
-    public void save(List<PlacedTower> placedTowerList){
-        this.placedTowers =placedTowerList;
-        changeRecentUpdateDatetime();
+    public PlacedObjects getPlacedObjects() {
+        return placedObjects;
+    }
+
+    public void save(PlacedObjects placedObjects){
+        updatePlacedTowers(placedObjects.getTowers());
+        updatePlacedObstacles(placedObjects.getObstacles());
+        updatePlacedDebuffs(placedObjects.getDebuffs());
+        setRecentUpdateDatetime();
         inProgress();
     }
 
-    private void changePlacedTowerList(List<PlacedTower> placedTowerList) {
-        this.placedTowers =placedTowerList;
+    private void updatePlacedDebuffs(List<PlacedDebuff> debuffs) {
+        if(!this.placedObjects.getDebuffs().equals(debuffs)){
+            this.placedObjects.setDebuffs(debuffs);
+        }
     }
 
-    private void changeRecentUpdateDatetime(){
+    private void updatePlacedObstacles(List<PlacedObstacle> obstacles) {
+        if(!this.placedObjects.getObstacles().equals(obstacles)){
+            this.placedObjects.setObstacles(obstacles);
+        }
+    }
+
+    private void updatePlacedTowers(List<PlacedTower> towers) {
+        if(!this.placedObjects.getTowers().equals(towers)){
+            this.placedObjects.setTowers(towers);
+        }
+    }
+
+//    private void changePlacedTowerList(List<PlacedTower> placedTowerList) {
+//        this.placedTowers =placedTowerList;
+//    }
+
+    private void setRecentUpdateDatetime(){
         this.recentUpdateDatetime = getCurrentDatetimeWithFormating();
     }
 
     private void inProgress(){
-        this.status = ProjectStatus.IN_PROGRESS;
+        if(!status.equals(ProjectStatus.IN_PROGRESS)){
+            this.status = ProjectStatus.IN_PROGRESS;
+        }
+
     }
 
-    public void changeName(String newName) {
+    public void modifyName(String newName) {
+        if (newName == null || newName.equals("")) throw new IllegalArgumentException("새로운 이름을 입력해주세요");
         this.name = newName;
+    }
+
+
+    public void comleted() {
+        this.status = ProjectStatus.DONE;
+        setRecentUpdateDatetime();
     }
 }

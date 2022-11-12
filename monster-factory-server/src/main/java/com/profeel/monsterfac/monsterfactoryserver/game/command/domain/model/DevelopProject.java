@@ -1,6 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model;
 
-import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Developer;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectId;
 
 import javax.persistence.Embeddable;
@@ -27,12 +27,12 @@ public class DevelopProject {
     private ProjectId projectId;
 
     @Embedded
-    private Editor editor;
+    private Developer editor;
 
     protected DevelopProject(){
     }
 
-    public DevelopProject(ProjectId projectId, Editor editor) {
+    public DevelopProject(ProjectId projectId, Developer editor) {
         this.projectId = projectId;
         this.editor = editor;
     }
@@ -41,7 +41,7 @@ public class DevelopProject {
         return projectId;
     }
 
-    public Editor getEditor() {
+    public Developer getEditor() {
         return editor;
     }
 }

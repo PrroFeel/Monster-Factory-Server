@@ -10,6 +10,8 @@ import com.profeel.monsterfac.monsterfactoryserver.project.command.application.s
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectRequestValidator;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.UpdateProjectService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +34,9 @@ import java.util.List;
  * @author 최윤서
  * @version 1
  */
-
+@Api(tags = {"Project API"})
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/projects")
 public class ProjectController {
     private ProjectRequestValidator projectRequestValidator;
     private RegistProjectService registProjectService;
@@ -49,7 +51,7 @@ public class ProjectController {
         this.deleteProjectService = deleteProjectService;
     }
 
-    @PostMapping("/projects")
+    @ApiOperation(value = "프로젝트 생성", notes = "프로젝트 생성하는 api")
     ResponseEntity<ResponseDTO> createProject(@RequestBody RegistProjectRequestDTO registProjectRequest) {
         System.out.println("[ProjectController] createProject 메소드 -- POST");
         System.out.println("registProjectRequest : " + registProjectRequest);
@@ -68,7 +70,8 @@ public class ProjectController {
         );
     }
 
-    @PostMapping("/projects/{id}/save")
+    @ApiOperation(value = "프로젝트 저장", notes = "프로젝트 edit 정보를 저장하는 api")
+    @PatchMapping("/{id}/save")
     ResponseEntity<ResponseDTO> saveProjet(@PathVariable("id") Integer projectId, @RequestBody SaveProjectRequestDTO saveProjectRequest) {
         System.out.println("[ProjectController] saveProjet -- POST");
         // 필수 입력값 유무 검사
@@ -78,23 +81,24 @@ public class ProjectController {
         }
 
         System.out.println("projectId : " + projectId);
-        System.out.println("storeProjectRequest.modelList : " + saveProjectRequest.getProjectPlacedTowerList());
+        System.out.println("saveProjectRequest: " + saveProjectRequest);
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "프로젝트 저장 성공"
-                        ,  updateProjectService.saveProject(projectId, saveProjectRequest.getProjectPlacedTowerList())
+                        ,  updateProjectService.saveProject(projectId, saveProjectRequest)
                 )
         );
     }
 
-    @PutMapping("/projects/{id}")
-    ResponseEntity<ResponseDTO> updateNameOfProject(@PathVariable("id") Integer projectId, @RequestParam("name") String newName){
-        System.out.println("[ProjectController] updateNameOfProject -- PUT");
-        System.out.println("newName : " + newName);
+    @ApiOperation(value = "프로젝트 완료 (개발중)", notes = "최종 edit 정보를 저장하고 개발 완료 처리하는 api")
+    @PatchMapping("/{id}/complete")
+    ResponseEntity<ResponseDTO> completeProject(@PathVariable("id") Integer projectId, @RequestBody SaveProjectRequestDTO saveProjectRequest){
+        System.out.println("[ProjectController] completeProject -- put");
+        System.out.println("saveProjectRequest : " + saveProjectRequest);
 
-        List<ValidationError> errors = projectRequestValidator.validate(newName);
+        List<ValidationError> errors = projectRequestValidator.validate(saveProjectRequest);
         if (!errors.isEmpty()) {
             throw new ValidationErrorException(errors);
         }
@@ -102,13 +106,27 @@ public class ProjectController {
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
-                        ,"프로젝트 이름 수정 성공"
-                        , updateProjectService.upadteNameOfProject(projectId, newName)
+                        ,"최종 edit 정보 저장 & 개발 완료 처리 성공"
+                        , ""
                 )
         );
     }
 
-    @DeleteMapping("/projects/{id}")
+    @PatchMapping("/{id}")
+    ResponseEntity<ResponseDTO> modifyProjectName(@PathVariable("id") Integer projectId, @RequestParam("name") String newName){
+        System.out.println("[ProjectController] modifyProjectName -- Patch");
+        System.out.println("newName : " + newName);
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"프로젝트 이름 수정 성공"
+                        , updateProjectService.modifyProjectName(projectId, newName)
+                )
+        );
+    }
+
+    @DeleteMapping("/{id}")
     ResponseEntity<ResponseDTO> deleteProject(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectController] deleteProject -- Delete");
         System.out.println("projectId : " + projectId);

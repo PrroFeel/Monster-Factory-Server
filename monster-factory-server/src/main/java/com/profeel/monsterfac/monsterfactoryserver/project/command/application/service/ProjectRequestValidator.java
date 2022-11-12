@@ -49,15 +49,21 @@ public class ProjectRequestValidator {
         List<ValidationError> errors = new ArrayList<>();
         if (saveProjectRequest == null) {
             errors.add(ValidationError.of("required"));
+        } else{
+            if(saveProjectRequest.getMapType() == null){
+                errors.add(ValidationError.of("mapType", "required"));
+            }
+            if(saveProjectRequest.getTowerInfoList() == null){
+                errors.add(ValidationError.of("towerInfoList", "required"));
+            }
+            if(saveProjectRequest.getObstacleInfoList() == null){
+                errors.add(ValidationError.of("obstacleInfoList", "required"));
+            }
+            if(saveProjectRequest.getDebuffInfoList() == null){
+                errors.add(ValidationError.of("debuffInfoList", "required"));
+            }
         }
         return errors;
     }
 
-    public  List<ValidationError> validate(String projectName){
-        List<ValidationError> errors = new ArrayList<>();
-        if (projectName.isEmpty()) {
-            errors.add(ValidationError.of("required"));
-        }
-        return errors;
-    }
 }

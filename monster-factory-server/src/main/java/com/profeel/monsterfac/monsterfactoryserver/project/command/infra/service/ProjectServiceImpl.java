@@ -4,7 +4,7 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.infra.servic
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
-import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Developer;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.service.ProjectService;
 import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.model.TowerId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +39,9 @@ public class ProjectServiceImpl implements ProjectService {
         return new TowerId(towerId);
     }
     @Override
-    public Editor createEditor(String userId) {
+    public Developer createEditor(String userId) {
         memberQueryService.isVailable(userId);
-        return new Editor(new MemberId(userId));
+        return new Developer(new MemberId(userId));
     }
 
 
