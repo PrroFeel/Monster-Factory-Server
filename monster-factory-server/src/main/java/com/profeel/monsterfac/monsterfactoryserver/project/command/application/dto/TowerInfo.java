@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Arrays;
 
@@ -19,12 +20,15 @@ import java.util.Arrays;
  * @version 1
  */
 public class TowerInfo {
+    @ApiModelProperty(value = "타워 이름")
     @JsonProperty("tower_name")
     private String towerName;
 
+    @ApiModelProperty(value = "배치된 위치")
     @JsonProperty("tower_position")
     private Float[] towerPosition;
 
+    @ApiModelProperty(value = "타워 스폰 주기")
     @JsonProperty("tower_spawnTime")
     private Float towerSpawnTime;
 

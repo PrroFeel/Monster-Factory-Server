@@ -10,6 +10,7 @@ import com.profeel.monsterfac.monsterfactoryserver.project.command.application.s
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectRequestValidator;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.UpdateProjectService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,9 +34,9 @@ import java.util.List;
  * @author 최윤서
  * @version 1
  */
-
+@Api(tags = {"Project API"})
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/projects")
 public class ProjectController {
     private ProjectRequestValidator projectRequestValidator;
     private RegistProjectService registProjectService;
@@ -51,7 +52,6 @@ public class ProjectController {
     }
 
     @ApiOperation(value = "프로젝트 생성", notes = "프로젝트 생성하는 api")
-    @PostMapping("/projects")
     ResponseEntity<ResponseDTO> createProject(@RequestBody RegistProjectRequestDTO registProjectRequest) {
         System.out.println("[ProjectController] createProject 메소드 -- POST");
         System.out.println("registProjectRequest : " + registProjectRequest);
@@ -71,7 +71,7 @@ public class ProjectController {
     }
 
     @ApiOperation(value = "프로젝트 저장", notes = "프로젝트 edit 정보를 저장하는 api")
-    @PatchMapping("/projects/{id}/save")
+    @PatchMapping("/{id}/save")
     ResponseEntity<ResponseDTO> saveProjet(@PathVariable("id") Integer projectId, @RequestBody SaveProjectRequestDTO saveProjectRequest) {
         System.out.println("[ProjectController] saveProjet -- POST");
         // 필수 입력값 유무 검사
@@ -92,8 +92,8 @@ public class ProjectController {
         );
     }
 
-    @ApiOperation(value = "프로젝트 완료 api", notes = "최종 edit 정보를 저장하고 개발 완료 처리하는 api")
-    @PatchMapping("/projects/{id}/complete")
+    @ApiOperation(value = "프로젝트 완료 (개발중)", notes = "최종 edit 정보를 저장하고 개발 완료 처리하는 api")
+    @PatchMapping("/{id}/complete")
     ResponseEntity<ResponseDTO> completeProject(@PathVariable("id") Integer projectId, @RequestBody SaveProjectRequestDTO saveProjectRequest){
         System.out.println("[ProjectController] completeProject -- put");
         System.out.println("saveProjectRequest : " + saveProjectRequest);
@@ -112,7 +112,7 @@ public class ProjectController {
         );
     }
 
-    @PatchMapping("/projects/{id}")
+    @PatchMapping("/{id}")
     ResponseEntity<ResponseDTO> modifyProjectName(@PathVariable("id") Integer projectId, @RequestParam("name") String newName){
         System.out.println("[ProjectController] modifyProjectName -- Patch");
         System.out.println("newName : " + newName);
@@ -126,7 +126,7 @@ public class ProjectController {
         );
     }
 
-    @DeleteMapping("/projects/{id}")
+    @DeleteMapping("/{id}")
     ResponseEntity<ResponseDTO> deleteProject(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectController] deleteProject -- Delete");
         System.out.println("projectId : " + projectId);

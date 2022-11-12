@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.application.
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
@@ -21,15 +22,19 @@ import java.util.List;
  */
 public class SaveProjectRequestDTO {
 
+    @ApiModelProperty(value = "선택된 맵 타입", example = "map1")
     @JsonProperty("map_type")
     private String mapType;
 
+    @ApiModelProperty(value = "배치된 타워 정보 리스트")
     @JsonProperty("towerInfo_list")
     private List<TowerInfo> towerInfoList;
 
+    @ApiModelProperty(value = "배치된 장애물 정보 리스트")
     @JsonProperty("obstacleInfo_list")
     private List<ObstacleInfo> obstacleInfoList;
 
+    @ApiModelProperty(value = "배치된 디버프 정보 리스트")
     @JsonProperty("debuffInfo_list")
     private List<DebuffInfo> debuffInfoList;
     protected SaveProjectRequestDTO() {}

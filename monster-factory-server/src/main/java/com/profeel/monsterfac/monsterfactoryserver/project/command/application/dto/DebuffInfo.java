@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Arrays;
 
@@ -19,10 +20,11 @@ import java.util.Arrays;
  * @version 1
  */
 public class DebuffInfo {
-
+    @ApiModelProperty(value = "디버프 이름")
     @JsonProperty("debuff_name")
     private String debuffName;
 
+    @ApiModelProperty(value = "배치 위치")
     @JsonProperty("debuff_position")
     private Float[] debuffPosition;
 
