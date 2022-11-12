@@ -6,6 +6,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
+import static com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameStatus.fromString;
+
 /**
  * <pre>
  * Class : Game
@@ -59,7 +61,7 @@ public class Game {
         this.description = description;
         this.thumbnail = thumbnail;
         this.developProject = developProject;
-        this.gameStatus = GameStatus.JUDGE_WAIT;
+        this.gameStatus = fromString("JUDGE_WAIT");
     }
 
     public Game(String name, String description,FileInfo thumbnail, Reward reward, GameStatus gameStatus, DevelopProject developProject) {

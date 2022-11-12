@@ -53,7 +53,7 @@ public class ProjectController {
         this.deleteProjectService = deleteProjectService;
     }
 
-    @ApiOperation(value = "프로젝트 생성", notes = "프로젝트 생성하는 api", response = ProjectResponseDTO.class)
+    @ApiOperation(value = "프로젝트 생성", notes = "프로젝트 생성하는 api")
     @PostMapping("/")
     ResponseEntity<ResponseDTO> createProject(@RequestBody RegistProjectRequestDTO registProjectRequest) {
         System.out.println("[ProjectController] createProject 메소드 -- POST");
@@ -73,6 +73,8 @@ public class ProjectController {
         );
     }
 
+    @ApiOperation(value = "프로젝트 이름 수정", notes = "프로젝트 이름 수정하는 api")
+    @ApiImplicitParam(name = "id", value = "프로젝트 id")
     @PatchMapping("/{id}")
     ResponseEntity<ResponseDTO> modifyProjectName(@PathVariable("id") Integer projectId, @RequestParam("name") String newName){
         System.out.println("[ProjectController] modifyProjectName -- Patch");
@@ -135,7 +137,8 @@ public class ProjectController {
     }
 
 
-
+    @ApiOperation(value = "프로젝트 삭제", notes = "프로젝트 삭제하는 api")
+    @ApiImplicitParam(name = "id", value = "프로젝트 id")
     @DeleteMapping("/{id}")
     ResponseEntity<ResponseDTO> deleteProject(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectController] deleteProject -- Delete");
