@@ -60,6 +60,6 @@ public class RegistProjectService {
         // project insert
         projectRepository.save(newProject);
 
-        return new ProjectResponseDTO(newProject.getId(), newProject.getRecentUpdateDatetime());
+        return new ProjectResponseDTO(newProject.getId(), newProject.getRecentUpdateDatetime(), newProject.getStatus().toString());
     }
 }

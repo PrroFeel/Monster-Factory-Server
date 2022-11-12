@@ -20,11 +20,11 @@ import java.util.Arrays;
  * @version 1
  */
 public class ObstacleInfo {
-    @ApiModelProperty(value = "장애물 이름")
+    @ApiModelProperty(value = "장애물 이름", example = "fense")
     @JsonProperty("obstacle_name")
     private String obstacleName;
 
-    @ApiModelProperty(value = "배치 위치")
+    @ApiModelProperty(value = "배치 위치", example = "[0,0,0]")
     @JsonProperty("obstacle_position")
     private Float[] obstaclePosition;
     protected ObstacleInfo(){}
