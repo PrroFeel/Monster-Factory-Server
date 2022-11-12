@@ -23,17 +23,17 @@ import javax.persistence.Embeddable;
  */
 
 @Embeddable
-public class Editor {
+public class Developer {
 
     @AttributeOverrides(
-            @AttributeOverride(name="id", column = @Column(name="editor_member_id"))
+            @AttributeOverride(name="id", column = @Column(name="developer_member_id"))
     )
     MemberId memberId;
 
 
-    protected Editor() {}
+    protected Developer() {}
 
-    public Editor(MemberId memberId) {
+    public Developer(MemberId memberId) {
         this.memberId = memberId;
     }
 
