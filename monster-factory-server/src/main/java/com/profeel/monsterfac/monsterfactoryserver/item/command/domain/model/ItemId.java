@@ -1,32 +1,35 @@
-package com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model;
+package com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
 /**
  * <pre>
- * Class : ProjectId
+ * Class : ItemId
  * Comment: 클래스에 대한 간단 설명
  * History
  * ================================================================
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
- * 2022-11-08       최윤서           최초 생성
+ * 2022-11-11       최윤서           최초 생성
  * </pre>
  *
  * @author 최윤서
  * @version 1
  */
+
 @Embeddable
 @Access(AccessType.FIELD)
-public class ProjectId implements Serializable {
-    @Column(name="project_id")
+public class ItemId {
+
+    @Column(name="item_id")
     private Integer id;
 
-    protected ProjectId() {}
-
-    public ProjectId(Integer id) {
+    protected ItemId() {}
+    public ItemId(Integer id) {
         this.id = id;
     }
 
@@ -38,8 +41,8 @@ public class ProjectId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProjectId projectId = (ProjectId) o;
-        return Objects.equals(id, projectId.id);
+        ItemId itemId = (ItemId) o;
+        return Objects.equals(id, itemId.id);
     }
 
     @Override
