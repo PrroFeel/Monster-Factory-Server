@@ -3,6 +3,8 @@ package com.profeel.monsterfac.monsterfactoryserver.item.command.domain.reposito
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * <pre>
  * Class : ItemRepository
@@ -19,4 +21,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
+
 }
