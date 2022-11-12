@@ -28,6 +28,7 @@ public class RegistReviewRequestDTO {
     private String result;
 
 
+
     protected RegistReviewRequestDTO(){}
     public RegistReviewRequestDTO(Integer targetGameId, String comment, String result) {
         this.targetGameId = targetGameId;

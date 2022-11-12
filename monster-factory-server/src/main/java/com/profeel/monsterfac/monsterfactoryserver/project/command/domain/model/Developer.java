@@ -3,7 +3,6 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -25,10 +24,8 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Developer {
 
-    @AttributeOverrides(
-            @AttributeOverride(name="id", column = @Column(name="developer_member_id"))
-    )
-    MemberId memberId;
+    @AttributeOverride(name="id", column = @Column(name="developer_member_id"))
+    private MemberId memberId;
 
 
     protected Developer() {}

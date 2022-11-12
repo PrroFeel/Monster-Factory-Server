@@ -1,4 +1,4 @@
-package com.profeel.monsterfac.monsterfactoryserver.member.query.exception;
+package com.profeel.monsterfac.monsterfactoryserver.game.query.exception;
 
 
 /**
@@ -15,6 +15,6 @@ package com.profeel.monsterfac.monsterfactoryserver.member.query.exception;
  * @author 최윤서
  * @version 1
  */
-public class NotFoundMemberException extends RuntimeException {
-    public NotFoundMemberException(String msg) {super(msg);}
+public class NotFoundGameException extends RuntimeException {
+    public NotFoundGameException(String msg) {super(msg);}
 }

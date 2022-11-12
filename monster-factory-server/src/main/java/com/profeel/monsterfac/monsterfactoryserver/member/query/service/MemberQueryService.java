@@ -3,7 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.member.query.service;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.repository.MemberRepository;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.dao.MemberDataDAO;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.data.MemberData;
-import com.profeel.monsterfac.monsterfactoryserver.member.query.exception.NotFoundMemberException;
+import com.profeel.monsterfac.monsterfactoryserver.member.query.exception.NotFoundGameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,7 @@ public class MemberQueryService{
         boolean result = memberDataDAO.existsById(memberId);
 
         if(!result) {
-            throw new NotFoundMemberException("회원 정보가 존재하지 않습니다.");
+            throw new NotFoundGameException("회원 정보가 존재하지 않습니다.");
         }
 
         return result;
@@ -52,7 +52,7 @@ public class MemberQueryService{
     public MemberData getMemberData(String memberId) {
         Optional<MemberData> memberData = memberDataDAO.findById(memberId);
 
-        return memberData.orElseThrow(() -> new NotFoundMemberException("해당 회원을 찾을 수 없습니다"));
+        return memberData.orElseThrow(() -> new NotFoundGameException("해당 회원을 찾을 수 없습니다"));
     }
 
     @Transactional(readOnly = true)
