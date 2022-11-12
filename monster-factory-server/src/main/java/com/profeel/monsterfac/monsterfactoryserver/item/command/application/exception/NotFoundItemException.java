@@ -1,13 +1,8 @@
-package com.profeel.monsterfac.monsterfactoryserver.item.query.repository;
-
-import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
-import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
+package com.profeel.monsterfac.monsterfactoryserver.item.command.application.exception;
 
 /**
  * <pre>
- * Class : ItemQueryMapper
+ * Class : NotFoundItemException
  * Comment: 클래스에 대한 간단 설명
  * History
  * ================================================================
@@ -20,10 +15,10 @@ import java.util.List;
  * @version 1(클래스 버전)
  */
 
-@Mapper
-public interface ItemQueryMapper {
 
-    List<ItemData> findItem();
+public class NotFoundItemException extends RuntimeException {
 
-    List<ItemData> findItemById(int itemId);
+    public NotFoundItemException(String msg){
+        super(msg);
+    }
 }

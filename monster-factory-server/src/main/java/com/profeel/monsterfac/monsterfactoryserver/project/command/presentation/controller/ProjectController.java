@@ -99,7 +99,6 @@ public class ProjectController {
             throw new ValidationErrorException(errors);
         }
 
-
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()

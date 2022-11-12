@@ -49,7 +49,7 @@ public class ItemQueryController {
 
     @ApiOperation(value = "아이템 상세 조회", notes = "아이템 하나의 정보가 나오는 api이다")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findItemById(@PathVariable("id") String itemId) {
+    public ResponseEntity<?> findItemById(@PathVariable("id") int itemId) {
 
         List<ItemData> itemDataList = itemQueryService.findItemById(itemId);
 

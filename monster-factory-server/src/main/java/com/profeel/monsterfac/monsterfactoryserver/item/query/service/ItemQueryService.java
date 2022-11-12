@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.query.service;
 
+import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
+import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.repository.ItemRepository;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.repository.ItemQueryMapper;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.exception.BadRequestException;
@@ -28,9 +30,12 @@ public class ItemQueryService {
 
     private ItemQueryMapper itemQueryMapper;
 
+    private ItemRepository itemRepository;
+
     @Autowired
-    public ItemQueryService(ItemQueryMapper itemQueryMapper) {
+    public ItemQueryService(ItemQueryMapper itemQueryMapper, ItemRepository itemRepository) {
         this.itemQueryMapper = itemQueryMapper;
+        this.itemRepository = itemRepository;
     }
 
     public List<ItemData> findItem() {
@@ -38,12 +43,13 @@ public class ItemQueryService {
         return itemQueryMapper.findItem();
     }
 
-    public List<ItemData> findItemById(String itemId) {
+    public List<ItemData> findItemById(int itemId) {
 
-        if(itemId == null) {
-            throw new BadRequestException("아이디가 존재하지 않습니다");
-        }
+//        if(itemId == null) {
+//            throw new BadRequestException("아이디가 존재하지 않습니다");
+//        }
 
         return itemQueryMapper.findItemById(itemId);
     }
+
 }
