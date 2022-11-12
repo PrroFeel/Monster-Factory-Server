@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model;
 
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.exception.ItemPriceException;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -24,6 +25,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tbl_items")
 public class Item {
+
 
     @ApiModelProperty(value="아이템 아이디", example = "1")
     @Id
@@ -92,4 +94,10 @@ public class Item {
             throw new ItemPriceException("아이템 가격은 음수일 수 없습니다");
         }
     }
+
+    public void changeItem(String itemName, int itemPrice, ImageFileInfo itemImgFile) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemImgInfo = itemImgFile;
+    };
 }

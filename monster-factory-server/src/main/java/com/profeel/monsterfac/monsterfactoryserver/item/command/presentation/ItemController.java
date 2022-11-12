@@ -3,14 +3,12 @@ package com.profeel.monsterfac.monsterfactoryserver.item.command.presentation;
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.dto.RegistItemRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.RegistItemService;
+import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.UpdateItemService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
@@ -34,10 +32,12 @@ import java.io.IOException;
 public class ItemController {
 
     private final RegistItemService registItemService;
+    private final UpdateItemService updateItemService;
 
     @Autowired
-    public ItemController(RegistItemService registItemService) {
+    public ItemController(RegistItemService registItemService, UpdateItemService updateItemService) {
         this.registItemService = registItemService;
+        this.updateItemService = updateItemService;
     }
 
     @ApiOperation(value = "아이템 추가", notes = "아이템을 추가(등록)하는 api")
@@ -47,6 +47,13 @@ public class ItemController {
         System.out.println("controller file" + registItemRequest.getItemImgFile());
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "아이템 추가 완료", registItemService.registItemImg(registItemRequest)));
+    }
+
+    @ApiOperation(value = "아이템 정보 수정", notes = "아이템 정보를 수정하는 api")
+    @PutMapping(value = "/{id}/update")
+    public ResponseEntity<ResponseDTO> updateItem(@PathVariable("id") int itemId, RegistItemRequestDTO registItemRequestInfo) throws IOException {
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "아이템 정보 수정 성공", updateItemService.updateItemInfo(itemId, registItemRequestInfo)));
     }
 
 }
