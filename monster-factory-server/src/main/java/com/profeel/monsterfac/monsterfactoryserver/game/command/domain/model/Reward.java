@@ -1,7 +1,5 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model;
 
-import com.profeel.monsterfac.monsterfactoryserver.common.model.Money;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,7 +22,7 @@ import java.util.List;
 public class Reward {
 
     @Column(name="game_reward_money")
-    private Money money;
+    private Integer money;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name="tbl_reward_items", joinColumns = @JoinColumn(name="game_id"))
@@ -32,12 +30,12 @@ public class Reward {
     private List<RewardItem> rewardItems;
 
     protected  Reward(){}
-    public Reward(Money money, List<RewardItem> rewardItems) {
+    public Reward(Integer money, List<RewardItem> rewardItems) {
         this.money = money;
         this.rewardItems = rewardItems;
     }
 
-    public Money getMoney() {
+    public Integer getMoney() {
         return money;
     }
 

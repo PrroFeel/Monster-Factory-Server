@@ -1,5 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -17,9 +18,16 @@ import org.springframework.web.multipart.MultipartFile;
  * @version 1
  */
 public class SubmitGameRequestDTO {
+    @ApiModelProperty(value="게임 이름", example = "탕탕탕 특공대")
     private String gameName;
+
+    @ApiModelProperty(value="게임 설명", example = "몬스터를 잡으며 앞으로 전진해보세요!")
     private String gameDescription;
+
+    @ApiModelProperty(value="게임 썸네일 파일", example = "monster.jpg")
     private MultipartFile thumbnailFile;
+
+    @ApiModelProperty(value="작업한 프로젝트 id", example = "3")
     private Integer projectId;
 
     protected SubmitGameRequestDTO(){}

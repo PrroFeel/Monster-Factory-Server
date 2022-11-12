@@ -45,7 +45,7 @@ public class Game {
 
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("JUDGE_WAIT")
+    @ColumnDefault("'JUDGE_WAIT'")
     private GameStatus gameStatus;
 
     @Embedded
@@ -54,13 +54,16 @@ public class Game {
 
     protected Game() {}
 
-    public Game( FileInfo thumbnail, DevelopProject developProject) {
+    public Game(String name, String description, FileInfo thumbnail, DevelopProject developProject) {
+        this.name = name;
+        this.description = description;
         this.thumbnail = thumbnail;
         this.developProject = developProject;
+        this.gameStatus = GameStatus.JUDGE_WAIT;
     }
 
-    public Game(FileInfo thumbnail, Reward reward, GameStatus gameStatus, DevelopProject developProject) {
-        this(thumbnail, developProject);
+    public Game(String name, String description,FileInfo thumbnail, Reward reward, GameStatus gameStatus, DevelopProject developProject) {
+        this(name, description, thumbnail, developProject);
         this.reward = reward;
         this.gameStatus = gameStatus;
     }
