@@ -95,9 +95,10 @@ public class Item {
         }
     }
 
-    public void changeItem(String itemName, int itemPrice, ImageFileInfo itemImgFile) {
+    public void changeItem(String itemName, int itemPrice, ImageFileInfo itemImgFile, ItemCategory itemCategoryCode) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemImgInfo = itemImgFile;
+        this.categoryId = itemCategoryCode;
     };
 }
