@@ -90,4 +90,11 @@ public class Game {
     public DevelopProject getDevelopProject() {
         return developProject;
     }
+
+    public void updateStatus(String status) {
+        if(fromString(status)==null){
+            throw new IllegalArgumentException("유효하지 않은 게임 상태 값 입니다");
+        }
+        this.gameStatus = fromString(status);
+    }
 }

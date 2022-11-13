@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.review.command.infra.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.application.service.UpdateGameSerive;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameId;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameData;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.service.GameQueryService;
@@ -27,9 +28,11 @@ public class ReviewServiceImpl implements ReviewService {
     private GameQueryService gameQueryService;
     private MemberQueryService memberQueryService;
 
-    public ReviewServiceImpl(GameQueryService gameQueryService, MemberQueryService memberQueryService){
+    private UpdateGameSerive updateGameSerive;
+    public ReviewServiceImpl(GameQueryService gameQueryService, MemberQueryService memberQueryService, UpdateGameSerive updateGameSerive){
         this.gameQueryService = gameQueryService;
         this.memberQueryService = memberQueryService;
+        this.updateGameSerive = updateGameSerive;
     }
 
 
@@ -37,5 +40,10 @@ public class ReviewServiceImpl implements ReviewService {
     public TargetGame createTargetGame(Integer targetGameId) {
         GameData gameData = gameQueryService.getGameData(targetGameId);
         return new TargetGame(new GameId(gameData.getId()));
+    }
+
+    @Override
+    public void updateGameStatus(GameId gameId, String status) {
+        updateGameSerive.updateGameStatus(gameId, status);
     }
 }

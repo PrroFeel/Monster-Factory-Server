@@ -1,5 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.review.command.domain.service;
 
+import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameId;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.TargetGame;
 
 /**
@@ -19,4 +20,6 @@ import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.T
 
 public interface ReviewService {
     TargetGame createTargetGame(Integer targetGameId);
+
+    void updateGameStatus(GameId gameId, String status);
 }

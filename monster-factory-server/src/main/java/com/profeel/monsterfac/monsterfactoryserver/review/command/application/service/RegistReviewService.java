@@ -7,6 +7,7 @@ import com.profeel.monsterfac.monsterfactoryserver.review.command.application.dt
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.PIC;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.Result;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.Review;
+import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.TargetGame;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.repository.ReviewRepository;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,16 +52,21 @@ public class RegistReviewService {
             throw new ValidationErrorException(errors);
         }
 
+        TargetGame targetGame =reviewService.createTargetGame(registReviewRequest.getTargetGameId());
+
         // review 객체 생성
         Review newReview = new Review(
                 registReviewRequest.getComment(),
                 Result.fromString(registReviewRequest.getResult()),
                 new PIC(new ManagerId(managerId)),
-                reviewService.createTargetGame(registReviewRequest.getTargetGameId())
+                targetGame
         );
 
         // new review insert
         newReview = reviewRepository.save(newReview);
+
+        // game status update
+        reviewService.updateGameStatus(targetGame.getGameId(), registReviewRequest.getResult());
 
         // insert 된 review 객체 반환
         return newReview;
