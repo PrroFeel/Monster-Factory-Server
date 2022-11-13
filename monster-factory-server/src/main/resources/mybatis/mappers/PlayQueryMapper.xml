@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.profeel.monsterfac.monsterfactoryserver.play.query.repository.PlayQueryMapper">
+
+    <resultMap id="RankingResultMap" type="com.profeel.monsterfac.monsterfactoryserver.play.query.data.PlayRankData">
+        <id property="rankingId" column="play_result_id"/>
+        <result property="playTime" column="play_time"/>
+        <association property="playGameData" javaType="com.profeel.monsterfac.monsterfactoryserver.play.query.data.PlayGameData">
+            <id property="playGameId" column="game_id"/>
+            <result property="playGameName" column="game_name"/>
+        </association>
+        <association property="playerData" javaType="com.profeel.monsterfac.monsterfactoryserver.play.query.data.PlayerData">
+            <id property="player" column="member_id"/>
+        </association>
+    </resultMap>
+
+    <select id="findRankingByGameId" resultMap="RankingResultMap">
+        SELECT
+               *
+          FROM tbl_play_result M
+          LEFT JOIN tbl_members C ON(M.player_id = C.member_id)
+          LEFT JOIN tbl_games F ON(M.play_game_id = F.game_id)
+         WHERE M.play_game_id = #{playGameId}
+         ORDER BY M.play_time ASC
+    </select>
+
+</mapper>
