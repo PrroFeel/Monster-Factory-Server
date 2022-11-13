@@ -27,7 +27,7 @@ public class DebuffInfo {
 
     @ApiModelProperty(value = "배치 위치", example = "[0,0,0]")
     @JsonProperty("debuff_position")
-    private Float[] debuffPosition;
+    private float[] debuffPosition;
 
     protected DebuffInfo(){}
 
@@ -39,11 +39,11 @@ public class DebuffInfo {
         this.debuffName = debuffName;
     }
 
-    public Float[] getDebuffPosition() {
+    public float[] getDebuffPosition() {
         return debuffPosition;
     }
 
-    public void setDebuffPosition(Float[] debuffPosition) {
+    public void setDebuffPosition(float[] debuffPosition) {
         this.debuffPosition = debuffPosition;
     }
 

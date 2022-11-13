@@ -19,18 +19,10 @@ public enum GameStatus {
 
     public static GameStatus fromString(String state) {
         switch(state) {
-            case "JUDGE_WAIT":
-            case "judge_wait":
-                return JUDGE_WAIT;
-            case "RETURNED":
-            case "returned":
-                return RETURNED;
-            case "APPROVED" :
-            case "approved":
-                return APPROVED;
-            case "UPLOADED" :
-            case "uploaded":
-                return UPLOADED;
+            case "JUDGE_WAIT": return GameStatus.JUDGE_WAIT;
+            case "RETURNED": return GameStatus.RETURNED;
+            case "APPROVED" : return GameStatus.APPROVED;
+            case "UPLOADED" : return GameStatus.UPLOADED;
             default: return null;
         }
     }

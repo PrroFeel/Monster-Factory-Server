@@ -26,10 +26,10 @@ public class ObstacleInfo {
 
     @ApiModelProperty(value = "배치 위치", example = "[0,0,0]")
     @JsonProperty("obstacle_position")
-    private Float[] obstaclePosition;
+    private float[] obstaclePosition;
     protected ObstacleInfo(){}
 
-    public ObstacleInfo(String obstacleName, Float[] obstaclePosition) {
+    public ObstacleInfo(String obstacleName, float[] obstaclePosition) {
         this.obstacleName = obstacleName;
         this.obstaclePosition = obstaclePosition;
     }
@@ -42,11 +42,11 @@ public class ObstacleInfo {
         this.obstacleName = obstacleName;
     }
 
-    public Float[] getObstaclePosition() {
+    public float[] getObstaclePosition() {
         return obstaclePosition;
     }
 
-    public void setObstaclePosition(Float[] obstaclePosition) {
+    public void setObstaclePosition(float[] obstaclePosition) {
         this.obstaclePosition = obstaclePosition;
     }
 

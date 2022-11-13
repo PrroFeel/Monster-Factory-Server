@@ -22,13 +22,13 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class GameQueryService {
+public class GameDataQueryService {
 
 
     private GameDataRepositoy gameDataRepositoy;
 
     @Autowired
-    public GameQueryService(GameDataRepositoy gameDataRepositoy){
+    public GameDataQueryService(GameDataRepositoy gameDataRepositoy){
         this.gameDataRepositoy = gameDataRepositoy;
     }
 
@@ -45,6 +45,6 @@ public class GameQueryService {
 
     public GameData getGameData(Integer gameId) {
         isVailable(gameId);
-        return  (gameDataRepositoy.findById(gameId)).get();
+        return (gameDataRepositoy.findById(gameId)).get();
     }
 }

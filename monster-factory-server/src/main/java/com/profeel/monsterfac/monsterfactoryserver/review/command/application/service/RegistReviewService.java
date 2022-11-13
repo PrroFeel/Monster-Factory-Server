@@ -55,6 +55,9 @@ public class RegistReviewService {
 
         TargetGame targetGame =reviewService.createTargetGame(registReviewRequest.getTargetGameId());
 
+        // game status update
+        reviewService.updateGameStatus(targetGame.getGameId(), registReviewRequest.getResult());
+
         // review 객체 생성
         Review newReview = new Review(
                 registReviewRequest.getComment(),
@@ -65,10 +68,6 @@ public class RegistReviewService {
 
         // new review insert
         newReview = reviewRepository.save(newReview);
-
-        // game status update
-        reviewService.updateGameStatus(targetGame.getGameId(), registReviewRequest.getResult());
-
         // insert 된 review 객체 반환
         return new ReviewResponseDTO(
                 newReview.getId(),

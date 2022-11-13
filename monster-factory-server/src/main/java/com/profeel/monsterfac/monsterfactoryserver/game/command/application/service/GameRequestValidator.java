@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.game.command.application.ser
 
 import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationError;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.SubmitGameRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.UploadGameRequestDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,6 +40,22 @@ public class GameRequestValidator {
             }
             if(submitGameRequest.getProjectId() == null){
                 errors.add(ValidationError.of("thumbnailFile", "required"));
+            }
+        }
+        return errors;
+    }
+
+    public List<ValidationError> validate(UploadGameRequestDTO upladGameRequest) {
+        List<ValidationError> errors = new ArrayList<>();
+        if (upladGameRequest == null) {
+            errors.add(ValidationError.of("required"));
+        } else {
+            if (upladGameRequest.getRewardItmes() == null) {
+                errors.add(ValidationError.of("rewardItemList", "required"));
+            }
+
+            if(upladGameRequest.getRewardMoney() == null){
+                errors.add(ValidationError.of("rewardMoney", "required"));
             }
         }
         return errors;
