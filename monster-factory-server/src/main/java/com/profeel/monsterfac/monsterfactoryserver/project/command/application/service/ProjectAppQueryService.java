@@ -22,11 +22,11 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
-public class ProjectQueryService {
+public class ProjectAppQueryService {
     private ProjectRepository projectRepository;
 
     @Autowired
-    public ProjectQueryService(ProjectRepository projectRepository){
+    public ProjectAppQueryService(ProjectRepository projectRepository){
         this.projectRepository =projectRepository;
     }
     public boolean isValidable(Integer projectId){

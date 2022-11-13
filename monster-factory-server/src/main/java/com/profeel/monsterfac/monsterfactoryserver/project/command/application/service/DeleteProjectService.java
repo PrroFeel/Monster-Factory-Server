@@ -23,11 +23,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DeleteProjectService {
-    private ProjectQueryService projectQueryService;
+    private ProjectAppQueryService projectQueryService;
     private ProjectRepository projectRepository;
 
     @Autowired
-    public DeleteProjectService(ProjectRepository projectRepository, ProjectQueryService projectQueryService){
+    public DeleteProjectService(ProjectRepository projectRepository, ProjectAppQueryService projectQueryService){
         this.projectQueryService = projectQueryService;
         this.projectRepository = projectRepository;
     }
