@@ -8,6 +8,7 @@ import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.repositor
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
@@ -37,6 +38,7 @@ public class SubmitGameService {
         this.gameRepository = gameRepository;
     }
 
+    @Transactional
     public Integer submitGame(SubmitGameRequestDTO submitGameRequest) throws IOException {
         // project id 검증
         DevelopProject developProject = gameService.createProject(submitGameRequest.getProjectId());

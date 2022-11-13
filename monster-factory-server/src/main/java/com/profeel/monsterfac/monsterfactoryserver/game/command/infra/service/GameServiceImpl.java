@@ -11,7 +11,7 @@ import com.profeel.monsterfac.monsterfactoryserver.item.command.application.exce
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.ItemId;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.service.ItemQueryService;
-import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectQueryService;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectAppQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Project;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +36,14 @@ import java.util.List;
  */
 @DomainService
 public class GameServiceImpl implements GameService {
-    private ProjectQueryService projectQueryService;
+    private ProjectAppQueryService projectQueryService;
     private UploadFileService uploadFileService;
 
     private ItemQueryService itemQueryService;
 
     @Autowired
     public GameServiceImpl(
-            ProjectQueryService projectQueryService,
+            ProjectAppQueryService projectQueryService,
             UploadFileService uploadFileService,
             ItemQueryService itemQueryService
     ){

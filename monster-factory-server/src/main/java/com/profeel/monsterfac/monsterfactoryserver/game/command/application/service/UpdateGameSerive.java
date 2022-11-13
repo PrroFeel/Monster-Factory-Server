@@ -10,6 +10,7 @@ import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.repositor
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class UpdateGameSerive {
         this.gameRepository = gameRepository;
         this.gameQueryService = gameQueryService;
     }
+    @Transactional
     public void updateGameStatus(GameId gameId, String status) {
         Game targetGame = gameQueryService.getGame(gameId.getId());
         System.out.println(targetGame.getGameStatus());
@@ -47,6 +49,7 @@ public class UpdateGameSerive {
     }
 
 
+    @Transactional
     public Game uploadGameWithReward(Integer gameId, UploadGameRequestDTO upladGameRequest){
 
         // rewardItem list 생성
@@ -59,7 +62,6 @@ public class UpdateGameSerive {
         Game targetGame = gameQueryService.getGame(gameId);
         // game reward regist & upload
         targetGame.registRewardAndUpload(new Reward(upladGameRequest.getRewardMoney(), rewardItemList));
-        gameRepository.save(targetGame);
         // response dto 반환
         return targetGame;
     }
