@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model;
 import com.profeel.monsterfac.monsterfactoryserver.common.model.Money;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
@@ -25,6 +26,7 @@ import java.util.Date;
 public class Member {
 
     @Id
+    @NotBlank
     @Column(name="member_id")
     private String memberId;
 
