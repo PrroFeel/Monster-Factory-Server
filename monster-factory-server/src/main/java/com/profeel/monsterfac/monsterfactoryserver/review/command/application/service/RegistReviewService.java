@@ -4,6 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationEr
 import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationErrorException;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.ManagerId;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.application.dto.RegistReviewRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.review.command.application.dto.ReviewResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.PIC;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.Result;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.Review;
@@ -44,7 +45,7 @@ public class RegistReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public Review registReview(RegistReviewRequestDTO registReviewRequest, String managerId){
+    public ReviewResponseDTO registReview(RegistReviewRequestDTO registReviewRequest, String managerId){
 
         if(fromString(registReviewRequest.getResult()) == null){
             List<ValidationError> errors = new ArrayList<>();
@@ -69,7 +70,14 @@ public class RegistReviewService {
         reviewService.updateGameStatus(targetGame.getGameId(), registReviewRequest.getResult());
 
         // insert 된 review 객체 반환
-        return newReview;
+        return new ReviewResponseDTO(
+                newReview.getId(),
+                newReview.getComment(),
+                newReview.getResult().toString(),
+                newReview.getRegistDatetime(),
+                newReview.getTargetGame().getGameId().getId(),
+                newReview.getPic().getManagerId().getId()
+        );
     }
 
 }

@@ -4,9 +4,11 @@ import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationError;
 import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationErrorException;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.application.dto.RegistReviewRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.review.command.application.dto.ReviewResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.application.service.RegistReviewService;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.application.service.ReviewValidateService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,7 @@ import java.util.List;
  * @version 1
  */
 @Api(tags = {"Review API"}, description = "심사 관련 api")
-@ApiResponses(value = {@ApiResponse(code = 200, message = "성공")})
+@ApiResponses(value = {@ApiResponse(code = 200, message = "성공", response = ReviewResponseDTO.class)})
 @Controller
 @RequestMapping("/reviews")
 public class ReviewController {
@@ -48,6 +50,7 @@ public class ReviewController {
         this.reviewValidateService = reviewValidateService;
     }
 
+    @ApiOperation(value = "심사 리뷰 등록 api", notes = "리뷰 정보를 저장하는 api")
     @PostMapping("/")
     public ResponseEntity<ResponseDTO> registReview(@RequestBody RegistReviewRequestDTO registReviewRequest){
         System.out.println("[JudgeResultController] registJudgeResult -- POST");
@@ -56,13 +59,12 @@ public class ReviewController {
         List<ValidationError> errors = reviewValidateService.validate(registReviewRequest);
         if (!errors.isEmpty()) throw new ValidationErrorException(errors);
 
-        registReviewService.registReview(registReviewRequest, "admin");
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "게임 심사 결과 저장 성공"
-                        , "저장된 정보 보여질 예정"
+                        , registReviewService.registReview(registReviewRequest, "admin")
                 )
         );
 
