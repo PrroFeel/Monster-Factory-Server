@@ -26,15 +26,15 @@ public class TowerInfo {
 
     @ApiModelProperty(value = "배치된 위치", example = "[0,0,0]")
     @JsonProperty("tower_position")
-    private Float[] towerPosition;
+    private float[] towerPosition;
 
     @ApiModelProperty(value = "타워 스폰 주기", example = "3.5f")
     @JsonProperty("tower_spawnTime")
-    private Float towerSpawnTime;
+    private float towerSpawnTime;
 
     protected TowerInfo(){}
 
-    public TowerInfo(String towerName, Float[] towerPosition, Float towerSpawnTime) {
+    public TowerInfo(String towerName, float[] towerPosition, float towerSpawnTime) {
         this.towerName = towerName;
         this.towerPosition = towerPosition;
         this.towerSpawnTime = towerSpawnTime;
@@ -48,18 +48,18 @@ public class TowerInfo {
         this.towerName = towerName;
     }
 
-    public Float[] getTowerPosition() {
+    public float[] getTowerPosition() {
         return towerPosition;
     }
 
-    public void setTowerPosition(Float[] towerPosition) {
+    public void setTowerPosition(float[] towerPosition) {
         this.towerPosition = towerPosition;
     }
     public float getTowerSpawnTime() {
         return towerSpawnTime;
     }
 
-    public void setTowerSpawnTime(Float towerSpawnTime) {
+    public void setTowerSpawnTime(float towerSpawnTime) {
         this.towerSpawnTime = towerSpawnTime;
     }
 
