@@ -10,6 +10,7 @@ import com.profeel.monsterfac.monsterfactoryserver.project.command.application.s
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.ProjectRequestValidator;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.RegistProjectService;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.service.UpdateProjectService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +33,12 @@ import java.util.List;
  * @author 최윤서
  * @version 1
  */
-
+@Api(tags = {"Project API"}, description = "project 관련 api")
+@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "성공", response = ProjectResponseDTO.class)
+})
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/projects")
 public class ProjectController {
     private ProjectRequestValidator projectRequestValidator;
     private RegistProjectService registProjectService;
@@ -49,7 +53,8 @@ public class ProjectController {
         this.deleteProjectService = deleteProjectService;
     }
 
-    @PostMapping("/projects")
+    @ApiOperation(value = "프로젝트 생성", notes = "프로젝트 생성하는 api")
+    @PostMapping("/")
     ResponseEntity<ResponseDTO> createProject(@RequestBody RegistProjectRequestDTO registProjectRequest) {
         System.out.println("[ProjectController] createProject 메소드 -- POST");
         System.out.println("registProjectRequest : " + registProjectRequest);
@@ -57,18 +62,36 @@ public class ProjectController {
         List<ValidationError> errors = projectRequestValidator.validate(registProjectRequest);
         if (!errors.isEmpty()) throw new ValidationErrorException(errors);
 
-        ProjectResponseDTO results = registProjectService.registProject(registProjectRequest);
+        ProjectResponseDTO result = registProjectService.registProject(registProjectRequest);
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "프로젝트 생성 성공"
-                        , results
+                        , result
                 )
         );
     }
 
-    @PostMapping("/projects/{id}/save")
+    @ApiOperation(value = "프로젝트 이름 수정", notes = "프로젝트 이름 수정하는 api")
+    @ApiImplicitParam(name = "id", value = "프로젝트 id")
+    @PatchMapping("/{id}")
+    ResponseEntity<ResponseDTO> modifyProjectName(@PathVariable("id") Integer projectId, @RequestParam("name") String newName){
+        System.out.println("[ProjectController] modifyProjectName -- Patch");
+        System.out.println("newName : " + newName);
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"프로젝트 이름 수정 성공"
+                        , updateProjectService.modifyProjectName(projectId, newName)
+                )
+        );
+    }
+
+    @ApiOperation(value = "프로젝트 저장", notes = "프로젝트 edit 정보를 저장하는 api")
+    @ApiImplicitParam(name = "id", value = "프로젝트 id")
+    @PatchMapping("/{id}/save")
     ResponseEntity<ResponseDTO> saveProjet(@PathVariable("id") Integer projectId, @RequestBody SaveProjectRequestDTO saveProjectRequest) {
         System.out.println("[ProjectController] saveProjet -- POST");
         // 필수 입력값 유무 검사
@@ -78,37 +101,45 @@ public class ProjectController {
         }
 
         System.out.println("projectId : " + projectId);
-        System.out.println("storeProjectRequest.modelList : " + saveProjectRequest.getProjectPlacedTowerList());
+        System.out.println("saveProjectRequest: " + saveProjectRequest);
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "프로젝트 저장 성공"
-                        ,  updateProjectService.saveProject(projectId, saveProjectRequest.getProjectPlacedTowerList())
+                        ,  updateProjectService.saveProject(projectId, saveProjectRequest)
                 )
         );
     }
 
-    @PutMapping("/projects/{id}")
-    ResponseEntity<ResponseDTO> updateNameOfProject(@PathVariable("id") Integer projectId, @RequestParam("name") String newName){
-        System.out.println("[ProjectController] updateNameOfProject -- PUT");
-        System.out.println("newName : " + newName);
+    @ApiOperation(value = "프로젝트 완료", notes = "최종 edit 정보를 저장하고 개발 완료 처리하는 api")
+    @ApiImplicitParam(name = "id", value = "프로젝트 id")
+    @PatchMapping("/{id}/complete")
+    ResponseEntity<ResponseDTO> completeProject(@PathVariable("id") Integer projectId, @RequestBody SaveProjectRequestDTO saveProjectRequest){
+        System.out.println("[ProjectController] completeProject -- put");
+        System.out.println("saveProjectRequest : " + saveProjectRequest);
 
-        List<ValidationError> errors = projectRequestValidator.validate(newName);
+        List<ValidationError> errors = projectRequestValidator.validate(saveProjectRequest);
         if (!errors.isEmpty()) {
             throw new ValidationErrorException(errors);
         }
 
+        updateProjectService.saveProject(projectId, saveProjectRequest);
+        ProjectResponseDTO projectResponse =  updateProjectService.completedProject(projectId);
+
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
-                        ,"프로젝트 이름 수정 성공"
-                        , updateProjectService.upadteNameOfProject(projectId, newName)
+                        ,"최종 edit 정보 저장 & 개발 완료 처리 성공"
+                        , projectResponse
                 )
         );
     }
 
-    @DeleteMapping("/projects/{id}")
+
+    @ApiOperation(value = "프로젝트 삭제", notes = "프로젝트 삭제하는 api")
+    @ApiImplicitParam(name = "id", value = "프로젝트 id")
+    @DeleteMapping("/{id}")
     ResponseEntity<ResponseDTO> deleteProject(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectController] deleteProject -- Delete");
         System.out.println("projectId : " + projectId);

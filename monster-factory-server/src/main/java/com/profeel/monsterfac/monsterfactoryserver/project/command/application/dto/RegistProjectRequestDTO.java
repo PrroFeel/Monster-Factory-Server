@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * <pre>
  * Class : ProjectRequestDTO
@@ -15,7 +17,10 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.application.
  * @version 1
  */
 public class RegistProjectRequestDTO {
+
+    @ApiModelProperty(name = "유저 id", example = "profeel", notes = "액세스 토큰을 보내는 방식이 될 예정")
     private String userId;
+    @ApiModelProperty(name = "프로젝트 이름", example = "큐비 프로젝트")
     private String projectName;
 
     public RegistProjectRequestDTO() {}

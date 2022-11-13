@@ -3,7 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.application.
 
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.ProjectResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.RegistProjectRequestDTO;
-import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Editor;
+import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Developer;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.Project;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.ProjectStatus;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.repository.ProjectRepository;
@@ -44,7 +44,7 @@ public class RegistProjectService {
     @Transactional
     public ProjectResponseDTO registProject(RegistProjectRequestDTO registProjectRequest){
         // userId 유효성 검사
-        Editor editor = projectService.createEditor(registProjectRequest.getUserId());
+        Developer editor = projectService.createEditor(registProjectRequest.getUserId());
 
         // 현재 날짜 및 시간 가져옴
         String currentDatetime = getCurrentDatetimeWithFormating();
@@ -60,6 +60,6 @@ public class RegistProjectService {
         // project insert
         projectRepository.save(newProject);
 
-        return new ProjectResponseDTO(newProject.getId(), newProject.getRecentUpdateDatetime());
+        return new ProjectResponseDTO(newProject.getId(), newProject.getRecentUpdateDatetime(), newProject.getStatus().toString());
     }
 }

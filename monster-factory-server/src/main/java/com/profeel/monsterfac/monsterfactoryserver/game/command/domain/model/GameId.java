@@ -3,6 +3,8 @@ package com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 
 import javax.persistence.Column;
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,6 +17,7 @@ import java.util.Objects;
  * ================================================================
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
+<<<<<<< HEAD
  * 2022-11-12       최은진           최초 생성
  * </pre>
  *
@@ -38,7 +41,6 @@ public class GameId implements Serializable {
         return id;
     }
 
-    @Override
     public String toString() {
         return "GameId{" +
                 "id=" + id +

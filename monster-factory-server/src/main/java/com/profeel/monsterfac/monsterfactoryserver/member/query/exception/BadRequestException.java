@@ -1,3 +1,4 @@
+
 package com.profeel.monsterfac.monsterfactoryserver.member.query.exception;
 
 /**

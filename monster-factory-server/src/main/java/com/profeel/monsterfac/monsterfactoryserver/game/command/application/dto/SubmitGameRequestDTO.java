@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author 최윤서
  * @version 1
  */
+
 public class SubmitGameRequestDTO {
     @ApiModelProperty(value="게임 이름", example = "탕탕탕 특공대")
     private String gameName;
