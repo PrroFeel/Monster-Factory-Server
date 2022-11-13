@@ -8,6 +8,7 @@ import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.mode
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -34,6 +35,7 @@ public class RegistInventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
+    @Transactional
     public Object registInventory(RegistInventoryRequestDTO registInventoryRequestInfo) {
 
         Inventory newInventoryItem = new Inventory(
@@ -50,4 +52,5 @@ public class RegistInventoryService {
 
         return inventoryResponseDTO;
     }
+
 }
