@@ -1,7 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.model.Money;
-import io.swagger.annotations.ApiParam;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,6 +23,7 @@ import java.util.Date;
 @Entity
 @Table(name="tbl_members")
 public class Member {
+
     @Id
     @Column(name="member_id")
     private String memberId;
@@ -46,7 +46,10 @@ public class Member {
     @Column(name="member_regist_date")
     private Date memberRegistDate;
 
-    public Member(String memberId, Password password, String gender, Date birthday, String secessionYn, Money money, Date memberRegistDate) {
+    @Column(name="member_auth")
+    private String auth;
+
+    public Member(String memberId, Password password, String gender, Date birthday, String secessionYn, Money money, Date memberRegistDate, String auth) {
         this.memberId = memberId;
         this.password = password;
         this.gender = gender;
@@ -54,6 +57,7 @@ public class Member {
         this.secessionYn = secessionYn;
         this.money = money;
         this.memberRegistDate = memberRegistDate;
+        this.auth = auth;
     }
 
     public Member() {}
@@ -113,5 +117,13 @@ public class Member {
 
     public void setMemberRegistDate(Date memberRegistDate) {
         this.memberRegistDate = memberRegistDate;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
     }
 }

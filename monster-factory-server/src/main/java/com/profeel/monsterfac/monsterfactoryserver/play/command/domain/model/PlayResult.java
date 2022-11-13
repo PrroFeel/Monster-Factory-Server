@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.play.command.domain.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Time;
 
 /**
@@ -34,18 +35,16 @@ public class PlayResult {
     private PlayGame playGameId;
 
     @Column(name = "play_time")
-    private Time playTime;
+    private String playTime;
 
 
     public PlayResult() {}
 
-    public PlayResult(int playResultId, Player playerId, PlayGame playGameId, Time playTime) {
-        this.playResultId = playResultId;
+    public PlayResult(Player playerId, PlayGame playGameId, String playTime) {
         this.playerId = playerId;
         this.playGameId = playGameId;
         this.playTime = playTime;
     }
-
     public int getPlayResultId() {
         return playResultId;
     }
@@ -70,11 +69,11 @@ public class PlayResult {
         this.playGameId = playGameId;
     }
 
-    public Time getPlayTime() {
+    public String getPlayTime() {
         return playTime;
     }
 
-    public void setPlayTime(Time playTime) {
+    public void setPlayTime(String playTime) {
         this.playTime = playTime;
     }
 
