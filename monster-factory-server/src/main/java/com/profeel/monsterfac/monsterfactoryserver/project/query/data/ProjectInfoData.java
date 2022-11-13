@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.query.data;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,22 +24,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbl_projects")
 public class ProjectInfoData {
+    @ApiModelProperty(example = "프로젝트 고유 번호")
     @Id
     @Column(name="project_id")
     private Integer projectId;
 
+
+    @ApiModelProperty(example = "프로젝트 이름")
     @Column(name="project_name")
     private String projectName;
 
+    @ApiModelProperty(example = "프로젝트 개발자 ID")
     @Column(name="developer_member_id")
     private String developerMemberId;
 
+    @ApiModelProperty(example = "프로젝트 생성 날짜 및 시간")
     @Column(name="create_datetime")
     private String createDatetime;
 
+    @ApiModelProperty(example = "프로젝트 최근 수정 날짜 및 시간")
     @Column(name="recent_update_datetime")
     private String recentUpdateDatetime;
 
+    @ApiModelProperty(example = "프로젝트 상태 - PRE : 개발 전, IN_PROGRESS : 개발 중, DONE : 개발 완료")
     @Column(name="project_status")
     private String proejctStatus;
 

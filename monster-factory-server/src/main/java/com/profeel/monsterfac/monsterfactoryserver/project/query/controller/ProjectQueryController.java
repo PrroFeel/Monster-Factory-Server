@@ -4,6 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.exception.NotFoundProjectException;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.service.ProjectQueryService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ import java.util.Optional;
  * @author 최윤서
  * @version 1
  */
+
+@Api(tags = {"Project 조회 API"}, description = "project 조화 관련 api")
+@ApiResponses(value = {@ApiResponse(code = 200, message = "성공")})
 @Controller
 @RequestMapping("/projects")
 public class ProjectQueryController {
@@ -37,6 +41,8 @@ public class ProjectQueryController {
         this.projectQueryService = projectQueryService;
     }
 
+    @ApiOperation(value = "프로젝트 기본 정보 조회", notes = "프로젝트 이름 등 기본 정보 조회 api" ,response = ProjectInfoData.class)
+    @ApiImplicitParam(name = "id", value = "조회하고자 하는 프로젝트 고유 번호")
     @GetMapping("/{id}")
     public ResponseEntity<ResponseDTO> getProjectInfoData(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectQueryController] getProjectInfoData -- GET");
