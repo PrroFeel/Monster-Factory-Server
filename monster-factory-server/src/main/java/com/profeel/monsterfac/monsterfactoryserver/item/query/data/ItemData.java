@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 public class ItemData {
 
     private int itemId;
-
     private String itemName;
     private int itemPrice;
     private ItemImgData itemImgData;
