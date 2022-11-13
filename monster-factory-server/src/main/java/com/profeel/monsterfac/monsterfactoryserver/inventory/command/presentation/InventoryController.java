@@ -2,14 +2,13 @@ package com.profeel.monsterfac.monsterfactoryserver.inventory.command.presentati
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.dto.RegistInventoryRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.service.DeleteInventoryService;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.service.RegistInventoryService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <pre>
@@ -31,10 +30,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class InventoryController {
 
     private final RegistInventoryService registInventoryService;
+    private final DeleteInventoryService deleteInventoryService;
 
     @Autowired
-    public InventoryController(RegistInventoryService registInventoryService) {
+    public InventoryController(RegistInventoryService registInventoryService, DeleteInventoryService deleteInventoryService) {
         this.registInventoryService = registInventoryService;
+        this.deleteInventoryService = deleteInventoryService;
     }
 
     @ApiOperation(value = "인벤토리에 아이템 추가", notes = "인벤토리에 아이템을 추가하는 api")
@@ -42,5 +43,12 @@ public class InventoryController {
     public ResponseEntity<ResponseDTO> registInventory(RegistInventoryRequestDTO registInventoryRequestInfo) {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "인벤토리에 아이템 추가 완료", registInventoryService.registInventory(registInventoryRequestInfo)));
+    }
+
+    @ApiOperation(value = "인벤토리에서 아이템을 삭제", notes = "인벤토리에서 아이템을 삭제하는 api")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ResponseDTO> deleteInventory(@PathVariable("id") int inventoryId) {
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "인벤토리에서 아이템 제거 완료", deleteInventoryService.deleteInventory(inventoryId)));
     }
 }
