@@ -27,6 +27,9 @@ public class Review {
     @Id
     @Column(name = "review_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Column(name="review_comment")
     private String comment;
 
     @Column(name="review_result")
@@ -50,6 +53,14 @@ public class Review {
         this.pic = pic;
         this.targetGame = targetGame;
         this.registDatetime = getCurrentDatetimeWithFormating();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getRegistDatetime() {
+        return registDatetime;
     }
 
     public String getComment() {

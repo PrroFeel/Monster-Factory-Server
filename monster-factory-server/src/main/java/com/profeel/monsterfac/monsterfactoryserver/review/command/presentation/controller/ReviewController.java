@@ -1,16 +1,23 @@
 package com.profeel.monsterfac.monsterfactoryserver.review.command.presentation.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
+import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationError;
+import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationErrorException;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.application.dto.RegistReviewRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.review.command.application.service.RegistReviewService;
+import com.profeel.monsterfac.monsterfactoryserver.review.command.application.service.ReviewValidateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 /**
  * <pre>
@@ -32,13 +39,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/reviews")
 public class ReviewController {
 
-//    private JudgeValidateService judgeValidateService;
+    private ReviewValidateService reviewValidateService;
+    private RegistReviewService registReviewService;
+
+    @Autowired
+    public ReviewController(RegistReviewService registReviewService, ReviewValidateService reviewValidateService){
+        this.registReviewService = registReviewService;
+        this.reviewValidateService = reviewValidateService;
+    }
 
     @PostMapping("/")
     public ResponseEntity<ResponseDTO> registReview(@RequestBody RegistReviewRequestDTO registReviewRequest){
         System.out.println("[JudgeResultController] registJudgeResult -- POST");
         System.out.println("registResultRequest:" + registReviewRequest);
 
+        List<ValidationError> errors = reviewValidateService.validate(registReviewRequest);
+        if (!errors.isEmpty()) throw new ValidationErrorException(errors);
+
+        registReviewService.registReview(registReviewRequest, "admin");
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
