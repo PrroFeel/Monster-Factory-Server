@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.item.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.service.ItemQueryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import java.util.List;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Item API"}, description = "item 조회 관련 api")
 @RestController
 @RequestMapping("/items")
 public class ItemQueryController {

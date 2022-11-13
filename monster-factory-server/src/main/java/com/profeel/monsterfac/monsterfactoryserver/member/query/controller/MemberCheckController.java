@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.member.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.member.query.exception.BadRequestException;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Member API"}, description = "아이디 중복 체크 api")
 @RestController
 @RequestMapping("/auth")
 public class MemberCheckController {

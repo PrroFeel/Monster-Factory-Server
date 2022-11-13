@@ -45,6 +45,7 @@ public class PlayResult {
         this.playGameId = playGameId;
         this.playTime = playTime;
     }
+
     public int getPlayResultId() {
         return playResultId;
     }
