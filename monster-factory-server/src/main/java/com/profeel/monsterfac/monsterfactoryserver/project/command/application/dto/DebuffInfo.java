@@ -20,11 +20,11 @@ import java.util.Arrays;
  * @version 1
  */
 public class DebuffInfo {
-    @ApiModelProperty(value = "디버프 이름")
+    @ApiModelProperty(value = "디버프 이름", example = "느려짐")
     @JsonProperty("debuff_name")
     private String debuffName;
 
-    @ApiModelProperty(value = "배치 위치")
+    @ApiModelProperty(value = "배치 위치", example = "[0,0,0]")
     @JsonProperty("debuff_position")
     private Float[] debuffPosition;
 

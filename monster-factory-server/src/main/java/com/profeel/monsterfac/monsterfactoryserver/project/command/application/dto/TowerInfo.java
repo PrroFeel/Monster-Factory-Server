@@ -20,15 +20,15 @@ import java.util.Arrays;
  * @version 1
  */
 public class TowerInfo {
-    @ApiModelProperty(value = "타워 이름")
+    @ApiModelProperty(value = "타워 이름", example = "skeleton_spwanTower")
     @JsonProperty("tower_name")
     private String towerName;
 
-    @ApiModelProperty(value = "배치된 위치")
+    @ApiModelProperty(value = "배치된 위치", example = "[0,0,0]")
     @JsonProperty("tower_position")
     private Float[] towerPosition;
 
-    @ApiModelProperty(value = "타워 스폰 주기")
+    @ApiModelProperty(value = "타워 스폰 주기", example = "3.5f")
     @JsonProperty("tower_spawnTime")
     private Float towerSpawnTime;
 
@@ -55,7 +55,6 @@ public class TowerInfo {
     public void setTowerPosition(Float[] towerPosition) {
         this.towerPosition = towerPosition;
     }
-
     public float getTowerSpawnTime() {
         return towerSpawnTime;
     }

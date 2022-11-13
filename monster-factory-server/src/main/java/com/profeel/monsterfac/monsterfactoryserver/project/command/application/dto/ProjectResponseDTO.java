@@ -14,14 +14,17 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.application.
  * @author 최윤서
  * @version 1
  */
+
 public class ProjectResponseDTO {
     private Integer projectId;
     private String recentUpdateDatetime;
+    private String projectStatus;
 
     public ProjectResponseDTO(){}
-    public ProjectResponseDTO(Integer projectId, String recentUpdateDatetime) {
+    public ProjectResponseDTO(Integer projectId, String recentUpdateDatetime, String projectStatus) {
         this.projectId = projectId;
         this.recentUpdateDatetime = recentUpdateDatetime;
+        this.projectStatus = projectStatus;
     }
 
     public Integer getProjectId() {
@@ -40,11 +43,20 @@ public class ProjectResponseDTO {
         this.recentUpdateDatetime = recentUpdateDatetime;
     }
 
+    public String getProjectStatus() {
+        return projectStatus;
+    }
+
+    public void setProjectStatus(String projectStatus) {
+        this.projectStatus = projectStatus;
+    }
+
     @Override
     public String toString() {
         return "ProjectResponseDTO{" +
-                "ProjectId=" + projectId +
+                "projectId=" + projectId +
                 ", recentUpdateDatetime='" + recentUpdateDatetime + '\'' +
+                ", projectStatus='" + projectStatus + '\'' +
                 '}';
     }
 }

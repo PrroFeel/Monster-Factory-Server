@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 
 @Service

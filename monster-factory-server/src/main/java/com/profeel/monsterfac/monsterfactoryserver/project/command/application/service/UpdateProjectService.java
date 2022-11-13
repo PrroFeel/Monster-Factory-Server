@@ -76,7 +76,7 @@ public class UpdateProjectService {
                 new PlacedObjects(placedTowerList, placedObstacleList, placedDebuffList)
         );
 
-        return  new ProjectResponseDTO(updateProject.getId(), updateProject.getRecentUpdateDatetime());
+        return  new ProjectResponseDTO(updateProject.getId(), updateProject.getRecentUpdateDatetime(), updateProject.getStatus().toString());
     }
 
 
@@ -90,7 +90,7 @@ public class UpdateProjectService {
         // project name modify
         targetProject.modifyName(newName);
 
-        return new ProjectResponseDTO(targetProject.getId(), targetProject.getRecentUpdateDatetime());
+        return new ProjectResponseDTO(targetProject.getId(), targetProject.getRecentUpdateDatetime(), targetProject.getStatus().toString());
     }
 
     @Transactional
@@ -102,6 +102,6 @@ public class UpdateProjectService {
         // project name update
         targetProject.comleted();
 
-        return new ProjectResponseDTO(targetProject.getId(), targetProject.getRecentUpdateDatetime());
+        return new ProjectResponseDTO(targetProject.getId(), targetProject.getRecentUpdateDatetime(), targetProject.getStatus().toString());
     }
 }
