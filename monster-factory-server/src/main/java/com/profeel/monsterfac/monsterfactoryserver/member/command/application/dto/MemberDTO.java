@@ -31,10 +31,11 @@ public class MemberDTO implements UserDetails {
     private String secessionYn;
     private Money money;
     private Date memberRegistDate;
+    private String auth;
 
     public MemberDTO() {}
 
-    public MemberDTO(String memberId, String accessToken, String gender, Date birthday, String secessionYn, Money money, Date memberRegistDate, Collection<? extends GrantedAuthority> authorities) {
+    public MemberDTO(String memberId, String accessToken, String gender, Date birthday, String secessionYn, Money money, Date memberRegistDate, String auth, Collection<? extends GrantedAuthority> authorities) {
         this.memberId = memberId;
         this.accessToken = accessToken;
         this.gender = gender;
@@ -42,6 +43,7 @@ public class MemberDTO implements UserDetails {
         this.secessionYn = secessionYn;
         this.money = money;
         this.memberRegistDate = memberRegistDate;
+        this.auth = auth;
         this.authorities = authorities;
 
     }
@@ -96,6 +98,14 @@ public class MemberDTO implements UserDetails {
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
     }
 
     // security 설정

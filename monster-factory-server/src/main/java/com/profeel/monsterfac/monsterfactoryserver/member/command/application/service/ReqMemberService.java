@@ -3,7 +3,6 @@ package com.profeel.monsterfac.monsterfactoryserver.member.command.application.s
 import com.profeel.monsterfac.monsterfactoryserver.common.model.Money;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.MemberDTO;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.TokenDTO;
-import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.service.MemberService;
 import com.profeel.monsterfac.monsterfactoryserver.jwt.TokenProvider;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.LoginDTO;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.SignUpDTO;
@@ -23,16 +22,13 @@ public class ReqMemberService {
 
     private final MemberRepository memberRepository;
 
-    private final MemberService memberService;
-
     private final PasswordEncoder passwordEncoder;
 
     private final TokenProvider tokenProvider;
 
     @Autowired
-    public ReqMemberService(MemberRepository memberRepository, MemberService memberService, PasswordEncoder passwordEncoder, TokenProvider tokenProvider) {
+    public ReqMemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder, TokenProvider tokenProvider) {
         this.memberRepository = memberRepository;
-        this.memberService = memberService;
         this.passwordEncoder = passwordEncoder;
         this.tokenProvider = tokenProvider;
     }
@@ -48,6 +44,7 @@ public class ReqMemberService {
         member.setMoney(new Money(100));
         member.setSecessionYn("N");
         member.setMemberRegistDate(new Date());
+        member.setAuth("ROLE_USER");
 
         System.out.println("service : " + member.getMemberId());
 
@@ -64,6 +61,7 @@ public class ReqMemberService {
         memberDTO.setMoney(newMember.getMoney());
         memberDTO.setSecessionYn(newMember.getSecessionYn());
         memberDTO.setMemberRegistDate(newMember.getMemberRegistDate());
+        memberDTO.setAuth(newMember.getAuth());
 
         return memberDTO;
     }
