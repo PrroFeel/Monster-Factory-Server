@@ -27,21 +27,21 @@ public class DevelopProject {
     private ProjectId projectId;
 
     @Embedded
-    private Developer editor;
+    private Developer developer;
 
     protected DevelopProject(){
     }
 
-    public DevelopProject(ProjectId projectId, Developer editor) {
+    public DevelopProject(ProjectId projectId, Developer developer) {
         this.projectId = projectId;
-        this.editor = editor;
+        this.developer = developer;
     }
 
     public ProjectId getProjectId() {
         return projectId;
     }
 
-    public Developer getEditor() {
-        return editor;
+    public Developer getDeveloper() {
+        return developer;
     }
 }

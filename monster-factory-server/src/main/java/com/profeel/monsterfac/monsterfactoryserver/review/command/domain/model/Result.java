@@ -20,14 +20,9 @@ public enum Result {
 
     public static Result fromString(String state) {
         switch (state) {
-            case "returned":
-            case "RETURNED":
-                return RETURNED;
-            case "approved":
-            case "APPROVED":
-                return APPROVED;
-            default:
-                return null;
+            case "RETURNED": return RETURNED;
+            case "APPROVED": return APPROVED;
+            default: return null;
         }
     }
 }

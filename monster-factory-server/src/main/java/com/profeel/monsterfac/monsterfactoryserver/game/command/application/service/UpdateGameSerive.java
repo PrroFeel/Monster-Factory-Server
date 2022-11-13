@@ -55,8 +55,9 @@ public class UpdateGameSerive {
             rewardItemList.add(gameService.createRewardItem(registRewardItem.getId(), registRewardItem.getQuantity()));
         }
 
-        // game upload
+        // game reward regist & upload
         targetGame.registReward(upladGameRequest.getRewardMoney(), rewardItemList);
+        targetGame.uploadGame();
 
         // response dto 반환
         return targetGame;
