@@ -76,7 +76,7 @@ public class GameServiceImpl implements GameService {
             throw new RewardItemQuantityException("보상 아이템 수량이 0개 이하 입니다");
         }
 
-        ItemData itemData = itemDataList.get(1);
+        ItemData itemData = itemDataList.get(0);
         return new RewardItem(new ItemId(itemData.getItemId()), itemData.getItemName(), quantity);
     }
 }

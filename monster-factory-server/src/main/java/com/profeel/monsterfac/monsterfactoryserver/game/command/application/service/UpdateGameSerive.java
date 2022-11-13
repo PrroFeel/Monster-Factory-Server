@@ -1,7 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.application.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.RegistRewardItem;
-import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.UpladGameRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.UploadGameRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Game;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameId;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.RewardItem;
@@ -45,7 +45,7 @@ public class UpdateGameSerive {
     }
 
 
-    public Game uploadGameWithReward(Integer gameId, UpladGameRequestDTO upladGameRequest){
+    public Game uploadGameWithReward(Integer gameId, UploadGameRequestDTO upladGameRequest){
         // game id 검증
         Game targetGame = gameQueryService.getGame(gameId);
 
