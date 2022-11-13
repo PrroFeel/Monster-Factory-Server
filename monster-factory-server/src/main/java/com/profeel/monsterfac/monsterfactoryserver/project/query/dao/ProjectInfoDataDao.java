@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 public interface ProjectInfoDataDao extends JpaRepository<ProjectInfoData, Integer> {
 }
