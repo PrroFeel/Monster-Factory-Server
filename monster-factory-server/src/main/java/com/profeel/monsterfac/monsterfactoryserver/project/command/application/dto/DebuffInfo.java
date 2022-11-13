@@ -20,6 +20,7 @@ import java.util.Arrays;
  * @version 1
  */
 public class DebuffInfo {
+
     @ApiModelProperty(value = "디버프 이름", example = "느려짐")
     @JsonProperty("debuff_name")
     private String debuffName;
