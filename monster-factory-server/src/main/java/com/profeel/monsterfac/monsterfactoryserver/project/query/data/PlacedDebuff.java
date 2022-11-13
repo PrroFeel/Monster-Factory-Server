@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.query.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -21,9 +22,13 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class PlacedDebuff {
+
+    @ApiModelProperty(example = "디버프 이름")
     @JsonProperty("debuff_name")
     @Column(name="placed_debuff_name")
     private String name;
+
+    @ApiModelProperty(example = "배치 위치")
     @JsonProperty("debuff_position")
     @Column(name = "placed_debuff_position")
     private String position;

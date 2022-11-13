@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.query.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -21,12 +22,16 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class PlacedTower {
+
+    @ApiModelProperty(example = "타워 이름")
     @JsonProperty("tower_name")
     @Column(name="placed_tower_name")
     private String name;
+    @ApiModelProperty(example = "배치 위치")
     @JsonProperty("tower_position")
     @Column(name = "placed_tower_position")
     private String position;
+    @ApiModelProperty(example = "스폰 주기")
     @JsonProperty("tower_spawnTime")
     @Column(name="placed_tower_spawntime")
     private Float spawntime;

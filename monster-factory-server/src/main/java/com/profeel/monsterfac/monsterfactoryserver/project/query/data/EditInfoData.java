@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.query.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,17 +25,18 @@ import java.util.List;
 public class EditInfoData {
 
 
+    @ApiModelProperty(example = "조회한 프로젝트 id")
     @Id
     @Column(name="project_id")
     private Integer id;
 
+    @ApiModelProperty(example = "선택된 멥 타입")
     @JsonProperty("map_type")
     @Column(name="selected_map_type")
-
     private String mapType;
 
 
-
+    @ApiModelProperty(example = "배치된 타워 정보 리스트")
     @JsonProperty("towerInfo_list")
     @ElementCollection
     @CollectionTable(name="tbl_placed_towers", joinColumns = @JoinColumn(name="project_id"))
@@ -42,12 +44,14 @@ public class EditInfoData {
     private List<PlacedTower> towers;
 
 
+    @ApiModelProperty(example = "배치된 장애물 정보 리스트")
     @JsonProperty("obstacleInfo_list")
     @ElementCollection
     @CollectionTable(name="tbl_placed_obstacles", joinColumns = @JoinColumn(name="project_id"))
     @OrderColumn(name="placed_obstacle_idx")
     private List<PlacedObstacle> obstacles;
 
+    @ApiModelProperty(example = "배치된 디버프 정보 리스트")
     @JsonProperty("debuffInfo_list")
     @ElementCollection
     @CollectionTable(name="tbl_placed_debuffs", joinColumns = @JoinColumn(name="project_id"))
