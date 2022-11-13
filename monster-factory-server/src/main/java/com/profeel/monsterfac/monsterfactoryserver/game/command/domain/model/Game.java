@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model;
 
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.exception.NotApprovedStatusException;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.exception.RewardNullException;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -56,7 +57,6 @@ public class Game {
     @Embedded
     private DevelopProject developProject;
 
-
     protected Game() {}
 
     public Game(String name, String description, FileInfo thumbnail, DevelopProject developProject) {
@@ -105,7 +105,7 @@ public class Game {
     }
 
     public void registReward(Integer money, List<RewardItem> rewardItems){
-        if(money == null || rewardItems == null){
+        if(money == 0 && rewardItems.isEmpty()){
             throw  new IllegalArgumentException("게임 보상 내용이 존재하지 않습니다");
         }
         if(verfiyApprovedStatus()){
@@ -115,5 +115,20 @@ public class Game {
     }
     private boolean verfiyApprovedStatus(){
         return this.gameStatus == GameStatus.APPROVED;
+    }
+
+    public void uploadGame(){
+        if(verfiyApprovedStatus()){
+            throw new NotApprovedStatusException("승인된 게임만 업로드 할 수 있습니다");
+        }
+        if(!verfiyRewardExist()){
+            throw new RewardNullException("보상을 등록해야만 업로드할 수 있습니다");
+        }
+
+        this.gameStatus = GameStatus.UPLOADED;
+    }
+
+    private boolean verfiyRewardExist(){
+        return this.gameStatus != null;
     }
 }
