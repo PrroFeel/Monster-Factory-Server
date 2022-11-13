@@ -115,10 +115,7 @@ public class Game {
 
 
     public void registRewardAndUpload(Reward newReward){
-        System.out.println(" this.reward : " +  this.reward );
-        System.out.println("reward : " + newReward);
-        this.reward = newReward;
-//        registReward(newReward);
+        registReward(newReward);
         upload();
     }
     private boolean verifyApprovedStatus(){
@@ -144,8 +141,7 @@ public class Game {
         if(!verifyApprovedStatus()){
             throw new NotApprovedStatusException("승인된 게임만 보상을 등록할 수 있습니다");
         }
-        this.reward.setMoney(newReward.getMoney());
-        this.reward.setRewardItems(newReward.getRewardItems());
+        this.reward = newReward;
     }
 
 
