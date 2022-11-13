@@ -1,6 +1,9 @@
 package com.profeel.monsterfac.monsterfactoryserver.play.query.data;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 /**
  * <pre>
@@ -17,7 +20,7 @@ import lombok.NoArgsConstructor;
  * @version 1(클래스 버전)
  */
 
-@NoArgsConstructor
+@AllArgsConstructor
 public class PlayRankData {
 
     private int rankingId;
@@ -25,6 +28,7 @@ public class PlayRankData {
     private PlayGameData playGameData;
     private PlayerData playerData;
 
+    public PlayRankData() {}
 
     public PlayRankData(int rankingId, String playTime, PlayerData playerData, PlayGameData playGameData) {
         this.rankingId = rankingId;

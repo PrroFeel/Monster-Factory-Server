@@ -18,7 +18,9 @@
 
     <select id="findRankingByGameId" resultMap="RankingResultMap">
         SELECT
-               *
+               M.play_time
+             , C.member_id
+             , F.game_name
           FROM tbl_play_result M
           LEFT JOIN tbl_members C ON(M.player_id = C.member_id)
           LEFT JOIN tbl_games F ON(M.play_game_id = F.game_id)

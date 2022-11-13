@@ -17,19 +17,21 @@ package com.profeel.monsterfac.monsterfactoryserver.play.query.data;
 
 public class PlayGameData {
 
-    private Integer playGameId;
+    private int playGameId;
     private String playGameName;
 
-    public PlayGameData(Integer playGameId, String playGameName) {
+    public PlayGameData() {}
+
+    public PlayGameData(int playGameId, String playGameName) {
         this.playGameId = playGameId;
         this.playGameName = playGameName;
     }
 
-    public Integer getPlayGameId() {
+    public int getPlayGameId() {
         return playGameId;
     }
 
-    public void setPlayGameId(Integer playGameId) {
+    public void setPlayGameId(int playGameId) {
         this.playGameId = playGameId;
     }
 

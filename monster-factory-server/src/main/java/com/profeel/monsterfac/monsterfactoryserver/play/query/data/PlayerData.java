@@ -19,6 +19,8 @@ public class PlayerData {
 
     private String player;
 
+    public PlayerData() {}
+
     public PlayerData(String player) {
         this.player = player;
     }
