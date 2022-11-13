@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.project.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.exception.NotFoundProjectException;
+import com.profeel.monsterfac.monsterfactoryserver.project.query.data.EditInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.service.ProjectQueryService;
 import io.swagger.annotations.*;
@@ -43,7 +44,7 @@ public class ProjectQueryController {
 
     @ApiOperation(value = "프로젝트 기본 정보 조회", notes = "프로젝트 이름 등 기본 정보 조회 api" ,response = ProjectInfoData.class)
     @ApiImplicitParam(name = "id", value = "조회하고자 하는 프로젝트 고유 번호")
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/basic-info")
     public ResponseEntity<ResponseDTO> getProjectInfoData(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectQueryController] getProjectInfoData -- GET");
 
@@ -53,8 +54,26 @@ public class ProjectQueryController {
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
-                        ,"프로젝트 정보 조회"
+                        ,"프로젝트 기본 정보 조회"
                         , projectInfoData
+                )
+        );
+    }
+
+    @ApiOperation(value = "프로젝트 Edit 정보 조회", notes = "배치된 타워 등 edit 정보 조회 api" ,response = ProjectInfoData.class)
+    @ApiImplicitParam(name = "id", value = "조회하고자 하는 프로젝트 고유 번호")
+    @GetMapping("/{id}/edit-info")
+    public ResponseEntity<ResponseDTO> getEditInfoDataById(@PathVariable("id") Integer projectId){
+        System.out.println("[ProjectQueryController] getEditInfoDataById -- GET");
+
+        Optional<EditInfoData> EditInfoDataOpt = projectQueryService.findEditInfoDataById(projectId);
+        EditInfoData editInfoData = EditInfoDataOpt.orElseThrow(()->new NotFoundProjectException("해당 프로젝트를 찾을 수 없습니다"));
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"프로젝트 edit 정보 조회"
+                        , editInfoData
                 )
         );
     }

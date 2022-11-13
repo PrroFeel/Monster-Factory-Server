@@ -76,7 +76,7 @@ public class UpdateProjectService {
 
         // project save
         updateProject.save(
-                new PlacedObjects(placedTowerList, placedObstacleList, placedDebuffList)
+                new PlacedObjects(saveProjectRequest.getMapType(), placedTowerList, placedObstacleList, placedDebuffList)
         );
 
         return  new ProjectResponseDTO(updateProject.getId(), updateProject.getRecentUpdateDatetime(), updateProject.getStatus().toString());
