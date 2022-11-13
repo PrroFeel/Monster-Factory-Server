@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.project.command.application.
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.dto.*;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model.*;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.domain.service.ProjectService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,9 +29,11 @@ import java.util.List;
 @Service
 public class UpdateProjectService {
 
-    private ProjectQueryService projectQueryService;
+    private ProjectAppQueryService projectQueryService;
     private ProjectService projectService;
-    public UpdateProjectService(ProjectService projectService, ProjectQueryService projectQueryService){
+
+    @Autowired
+    public UpdateProjectService(ProjectService projectService, ProjectAppQueryService projectQueryService){
         this.projectQueryService = projectQueryService;
         this.projectService = projectService;
     }
