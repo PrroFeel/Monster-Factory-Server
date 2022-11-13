@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.play.command.presentation;
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.play.command.application.dto.RegistPlayResultDTO;
 import com.profeel.monsterfac.monsterfactoryserver.play.command.application.service.RegistPlayResultService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Play API"}, description = "플레이 결과 저장하는 api")
 @RestController
 @RequestMapping("/play")
 public class PlayController {

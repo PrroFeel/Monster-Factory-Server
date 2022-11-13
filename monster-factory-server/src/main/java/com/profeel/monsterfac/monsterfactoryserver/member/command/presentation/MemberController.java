@@ -5,6 +5,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.LoginDTO;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.SignUpDTO;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.service.ReqMemberService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Auth API"}, description = "회원 로그인, 회원가입 api")
 @RestController
 @RequestMapping("/auth")
 public class MemberController {

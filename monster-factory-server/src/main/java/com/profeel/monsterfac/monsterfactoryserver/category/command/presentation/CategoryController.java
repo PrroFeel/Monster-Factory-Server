@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.category.command.presentatio
 import com.profeel.monsterfac.monsterfactoryserver.category.command.application.dto.ReqCategoryDTO;
 import com.profeel.monsterfac.monsterfactoryserver.category.command.application.service.ReqCategoryService;
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import javax.validation.Valid;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Category API"}, description = "item category 관련 api")
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
@@ -40,7 +42,7 @@ public class CategoryController {
 
     @ApiOperation(value = "카테고리 추가", notes = "프론트에선 사용하지 않는 api!!!")
     @PostMapping("/regist")
-    public ResponseEntity<ResponseDTO> registCategory(@RequestBody @Valid ReqCategoryDTO reqCategoryinfo) {
+    public ResponseEntity<ResponseDTO> registCategory(@RequestBody ReqCategoryDTO reqCategoryinfo) {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "카테고리 추가 성공", categoryService.registCategory(reqCategoryinfo)));
     }

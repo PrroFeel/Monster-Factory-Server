@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.play.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.play.query.data.PlayRankData;
 import com.profeel.monsterfac.monsterfactoryserver.play.query.service.PlayQueryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import java.util.List;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Ranking API"}, description = "게임 랭킹 조회 api")
 @RestController
 @RequestMapping("/play")
 public class PlayQueryController {

@@ -37,7 +37,6 @@ public class PlayResult {
     @Column(name = "play_time")
     private String playTime;
 
-
     public PlayResult() {}
 
     public PlayResult(Player playerId, PlayGame playGameId, String playTime) {
@@ -45,6 +44,7 @@ public class PlayResult {
         this.playGameId = playGameId;
         this.playTime = playTime;
     }
+
     public int getPlayResultId() {
         return playResultId;
     }

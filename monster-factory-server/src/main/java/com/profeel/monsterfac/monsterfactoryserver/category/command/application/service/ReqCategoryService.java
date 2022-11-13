@@ -45,6 +45,11 @@ public class ReqCategoryService {
 
         categoryRepository.save(newCategory);
 
-        return new CategoryDTO(newCategory.getCategoryName(), newCategory.getParRefCategoryId());
+        CategoryDTO categoryDTO = new CategoryDTO(
+                newCategory.getCategoryName(),
+                newCategory.getParRefCategoryId()
+        );
+
+        return categoryDTO;
     }
 }

@@ -5,6 +5,7 @@ import com.profeel.monsterfac.monsterfactoryserver.item.command.application.dto.
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.DeleteItemService;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.RegistItemService;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.service.UpdateItemService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import java.io.IOException;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Item API"}, description = "item 관련 api")
 @RestController
 @RequestMapping("/item")
 public class ItemController {

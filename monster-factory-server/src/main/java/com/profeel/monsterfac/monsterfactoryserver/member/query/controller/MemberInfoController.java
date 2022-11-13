@@ -3,6 +3,7 @@ package com.profeel.monsterfac.monsterfactoryserver.member.query.controller;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.data.MemberInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.repository.MemberInfoMapper;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberInfoService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ import java.util.List;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Member search API"}, description = "회원 조회 관련 api")
 @RestController
 @RequestMapping("/members")
 public class MemberInfoController {
