@@ -53,7 +53,7 @@ public class GameController {
 
     @ApiOperation(value = "게임 심사 제출", notes = "게임 정보를 저장하고 심사 제출 하는 api")
     @PostMapping("/submit")
-    public ResponseEntity<ResponseDTO> submitGame(@RequestParam SubmitGameRequestDTO submitGameRequest) throws IOException {
+    public ResponseEntity<ResponseDTO> submitGame(SubmitGameRequestDTO submitGameRequest) throws IOException {
         System.out.println("[GameController] submitGame -- post");
         System.out.println("submitGameRequest : " +submitGameRequest);
 

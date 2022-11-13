@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.List;
 
 /**
@@ -18,7 +20,10 @@ import java.util.List;
  * @see 참고할 class 또는 외부 url
  */
 public class UploadGameRequestDTO {
+    @ApiModelProperty(name = "보상 머니", example = "10")
     private Integer rewardMoney;
+
+    @ApiModelProperty(name = "보상 아이템 리스트")
     private List<RegistRewardItem> rewardItmes;
 
     protected UploadGameRequestDTO(){}

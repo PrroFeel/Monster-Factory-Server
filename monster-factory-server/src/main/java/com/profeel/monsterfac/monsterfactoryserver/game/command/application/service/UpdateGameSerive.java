@@ -4,6 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.UploadGameRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Game;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameId;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Reward;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.RewardItem;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.repository.GameRepository;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.service.GameService;
@@ -41,13 +42,12 @@ public class UpdateGameSerive {
     }
     public void updateGameStatus(GameId gameId, String status) {
         Game targetGame = gameQueryService.getGame(gameId.getId());
+        System.out.println(targetGame.getGameStatus());
         targetGame.updateStatus(status);
     }
 
 
     public Game uploadGameWithReward(Integer gameId, UploadGameRequestDTO upladGameRequest){
-        // game id 검증
-        Game targetGame = gameQueryService.getGame(gameId);
 
         // rewardItem list 생성
         List<RewardItem> rewardItemList = new ArrayList<>();
@@ -55,10 +55,11 @@ public class UpdateGameSerive {
             rewardItemList.add(gameService.createRewardItem(registRewardItem.getId(), registRewardItem.getQuantity()));
         }
 
+        // game id 검증
+        Game targetGame = gameQueryService.getGame(gameId);
         // game reward regist & upload
-        targetGame.registReward(upladGameRequest.getRewardMoney(), rewardItemList);
-        targetGame.uploadGame();
-
+        targetGame.registRewardAndUpload(new Reward(upladGameRequest.getRewardMoney(), rewardItemList));
+        gameRepository.save(targetGame);
         // response dto 반환
         return targetGame;
     }

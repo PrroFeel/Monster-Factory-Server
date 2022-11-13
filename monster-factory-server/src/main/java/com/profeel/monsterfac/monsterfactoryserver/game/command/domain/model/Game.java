@@ -8,8 +8,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
-import java.util.List;
-
 import static com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameStatus.fromString;
 
 /**
@@ -74,18 +72,20 @@ public class Game {
     }
 
 
-
     public Integer getId() {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     public FileInfo getThumbnail() {
         return thumbnail;
-    }
-
-    public Reward getReward() {
-        return reward;
     }
 
     public GameStatus getGameStatus() {
@@ -96,39 +96,57 @@ public class Game {
         return developProject;
     }
 
+    public Reward getReward() {
+        return reward;
+    }
+
+    private boolean verifyRewardExist(){
+        return this.gameStatus != null;
+    }
 
     public void updateStatus(String status) {
         if(fromString(status)==null){
             throw new IllegalArgumentException("유효하지 않은 게임 상태 값 입니다");
         }
-        this.gameStatus = fromString(status);
+        System.out.println(status);
+        this.gameStatus = GameStatus.APPROVED;
     }
 
-    public void registReward(Integer money, List<RewardItem> rewardItems){
-        if(money == 0 && rewardItems.isEmpty()){
-            throw  new IllegalArgumentException("게임 보상 내용이 존재하지 않습니다");
-        }
-        if(verfiyApprovedStatus()){
-            throw new NotApprovedStatusException("승인된 게임만 보상을 등록할 수 있습니다");
-        }
-        this.reward = new Reward(money, rewardItems);
+
+
+    public void registRewardAndUpload(Reward newReward){
+        System.out.println(" this.reward : " +  this.reward );
+        System.out.println("reward : " + newReward);
+        this.reward = newReward;
+//        registReward(newReward);
+        upload();
     }
-    private boolean verfiyApprovedStatus(){
-        return this.gameStatus == GameStatus.APPROVED;
+    private boolean verifyApprovedStatus(){
+        return this.gameStatus.equals(GameStatus.APPROVED);
     }
 
-    public void uploadGame(){
-        if(verfiyApprovedStatus()){
+    private void upload(){
+        if(!verifyApprovedStatus()){
             throw new NotApprovedStatusException("승인된 게임만 업로드 할 수 있습니다");
         }
-        if(!verfiyRewardExist()){
+        if(!verifyRewardExist()){
             throw new RewardNullException("보상을 등록해야만 업로드할 수 있습니다");
         }
-
-        this.gameStatus = GameStatus.UPLOADED;
+        if(!this.gameStatus.equals(GameStatus.UPLOADED)){
+            this.gameStatus = GameStatus.UPLOADED;
+        }
     }
 
-    private boolean verfiyRewardExist(){
-        return this.gameStatus != null;
+    public void registReward(Reward newReward){
+        if(newReward.getMoney()== 0 && newReward.getRewardItems().isEmpty()){
+            throw  new IllegalArgumentException("게임 보상 내용이 존재하지 않습니다");
+        }
+        if(!verifyApprovedStatus()){
+            throw new NotApprovedStatusException("승인된 게임만 보상을 등록할 수 있습니다");
+        }
+        this.reward.setMoney(newReward.getMoney());
+        this.reward.setRewardItems(newReward.getRewardItems());
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * <pre>
  * Class : RegistRewardItem
@@ -15,7 +17,10 @@ package com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto
  * @version 1
  */
 public class RegistRewardItem {
+    @ApiModelProperty(name = "아이템 고유 번호", example = "1")
     private int id;
+
+    @ApiModelProperty(name = "아이템 수량", example = "3")
     private int quantity;
 
     protected RegistRewardItem(){}
