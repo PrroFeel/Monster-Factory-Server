@@ -1,7 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.command.application.service;
 
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
+import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.dto.RegistInventoryRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.dto.ItemResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.dto.RegistItemRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
