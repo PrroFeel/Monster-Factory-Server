@@ -1,10 +1,13 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model;
 
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.exception.NotApprovedStatusException;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+
+import java.util.List;
 
 import static com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameStatus.fromString;
 
@@ -70,6 +73,8 @@ public class Game {
         this.gameStatus = gameStatus;
     }
 
+
+
     public Integer getId() {
         return id;
     }
@@ -91,10 +96,24 @@ public class Game {
         return developProject;
     }
 
+
     public void updateStatus(String status) {
         if(fromString(status)==null){
             throw new IllegalArgumentException("유효하지 않은 게임 상태 값 입니다");
         }
         this.gameStatus = fromString(status);
+    }
+
+    public void registReward(Integer money, List<RewardItem> rewardItems){
+        if(money == null || rewardItems == null){
+            throw  new IllegalArgumentException("게임 보상 내용이 존재하지 않습니다");
+        }
+        if(verfiyApprovedStatus()){
+            throw new NotApprovedStatusException("승인된 게임만 보상을 등록할 수 있습니다");
+        }
+        this.reward = new Reward(money, rewardItems);
+    }
+    private boolean verfiyApprovedStatus(){
+        return this.gameStatus == GameStatus.APPROVED;
     }
 }

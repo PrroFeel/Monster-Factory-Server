@@ -39,4 +39,6 @@ public class UpdateGameSerive {
         Game game = gameOpt.orElseThrow(()->new NotFoundGameException("유효하지 않은 게임 id 입니다"));
         game.updateStatus(status);
     }
+
+
 }
