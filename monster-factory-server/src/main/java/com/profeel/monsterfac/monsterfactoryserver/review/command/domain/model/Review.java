@@ -32,7 +32,9 @@ public class Review {
     @Column(name="review_comment")
     private String comment;
 
+
     @Column(name="review_result")
+    @Enumerated(EnumType.STRING)
     private Result result;
 
     @Embedded

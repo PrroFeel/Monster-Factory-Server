@@ -13,7 +13,6 @@ package com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 public enum Result {
     APPROVED, RETURNED;
