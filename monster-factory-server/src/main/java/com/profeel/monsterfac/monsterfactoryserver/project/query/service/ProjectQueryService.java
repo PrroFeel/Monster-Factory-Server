@@ -1,6 +1,8 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.query.service;
 
+import com.profeel.monsterfac.monsterfactoryserver.project.query.dao.EditInfoDataDao;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.dao.ProjectInfoDataDao;
+import com.profeel.monsterfac.monsterfactoryserver.project.query.data.EditInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectInfoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +25,19 @@ import java.util.Optional;
  */
 @Service
 public class ProjectQueryService {
-
     private ProjectInfoDataDao projectInfoDataDao;
+    private EditInfoDataDao editInfoDataDao;
     @Autowired
-    public ProjectQueryService(ProjectInfoDataDao projectInfoDataDao){
+    public ProjectQueryService(ProjectInfoDataDao projectInfoDataDao,
+                               EditInfoDataDao editInfoDataDao){
         this.projectInfoDataDao = projectInfoDataDao;
+        this.editInfoDataDao = editInfoDataDao;
     }
     public Optional<ProjectInfoData> findProjectInfoDataById(Integer projectId) {
         return projectInfoDataDao.findById(projectId);
+    }
+
+    public Optional<EditInfoData> findEditInfoDataById(Integer projectId){
+        return editInfoDataDao.findById(projectId);
     }
 }
