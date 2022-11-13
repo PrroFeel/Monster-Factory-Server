@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.play.query.data;
 
+import lombok.NoArgsConstructor;
+
 /**
  * <pre>
  * Class : PlayRankData
@@ -15,17 +17,40 @@ package com.profeel.monsterfac.monsterfactoryserver.play.query.data;
  * @version 1(클래스 버전)
  */
 
+@NoArgsConstructor
 public class PlayRankData {
 
+    private int rankingId;
     private String playTime;
-    private PlayerData playerData;
     private PlayGameData playGameData;
+    private PlayerData playerData;
 
 
-    public PlayRankData(String playTime, PlayerData playerData, PlayGameData playGameData) {
+    public PlayRankData(int rankingId, String playTime, PlayerData playerData, PlayGameData playGameData) {
+        this.rankingId = rankingId;
         this.playTime = playTime;
         this.playerData = playerData;
         this.playGameData = playGameData;
+    }
+
+    public void setRankingId(int rankingId) {
+        this.rankingId = rankingId;
+    }
+
+    public void setPlayTime(String playTime) {
+        this.playTime = playTime;
+    }
+
+    public void setPlayerData(PlayerData playerData) {
+        this.playerData = playerData;
+    }
+
+    public void setPlayGameData(PlayGameData playGameData) {
+        this.playGameData = playGameData;
+    }
+
+    public int getRankingId() {
+        return rankingId;
     }
 
     public String getPlayTime() {
@@ -43,7 +68,8 @@ public class PlayRankData {
     @Override
     public String toString() {
         return "PlayRankData{" +
-                "playTime='" + playTime + '\'' +
+                "rankingId=" + rankingId +
+                ", playTime='" + playTime + '\'' +
                 ", playerData=" + playerData +
                 ", playGameData=" + playGameData +
                 '}';

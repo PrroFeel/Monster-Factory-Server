@@ -27,6 +27,10 @@ public class PlayerData {
         return player;
     }
 
+    public void setPlayer(String player) {
+        this.player = player;
+    }
+
     @Override
     public String toString() {
         return "PlayerData{" +
