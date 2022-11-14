@@ -1,9 +1,11 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.query.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameData;
+import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameSummaryData;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.exception.NotFoundGameException;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.repository.GameDataDao;
+import com.profeel.monsterfac.monsterfactoryserver.game.query.repository.GameInfoDataDao;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.repository.GameSummaryDataDao;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +35,17 @@ public class GameQueryService {
     private GameSummaryDataDao gameSummaryDataDao;
 
 
+    private GameInfoDataDao gameInfoDataDao;
+
     @Autowired
     public GameQueryService(MemberQueryService memberQueryService,
                             GameDataDao gameDataDao,
-                            GameSummaryDataDao gameSummaryDataDao){
+                            GameSummaryDataDao gameSummaryDataDao,
+                            GameInfoDataDao gameInfoDataDao){
         this.gameDataDao = gameDataDao;
         this.gameSummaryDataDao = gameSummaryDataDao;
         this.memberQueryService = memberQueryService;
+        this.gameInfoDataDao = gameInfoDataDao;
     }
 
     public boolean isVailable(Integer gameId) {
@@ -69,5 +75,10 @@ public class GameQueryService {
 
     public List<GameSummaryData> getWaitedGameList() {
         return gameSummaryDataDao.findAllByGameStatus("JUDGE_WAIT");
+    }
+
+    public GameInfoData getGameInfoData(Integer gameId){
+        isVailable(gameId);
+        return gameInfoDataDao.findById(gameId).get();
     }
 }
