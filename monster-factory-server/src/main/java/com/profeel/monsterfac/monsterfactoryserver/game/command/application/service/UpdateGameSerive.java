@@ -31,9 +31,9 @@ public class UpdateGameSerive {
     private GameService gameService;
     private GameRepository gameRepository;
 
-    private GameQueryService gameQueryService;
+    private GameAppQueryService gameQueryService;
     @Autowired
-    public UpdateGameSerive(GameService gameService, GameRepository gameRepository, GameQueryService gameQueryService){
+    public UpdateGameSerive(GameService gameService, GameRepository gameRepository, GameAppQueryService gameQueryService){
         this.gameService = gameService;
         this.gameRepository = gameRepository;
         this.gameQueryService = gameQueryService;

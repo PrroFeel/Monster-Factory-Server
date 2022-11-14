@@ -44,13 +44,15 @@ public class Game {
     @JoinColumn(name="thumbnail_file_id", unique = true)
     private FileInfo thumbnail;
 
-    @Embedded
-    private Reward reward;
 
     @Column(name = "game_status")
     @Enumerated(EnumType.STRING)
     @ColumnDefault("'JUDGE_WAIT'")
     private GameStatus gameStatus;
+    @Embedded
+    private Reward reward;
+
+
 
     @Embedded
     private DevelopProject developProject;
