@@ -41,6 +41,8 @@ public class GameSummaryData {
     @Column(name = "game_status")
     private String gameStatus;
 
+
+    @ApiModelProperty(example = "개발자 ID")
     @Column(name="developer_member_id")
     private String developerMemberId;
 

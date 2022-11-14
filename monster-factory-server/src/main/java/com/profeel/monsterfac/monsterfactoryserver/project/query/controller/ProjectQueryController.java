@@ -44,7 +44,7 @@ public class ProjectQueryController {
 
     @ApiOperation(value = "프로젝트 기본 정보 조회", notes = "프로젝트 이름 등 기본 정보 조회 api" ,response = ProjectInfoData.class)
     @ApiImplicitParam(name = "id", value = "조회하고자 하는 프로젝트 고유 번호")
-    @GetMapping("/{id}/basic-info")
+    @GetMapping("/{id}/basic")
     public ResponseEntity<ResponseDTO> getProjectInfoData(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectQueryController] getProjectInfoData -- GET");
 
@@ -59,7 +59,7 @@ public class ProjectQueryController {
 
     @ApiOperation(value = "프로젝트 Edit 정보 조회", notes = "배치된 타워 등 edit 정보 조회 api" ,response = ProjectInfoData.class)
     @ApiImplicitParam(name = "id", value = "조회하고자 하는 프로젝트 고유 번호")
-    @GetMapping("/{id}/edit-info")
+    @GetMapping("/{id}/edit")
     public ResponseEntity<ResponseDTO> getEditInfoDataById(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectQueryController] getEditInfoDataById -- GET");
 
@@ -90,5 +90,7 @@ public class ProjectQueryController {
                 )
         );
     }
+
+
 
 }

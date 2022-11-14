@@ -60,6 +60,14 @@ public class GameQueryService {
 
     public List<GameSummaryData> getGameSummaryDataList(String memberId){
         memberQueryService.isVailable(memberId);
-        return gameSummaryDataDao.findByDeveloperMemberId(memberId);
+        return gameSummaryDataDao.findAllByDeveloperMemberId(memberId);
+    }
+
+    public List<GameSummaryData> getUploadedGameSummaryList() {
+        return gameSummaryDataDao.findAllByGameStatus("UPLOADED");
+    }
+
+    public List<GameSummaryData> getWaitedGameList() {
+        return gameSummaryDataDao.findAllByGameStatus("JUDGE_WAIT");
     }
 }
