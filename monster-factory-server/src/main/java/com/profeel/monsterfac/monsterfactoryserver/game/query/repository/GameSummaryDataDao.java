@@ -20,6 +20,7 @@ import java.util.List;
  * @version 1
  */
 public interface GameSummaryDataDao extends JpaRepository<GameSummaryData, Integer> {
-    List<GameSummaryData> findByDeveloperMemberId(String developerMemberId);
+    List<GameSummaryData> findAllByDeveloperMemberId(String developerMemberId);
+    List<GameSummaryData> findAllByGameStatus(String gameStatus);
 }
 
