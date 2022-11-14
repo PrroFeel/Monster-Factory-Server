@@ -41,17 +41,26 @@ public class ProjectSummaryData {
     @Column(name="project_name")
     private String projectName;
 
+    @ApiModelProperty(example = "프로젝트 개발자 ID")
+    @Column(name="developer_member_id")
+    private String developerMemberId;
+
     @ApiModelProperty(example = "프로젝트 상태 - PRE : 개발 전, IN_PROGRESS : 개발 중, DONE : 개발 완료")
     @Column(name="project_status")
     private String proejctStatus;
 
     protected ProjectSummaryData(){}
 
-    public ProjectSummaryData(Integer projectId, String recentUpdateDatetime, String projectName, String proejctStatus) {
+    public ProjectSummaryData(Integer projectId, String recentUpdateDatetime, String projectName, String developerMemberId, String proejctStatus) {
         this.projectId = projectId;
         this.recentUpdateDatetime = recentUpdateDatetime;
         this.projectName = projectName;
+        this.developerMemberId = developerMemberId;
         this.proejctStatus = proejctStatus;
+    }
+
+    public String getDeveloperMemberId() {
+        return developerMemberId;
     }
 
     public Integer getProjectId() {
@@ -76,6 +85,7 @@ public class ProjectSummaryData {
                 "projectId=" + projectId +
                 ", recentUpdateDatetime='" + recentUpdateDatetime + '\'' +
                 ", projectName='" + projectName + '\'' +
+                ", developerMemberId='" + developerMemberId + '\'' +
                 ", proejctStatus='" + proejctStatus + '\'' +
                 '}';
     }

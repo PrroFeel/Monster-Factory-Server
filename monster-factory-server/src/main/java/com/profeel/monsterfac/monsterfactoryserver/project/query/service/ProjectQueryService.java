@@ -2,11 +2,15 @@ package com.profeel.monsterfac.monsterfactoryserver.project.query.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.project.query.dao.EditInfoDataDao;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.dao.ProjectInfoDataDao;
+import com.profeel.monsterfac.monsterfactoryserver.project.query.dao.ProjectSummaryDataDao;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.EditInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectInfoData;
+import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectSummaryData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,11 +31,14 @@ import java.util.Optional;
 public class ProjectQueryService {
     private ProjectInfoDataDao projectInfoDataDao;
     private EditInfoDataDao editInfoDataDao;
+    private ProjectSummaryDataDao projectSummaryDataDao;
     @Autowired
     public ProjectQueryService(ProjectInfoDataDao projectInfoDataDao,
-                               EditInfoDataDao editInfoDataDao){
+                               EditInfoDataDao editInfoDataDao,
+                               ProjectSummaryDataDao projectSummaryDataDao){
         this.projectInfoDataDao = projectInfoDataDao;
         this.editInfoDataDao = editInfoDataDao;
+        this.projectSummaryDataDao = projectSummaryDataDao;
     }
     public Optional<ProjectInfoData> findProjectInfoDataById(Integer projectId) {
         return projectInfoDataDao.findById(projectId);
@@ -39,5 +46,11 @@ public class ProjectQueryService {
 
     public Optional<EditInfoData> findEditInfoDataById(Integer projectId){
         return editInfoDataDao.findById(projectId);
+    }
+
+    public List<ProjectSummaryData> findProjectSummaryListByUserId(String userId) {
+        List<String> statusFilter = new ArrayList<>();
+        statusFilter.add("DONE");
+        return projectSummaryDataDao.findAllByDeveloperMemberIdAndProejctStatusNotIn(userId, statusFilter);
     }
 }
