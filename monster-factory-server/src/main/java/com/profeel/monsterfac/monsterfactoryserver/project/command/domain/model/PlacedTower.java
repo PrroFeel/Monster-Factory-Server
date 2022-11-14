@@ -63,4 +63,13 @@ public class PlacedTower {
     public int hashCode() {
         return Objects.hash(name, position, spawntime);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", position='" + position + '\'' +
+                ", spawntime=" + spawntime +
+                '}';
+    }
 }

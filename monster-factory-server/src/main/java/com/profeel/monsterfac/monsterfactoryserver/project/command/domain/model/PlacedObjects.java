@@ -91,4 +91,5 @@ public class PlacedObjects {
     public int hashCode() {
         return Objects.hash(towers, obstacles, debuffs);
     }
+
 }
