@@ -2,10 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.game.command.application.ser
 
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.RegistRewardItem;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.UploadGameRequestDTO;
-import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Game;
-import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameId;
-import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Reward;
-import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.RewardItem;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.*;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.repository.GameRepository;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +31,9 @@ public class UpdateGameSerive {
     private GameService gameService;
     private GameRepository gameRepository;
 
-    private GameQueryService gameQueryService;
+    private GameAppQueryService gameQueryService;
     @Autowired
-    public UpdateGameSerive(GameService gameService, GameRepository gameRepository, GameQueryService gameQueryService){
+    public UpdateGameSerive(GameService gameService, GameRepository gameRepository, GameAppQueryService gameQueryService){
         this.gameService = gameService;
         this.gameRepository = gameRepository;
         this.gameQueryService = gameQueryService;
@@ -58,10 +55,16 @@ public class UpdateGameSerive {
             rewardItemList.add(gameService.createRewardItem(registRewardItem.getId(), registRewardItem.getQuantity()));
         }
 
+
+
+
+
         // game id 검증
         Game targetGame = gameQueryService.getGame(gameId);
+
         // game reward regist & upload
         targetGame.registRewardAndUpload(new Reward(upladGameRequest.getRewardMoney(), rewardItemList));
+
         // response dto 반환
         return targetGame;
     }

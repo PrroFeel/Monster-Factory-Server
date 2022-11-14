@@ -1,8 +1,10 @@
-package com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model;
+package com.profeel.monsterfac.monsterfactoryserver.project.query.data;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.util.Objects;
 
 /**
  * <pre>
@@ -20,11 +22,17 @@ import java.util.Objects;
  */
 @Embeddable
 public class PlacedDebuff {
+
+    @ApiModelProperty(example = "디버프 이름")
+    @JsonProperty("debuff_name")
     @Column(name="placed_debuff_name")
     private String name;
 
+    @ApiModelProperty(example = "배치 위치")
+    @JsonProperty("debuff_position")
     @Column(name = "placed_debuff_position")
     private String position;
+
 
     protected PlacedDebuff(){}
 
@@ -42,21 +50,8 @@ public class PlacedDebuff {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PlacedDebuff that = (PlacedDebuff) o;
-        return Objects.equals(name, that.name) && Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, position);
-    }
-
-    @Override
     public String toString() {
-        return "{" +
+        return "PlacedDebuff{" +
                 "name='" + name + '\'' +
                 ", position='" + position + '\'' +
                 '}';

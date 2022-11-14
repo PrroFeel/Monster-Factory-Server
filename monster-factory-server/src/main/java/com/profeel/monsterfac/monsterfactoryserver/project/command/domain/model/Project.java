@@ -100,6 +100,11 @@ public class Project {
     }
 
     public void save(PlacedObjects placedObjects){
+        if(this.placedObjects.getMapType() == null){
+            registMapType(placedObjects.getMapType());
+        }else{
+            updateMapType(placedObjects.getMapType());
+        }
         updatePlacedTowers(placedObjects.getTowers());
         updatePlacedObstacles(placedObjects.getObstacles());
         updatePlacedDebuffs(placedObjects.getDebuffs());
@@ -107,6 +112,15 @@ public class Project {
         inProgress();
     }
 
+    private void registMapType(String selectedMapType){
+        this.placedObjects.setMapType(selectedMapType);
+    }
+
+    private void updateMapType(String selectedMapType) {
+        if(!this.placedObjects.getMapType().equals(selectedMapType)){
+            this.placedObjects.setMapType(selectedMapType);
+        }
+    }
     private void updatePlacedDebuffs(List<PlacedDebuff> debuffs) {
         if(!this.placedObjects.getDebuffs().equals(debuffs)){
             this.placedObjects.setDebuffs(debuffs);

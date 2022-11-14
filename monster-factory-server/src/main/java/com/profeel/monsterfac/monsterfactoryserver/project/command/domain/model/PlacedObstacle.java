@@ -54,4 +54,12 @@ public class PlacedObstacle {
     public int hashCode() {
         return Objects.hash(name, position);
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", position='" + position + '\'' +
+                '}';
+    }
 }

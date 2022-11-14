@@ -17,9 +17,12 @@ import java.util.Objects;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 public class PlacedObjects {
+
+    @Column(name="selected_map_type")
+    private String mapType;
+
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name="tbl_placed_towers", joinColumns = @JoinColumn(name="project_id"))
     @OrderColumn(name="placed_tower_idx")
@@ -37,7 +40,8 @@ public class PlacedObjects {
 
     protected PlacedObjects(){}
 
-    public PlacedObjects(List<PlacedTower> towers, List<PlacedObstacle> obstacles, List<PlacedDebuff> debuffs) {
+    public PlacedObjects(String mapType, List<PlacedTower> towers, List<PlacedObstacle> obstacles, List<PlacedDebuff> debuffs) {
+        this.mapType = mapType;
         this.towers = towers;
         this.obstacles = obstacles;
         this.debuffs = debuffs;
@@ -55,6 +59,14 @@ public class PlacedObjects {
         return debuffs;
     }
 
+    public String getMapType() {
+        return mapType;
+    }
+
+    protected void setMapType(String mapType) {
+        this.mapType = mapType;
+    }
+
     protected void setDebuffs(List<PlacedDebuff> newPlacedDebuffs) {
         this.debuffs = newPlacedDebuffs;
     }
@@ -67,16 +79,17 @@ public class PlacedObjects {
         this.towers = newPlacedTowers;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlacedObjects that = (PlacedObjects) o;
-        return Objects.equals(towers, that.towers) && Objects.equals(obstacles, that.obstacles) && Objects.equals(debuffs, that.debuffs);
+        return Objects.equals(mapType, that.mapType) && Objects.equals(towers, that.towers) && Objects.equals(obstacles, that.obstacles) && Objects.equals(debuffs, that.debuffs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(towers, obstacles, debuffs);
+        return Objects.hash(mapType);
     }
 }

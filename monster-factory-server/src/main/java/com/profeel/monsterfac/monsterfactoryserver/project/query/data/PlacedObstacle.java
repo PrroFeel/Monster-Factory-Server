@@ -1,12 +1,14 @@
-package com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model;
+package com.profeel.monsterfac.monsterfactoryserver.project.query.data;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.util.Objects;
 
 /**
  * <pre>
- * Class : PlacedDebuff
+ * Class : PlacedObstacle
  * Comment: 클래스에 대한 간단 설명
  * History
  * ================================================================
@@ -19,16 +21,21 @@ import java.util.Objects;
  * @version 1
  */
 @Embeddable
-public class PlacedDebuff {
-    @Column(name="placed_debuff_name")
+public class PlacedObstacle {
+
+    @ApiModelProperty(example = "장애물 이름")
+    @JsonProperty("obstacle_name")
+    @Column(name="placed_obstacle_name")
     private String name;
 
-    @Column(name = "placed_debuff_position")
+    @ApiModelProperty(example = "배치 위치")
+    @JsonProperty("obstacle_position")
+    @Column(name = "placed_obstacle_position")
     private String position;
 
-    protected PlacedDebuff(){}
+    protected PlacedObstacle(){}
 
-    public PlacedDebuff(String name, String position) {
+    public PlacedObstacle(String name, String position) {
         this.name = name;
         this.position = position;
     }
@@ -41,22 +48,10 @@ public class PlacedDebuff {
         return position;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PlacedDebuff that = (PlacedDebuff) o;
-        return Objects.equals(name, that.name) && Objects.equals(position, that.position);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, position);
-    }
 
     @Override
     public String toString() {
-        return "{" +
+        return "PlacedObstacle{" +
                 "name='" + name + '\'' +
                 ", position='" + position + '\'' +
                 '}';

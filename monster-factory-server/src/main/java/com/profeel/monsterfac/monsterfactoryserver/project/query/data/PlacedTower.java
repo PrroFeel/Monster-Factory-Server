@@ -1,8 +1,10 @@
-package com.profeel.monsterfac.monsterfactoryserver.project.command.domain.model;
+package com.profeel.monsterfac.monsterfactoryserver.project.query.data;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import java.util.Objects;
 
 /**
  * <pre>
@@ -18,16 +20,19 @@ import java.util.Objects;
  * @author 최윤서
  * @version 1
  */
-
 @Embeddable
 public class PlacedTower {
 
+    @ApiModelProperty(example = "타워 이름")
+    @JsonProperty("tower_name")
     @Column(name="placed_tower_name")
     private String name;
-
+    @ApiModelProperty(example = "배치 위치")
+    @JsonProperty("tower_position")
     @Column(name = "placed_tower_position")
     private String position;
-
+    @ApiModelProperty(example = "스폰 주기")
+    @JsonProperty("tower_spawnTime")
     @Column(name="placed_tower_spawntime")
     private Float spawntime;
 
@@ -52,21 +57,8 @@ public class PlacedTower {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PlacedTower that = (PlacedTower) o;
-        return Objects.equals(name, that.name) && Objects.equals(position, that.position) && Objects.equals(spawntime, that.spawntime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, position, spawntime);
-    }
-
-    @Override
     public String toString() {
-        return "{" +
+        return "PlacedTower{" +
                 "name='" + name + '\'' +
                 ", position='" + position + '\'' +
                 ", spawntime=" + spawntime +
