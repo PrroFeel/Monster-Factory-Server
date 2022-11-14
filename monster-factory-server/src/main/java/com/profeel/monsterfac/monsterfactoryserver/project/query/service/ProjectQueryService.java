@@ -69,4 +69,5 @@ public class ProjectQueryService {
         statusFilter.add("DONE");
         return projectSummaryDataDao.findAllByDeveloperMemberIdAndProejctStatusNotInOrderByRecentUpdateDatetimeDesc(userId, statusFilter);
     }
+
 }
