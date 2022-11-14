@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.dto;
 
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model.HoldingItems;
+import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model.InventoryItemStatus;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model.InventoryOwner;
 
 /**
@@ -22,12 +23,14 @@ public class InventoryResponseDTO {
 
     private InventoryOwner ownerId;
     private HoldingItems itemId;
+    private InventoryItemStatus status;
 
     public InventoryResponseDTO() {}
 
-    public InventoryResponseDTO(InventoryOwner ownerId, HoldingItems itemId) {
+    public InventoryResponseDTO(InventoryOwner ownerId, HoldingItems itemId, InventoryItemStatus status) {
         this.ownerId = ownerId;
         this.itemId = itemId;
+        this.status = status;
     }
 
     public InventoryOwner getOwnerId() {
@@ -38,11 +41,16 @@ public class InventoryResponseDTO {
         return itemId;
     }
 
+    public InventoryItemStatus getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
         return "InventoryResponseDTO{" +
-                "ownerId='" + ownerId + '\'' +
+                "ownerId=" + ownerId +
                 ", itemId=" + itemId +
+                ", status=" + status +
                 '}';
     }
 }

@@ -4,10 +4,12 @@ import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.dto.RegistInventoryRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model.HoldingItems;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model.Inventory;
+import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model.InventoryItemStatus;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model.InventoryOwner;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.repository.InventoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -34,20 +36,24 @@ public class RegistInventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
+    @Transactional
     public Object registInventory(RegistInventoryRequestDTO registInventoryRequestInfo) {
 
         Inventory newInventoryItem = new Inventory(
                 new InventoryOwner(registInventoryRequestInfo.getOwnerId()),
-                new HoldingItems(registInventoryRequestInfo.getItemId())
+                new HoldingItems(registInventoryRequestInfo.getItemId()),
+                InventoryItemStatus.fromString("NON_WEARING")
         );
 
         newInventoryItem = inventoryRepository.save(newInventoryItem);
 
         InventoryResponseDTO inventoryResponseDTO = new InventoryResponseDTO(
                 newInventoryItem.getInventoryOwner(),
-                newInventoryItem.getHoldingItems()
+                newInventoryItem.getHoldingItems(),
+                newInventoryItem.getStatus()
         );
 
         return inventoryResponseDTO;
     }
+
 }
