@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * <pre>
  * Class : MemberController
@@ -42,7 +44,7 @@ public class MemberController {
 
     @ApiOperation(value = "회원가입", notes = "회원 가입하는 api, 비밀번호는 10자 이상으로 대문자, 숫자, 특수문자를 포함해야 한다")
     @PostMapping("/signup")
-    public ResponseEntity<ResponseDTO> signup(@RequestBody SignUpDTO signupinfo) {
+    public ResponseEntity<ResponseDTO> signup(@RequestBody @Valid SignUpDTO signupinfo) {
         System.out.println("post 요청 옴");
         System.out.println("controller : "+ signupinfo);
 
@@ -51,7 +53,7 @@ public class MemberController {
 
     @ApiOperation(value = "로그인", notes = "로그인을 하는 api")
     @PostMapping("/login")
-    public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO logininfo) {
+    public ResponseEntity<ResponseDTO> login(@RequestBody @Valid LoginDTO logininfo) {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "로그인 성공", memberService.login(logininfo)));
     }
