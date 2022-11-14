@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.inventory.command.domain.model;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 /**
@@ -32,11 +34,17 @@ public class Inventory {
     @Embedded
     private HoldingItems holdingItems;
 
+    @Column(name = "inventory_item_status")
+    @Enumerated(EnumType.STRING)
+    @ColumnDefault("'NON_WEARING'")
+    private InventoryItemStatus status;
+
     public Inventory() {}
 
-    public Inventory(InventoryOwner inventoryOwner, HoldingItems holdingItems) {
+    public Inventory(InventoryOwner inventoryOwner, HoldingItems holdingItems, InventoryItemStatus status) {
         this.inventoryOwner = inventoryOwner;
         this.holdingItems = holdingItems;
+        this.status = status;
     }
 
     public int getInventoryId() {
@@ -51,12 +59,17 @@ public class Inventory {
         return holdingItems;
     }
 
+    public InventoryItemStatus getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
         return "Inventory{" +
                 "inventoryId=" + inventoryId +
                 ", inventoryOwner=" + inventoryOwner +
                 ", holdingItems=" + holdingItems +
+                ", status=" + status +
                 '}';
     }
 }
