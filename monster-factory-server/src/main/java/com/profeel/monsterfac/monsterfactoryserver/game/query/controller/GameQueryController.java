@@ -1,7 +1,9 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
+import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameSummaryData;
+import com.profeel.monsterfac.monsterfactoryserver.game.query.dto.GameLoadResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.service.GameQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -83,6 +86,38 @@ public class GameQueryController {
                         HttpStatus.OK.value()
                         ,"심사 대기 중인 모든 게임 목록 조회"
                         , gameSummaryDataList
+                )
+        );
+    }
+
+    @ApiOperation(value = "게임 상세 정보 조회(추가 예정)", notes = "게임에 대해 각종 정보를 조회하는 api" ,response = GameInfoData.class)
+    @GetMapping("/{id}/detail")
+    public ResponseEntity<ResponseDTO> findGameInfoById(@PathVariable("id") Integer gameId){
+        System.out.println("[GameController] findGameInfoById -- GET");
+
+        System.out.println("gameId  : " + gameId);
+
+        GameInfoData gameInfoData = gameQueryService.getGameInfoData(gameId);
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"게임 기본 정보 조회"
+                        , gameInfoData
+                )
+        );
+    }
+
+    @ApiOperation(value = "게임 로드 정보 조회", notes = "게임 load 시 필요한 각종 오브젝트 정보를 조회하는 api" ,response = GameLoadResponseDTO.class)
+    @GetMapping("/{id}/load")
+    public ResponseEntity<ResponseDTO> findGameLoadInfoById(@PathVariable("id") Integer gameId){
+        System.out.println("[GameController] findGameLoadInfoById -- GET");
+
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"게임 load 필요 정보 조회"
+                        , gameQueryService.findGameLoadInfoById(gameId)
                 )
         );
     }

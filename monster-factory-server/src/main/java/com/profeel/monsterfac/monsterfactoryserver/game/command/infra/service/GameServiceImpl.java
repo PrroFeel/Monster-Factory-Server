@@ -5,7 +5,6 @@ import com.profeel.monsterfac.monsterfactoryserver.file.command.application.serv
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.exception.RewardItemQuantityException;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.DevelopProject;
-import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Objects;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.RewardItem;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.service.GameService;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.exception.NotFoundItemException;
@@ -81,14 +80,4 @@ public class GameServiceImpl implements GameService {
         return new RewardItem(new ItemId(itemData.getItemId()), itemData.getItemName(), quantity);
     }
 
-    @Override
-    public Objects createObjects(Integer projectId) {
-        Project project = projectAppQueryService.getProject(projectId);
-        return new Objects(
-                project.getPlacedObjects().getMapType(),
-                project.getPlacedObjects().getTowers().toString(),
-                project.getPlacedObjects().getObstacles().toString(),
-                project.getPlacedObjects().getDebuffs().toString()
-        );
-    }
 }

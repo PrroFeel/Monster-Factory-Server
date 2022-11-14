@@ -45,6 +45,7 @@ public class ProjectQueryService {
         this.projectSummaryDataDao = projectSummaryDataDao;
     }
 
+
     public boolean isVaild(Integer projectId){
         boolean result = projectInfoDataDao.existsById(projectId);
         if(!result){
