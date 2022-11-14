@@ -82,8 +82,9 @@ public class S3UploaderService {
 
     public String imageUpload(File uploadFile, String savePath){
         // S3 버킷 폴더에 업로드
-        amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile));
-//                .withCannedAcl(CannedAccessControlList.PublicRead));
+        amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile)
+                .withCannedAcl(CannedAccessControlList.PublicRead));
+
         // 임시 저장된 File 객체 제거
         removeFile(uploadFile);
         // 업로드 url 반환

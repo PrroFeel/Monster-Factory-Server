@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 /**
  * <pre>
- * Class : GameSummaryData
+ * Class : GameInfoData
  * Comment: 클래스에 대한 간단 설명
  * History
  * ================================================================
@@ -21,7 +21,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tbl_games")
-public class GameSummaryData {
+public class GameInfoData {
 
     @ApiModelProperty(example = "게임 고유 번호")
     @Id
@@ -46,18 +46,24 @@ public class GameSummaryData {
     @Column(name="developer_member_id")
     private String developerMemberId;
 
-    protected  GameSummaryData(){}
+    @ApiModelProperty(example = "게임 설명")
+    @Column(name="game_description")
+    private String gameDescription;
 
-    public GameSummaryData(Integer id, String name, ImageFileData thumbnailFile, String gameStatus, String developerMemberId) {
+    @ApiModelProperty(example = "작업 프로젝트 고유 번호")
+    @Column(name="project_id")
+    private Integer projectId;
+
+    protected GameInfoData(){}
+
+    public GameInfoData(Integer id, String name, ImageFileData thumbnailFile, String gameStatus, String developerMemberId, String gameDescription, Integer projectId) {
         this.id = id;
         this.name = name;
         this.thumbnailFile = thumbnailFile;
         this.gameStatus = gameStatus;
         this.developerMemberId = developerMemberId;
-    }
-
-    public String getDeveloperMemberId() {
-        return developerMemberId;
+        this.gameDescription = gameDescription;
+        this.projectId = projectId;
     }
 
     public Integer getId() {
@@ -74,5 +80,17 @@ public class GameSummaryData {
 
     public String getGameStatus() {
         return gameStatus;
+    }
+
+    public String getDeveloperMemberId() {
+        return developerMemberId;
+    }
+
+    public String getGameDescription() {
+        return gameDescription;
+    }
+
+    public Integer getProjectId() {
+        return projectId;
     }
 }

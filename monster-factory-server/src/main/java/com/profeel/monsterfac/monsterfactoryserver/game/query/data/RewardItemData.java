@@ -1,10 +1,9 @@
-package com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model;
+package com.profeel.monsterfac.monsterfactoryserver.game.query.data;
 
-import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.ItemId;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import java.util.Objects;
 
 /**
@@ -23,26 +22,29 @@ import java.util.Objects;
  */
 
 @Embeddable
-public class RewardItem {
+public class RewardItemData {
 
-    @Embedded
-    private ItemId itemId;
+    @ApiModelProperty(example = "아이템 고유 번호")
+    @Column(name = "item_id")
+    private Integer itemId;
 
+    @ApiModelProperty(example = "아이템 이름")
     @Column(name = "item_name")
     private String name;
 
+    @ApiModelProperty(example = "보상 수량")
     @Column(name = "item_quantity")
     private Integer quantity;
 
-    protected RewardItem(){}
+    protected RewardItemData(){}
 
-    public RewardItem(ItemId itemId, String name, Integer quantity) {
+    public RewardItemData(Integer itemId, String name, Integer quantity) {
         this.itemId = itemId;
         this.name = name;
         this.quantity = quantity;
     }
 
-    public ItemId getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 
@@ -58,7 +60,7 @@ public class RewardItem {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RewardItem that = (RewardItem) o;
+        RewardItemData that = (RewardItemData) o;
         return Objects.equals(itemId, that.itemId) && Objects.equals(name, that.name) && Objects.equals(quantity, that.quantity);
     }
 

@@ -57,21 +57,18 @@ public class Game {
     @Embedded
     private DevelopProject developProject;
 
-    @Embedded
-    private Objects objects;
     protected Game() {}
 
-    public Game(String name, String description, FileInfo thumbnail, DevelopProject developProject, Objects objects) {
+    public Game(String name, String description, FileInfo thumbnail, DevelopProject developProject) {
         this.name = name;
         this.description = description;
         this.thumbnail = thumbnail;
         this.developProject = developProject;
         this.gameStatus = fromString("JUDGE_WAIT");
-        this.objects = objects;
     }
 
-    public Game(String name, String description,FileInfo thumbnail, Reward reward, Objects objects, GameStatus gameStatus, DevelopProject developProject) {
-        this(name, description, thumbnail, developProject, objects);
+    public Game(String name, String description,FileInfo thumbnail, Reward reward, GameStatus gameStatus, DevelopProject developProject) {
+        this(name, description, thumbnail, developProject);
         this.reward = reward;
         this.gameStatus = gameStatus;
     }
@@ -103,10 +100,6 @@ public class Game {
 
     public Reward getReward() {
         return reward;
-    }
-
-    public Objects getObjects() {
-        return objects;
     }
 
     private boolean verifyRewardExist(){
