@@ -3,6 +3,9 @@ package com.profeel.monsterfac.monsterfactoryserver.member.command.application.d
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -23,9 +26,13 @@ import java.util.Date;
 public class SignUpDTO {
 
     @ApiModelProperty(value="사용자의 이름", example = "홍길동")
+    @NotBlank(message = "닉네임을 입력해 주세요")
+    @Size(min = 2, max = 10, message = "닉네임은 2자 이상, 10자 이하로 입력해 주세요")
     private String memberId;
 
-    @ApiModelProperty(value="사용자의 비밀번호", example = "Profeel123!")
+    @NotBlank(message = "비밀번호를 입력해 주세요")
+    @Size(min = 10, message = "비밀번호는 10자 이상으로 작성해 주세요")
+    @Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,16}", message = "비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
     private String password;
 
     @ApiModelProperty(value="사용자의 성별", example = "남")
