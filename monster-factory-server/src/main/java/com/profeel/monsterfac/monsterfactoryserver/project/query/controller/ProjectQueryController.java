@@ -1,8 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.project.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
-import com.profeel.monsterfac.monsterfactoryserver.project.command.application.exception.NotFoundProjectException;
-import com.profeel.monsterfac.monsterfactoryserver.project.query.data.EditInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectSummaryData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.service.ProjectQueryService;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <pre>
@@ -51,14 +48,11 @@ public class ProjectQueryController {
     public ResponseEntity<ResponseDTO> getProjectInfoData(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectQueryController] getProjectInfoData -- GET");
 
-        Optional<ProjectInfoData> projectInfoDataOpt = projectQueryService.findProjectInfoDataById(projectId);
-        ProjectInfoData projectInfoData = projectInfoDataOpt.orElseThrow(()->new NotFoundProjectException("해당 프로젝트를 찾을 수 없습니다"));
-
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         ,"프로젝트 기본 정보 조회"
-                        , projectInfoData
+                        , projectQueryService.findProjectInfoDataById(projectId)
                 )
         );
     }
@@ -69,14 +63,11 @@ public class ProjectQueryController {
     public ResponseEntity<ResponseDTO> getEditInfoDataById(@PathVariable("id") Integer projectId){
         System.out.println("[ProjectQueryController] getEditInfoDataById -- GET");
 
-        Optional<EditInfoData> EditInfoDataOpt = projectQueryService.findEditInfoDataById(projectId);
-        EditInfoData editInfoData = EditInfoDataOpt.orElseThrow(()->new NotFoundProjectException("해당 프로젝트를 찾을 수 없습니다"));
-
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         ,"프로젝트 edit 정보 조회"
-                        , editInfoData
+                        , projectQueryService.findEditInfoDataById(projectId)
                 )
         );
     }

@@ -20,10 +20,10 @@ import org.springframework.stereotype.Service;
  * @version 1
  */
 @Service
-public class GameQueryService {
+public class GameAppQueryService {
     private GameRepository gameRepository;
 
-    public GameQueryService(GameRepository gameRepository){
+    public GameAppQueryService(GameRepository gameRepository){
         this.gameRepository = gameRepository;
     }
 

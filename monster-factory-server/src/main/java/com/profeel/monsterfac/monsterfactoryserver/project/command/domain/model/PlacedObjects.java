@@ -79,16 +79,17 @@ public class PlacedObjects {
         this.towers = newPlacedTowers;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PlacedObjects that = (PlacedObjects) o;
-        return Objects.equals(towers, that.towers) && Objects.equals(obstacles, that.obstacles) && Objects.equals(debuffs, that.debuffs);
+        return Objects.equals(mapType, that.mapType) && Objects.equals(towers, that.towers) && Objects.equals(obstacles, that.obstacles) && Objects.equals(debuffs, that.debuffs);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(towers, obstacles, debuffs);
+        return Objects.hash(mapType);
     }
 }

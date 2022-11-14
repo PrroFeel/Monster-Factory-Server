@@ -4,7 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainServi
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.service.UpdateGameSerive;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameId;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameData;
-import com.profeel.monsterfac.monsterfactoryserver.game.query.service.GameDataQueryService;
+import com.profeel.monsterfac.monsterfactoryserver.game.query.service.GameQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.model.TargetGame;
 import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.service.ReviewService;
@@ -25,11 +25,11 @@ import com.profeel.monsterfac.monsterfactoryserver.review.command.domain.service
  */
 @DomainService
 public class ReviewServiceImpl implements ReviewService {
-    private GameDataQueryService gameQueryService;
+    private GameQueryService gameQueryService;
     private MemberQueryService memberQueryService;
 
     private UpdateGameSerive updateGameSerive;
-    public ReviewServiceImpl(GameDataQueryService gameQueryService, MemberQueryService memberQueryService, UpdateGameSerive updateGameSerive){
+    public ReviewServiceImpl(GameQueryService gameQueryService, MemberQueryService memberQueryService, UpdateGameSerive updateGameSerive){
         this.gameQueryService = gameQueryService;
         this.memberQueryService = memberQueryService;
         this.updateGameSerive = updateGameSerive;
