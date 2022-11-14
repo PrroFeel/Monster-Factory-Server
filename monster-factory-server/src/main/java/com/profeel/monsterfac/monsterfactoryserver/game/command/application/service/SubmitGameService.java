@@ -4,7 +4,6 @@ import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.Fil
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.SubmitGameRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.DevelopProject;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Game;
-import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Objects;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.repository.GameRepository;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +46,12 @@ public class SubmitGameService {
         // 썸네일 파일 s3 업로드
         FileInfo thumbnailFileInfo = gameService.uploadImageFile(submitGameRequest.getThumbnailFile());
 
-        Objects objects= gameService.createObjects(developProject.getProjectId().getId());
         // Game 객체 생성
         Game submitedGame = new Game(
                 submitGameRequest.getGameName(),
                 submitGameRequest.getGameDescription(),
                 thumbnailFileInfo,
-                developProject,
-                objects);
+                developProject);
         // game object insert
         submitedGame = gameRepository.save(submitedGame);
 

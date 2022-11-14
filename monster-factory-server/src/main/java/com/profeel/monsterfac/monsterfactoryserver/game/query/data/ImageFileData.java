@@ -23,7 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="tbl_image_files")
-public class ImageFile {
+public class ImageFileData {
 
     @ApiModelProperty(example = "파일 고유 번호")
     @Id
@@ -34,9 +34,9 @@ public class ImageFile {
     @Column(name = "file_url")
     private String url;
 
-    protected ImageFile(){}
+    protected ImageFileData(){}
 
-    public ImageFile(Integer id, String url) {
+    public ImageFileData(Integer id, String url) {
         this.id = id;
         this.url = url;
     }
