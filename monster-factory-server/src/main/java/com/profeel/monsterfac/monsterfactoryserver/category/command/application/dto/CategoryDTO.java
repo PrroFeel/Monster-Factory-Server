@@ -27,9 +27,7 @@ public class CategoryDTO {
         this.reqCategoryId = reqCategoryId;
     }
 
-    public CategoryDTO() {
-
-    }
+    public CategoryDTO() {}
 
     public String getCategoryName() {
         return categoryName;
