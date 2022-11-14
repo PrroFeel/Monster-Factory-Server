@@ -51,6 +51,6 @@ public class ProjectQueryService {
     public List<ProjectSummaryData> findProjectSummaryListByUserId(String userId) {
         List<String> statusFilter = new ArrayList<>();
         statusFilter.add("DONE");
-        return projectSummaryDataDao.findAllByDeveloperMemberIdAndProejctStatusNotIn(userId, statusFilter);
+        return projectSummaryDataDao.findAllByDeveloperMemberIdAndProejctStatusNotInOrderByRecentUpdateDatetimeDesc(userId, statusFilter);
     }
 }

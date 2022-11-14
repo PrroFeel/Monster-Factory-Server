@@ -20,5 +20,5 @@ import java.util.List;
  * @version 1
  */
 public interface ProjectSummaryDataDao extends JpaRepository<ProjectSummaryData, Integer> {
-    List<ProjectSummaryData> findAllByDeveloperMemberIdAndProejctStatusNotIn(String developerMemberId, List<String> projectStatus);
+    List<ProjectSummaryData> findAllByDeveloperMemberIdAndProejctStatusNotInOrderByRecentUpdateDatetimeDesc(String developerMemberId, List<String> projectStatus);
 }
