@@ -4,6 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.exception.NotFoundProjectException;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.EditInfoData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectInfoData;
+import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectSummaryData;
 import com.profeel.monsterfac.monsterfactoryserver.project.query.service.ProjectQueryService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -74,6 +77,25 @@ public class ProjectQueryController {
                         HttpStatus.OK.value()
                         ,"프로젝트 edit 정보 조회"
                         , editInfoData
+                )
+        );
+    }
+
+
+    @ApiOperation(value = "프로젝트 목록 조회", notes = "완료된 프로젝트를 제외한 모든 프로젝트 목록을 조회하는 api" ,response = ProjectSummaryData.class)
+    @ApiImplicitParam(name = "user", value = "조회를 요청한 유저 ID (액세스 토큰으로 대체될 예정)")
+    @GetMapping("")
+    public ResponseEntity<ResponseDTO> getProjectSummaryList(@RequestParam(value = "user") String userId){
+        System.out.println("[ProjectQueryController] getProjectSummaryList -- GET");
+
+        List<ProjectSummaryData> projectSummaryDataList = projectQueryService.findProjectSummaryListByUserId(userId);
+
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"특정 유저의 완료되지 않은 모든 프로젝트 목록 조회"
+                        , projectSummaryDataList
                 )
         );
     }
