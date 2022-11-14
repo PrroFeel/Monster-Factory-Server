@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.query.data;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 /**
@@ -21,17 +23,21 @@ import javax.persistence.*;
 @Table(name="tbl_games")
 public class GameSummaryData {
 
+    @ApiModelProperty(example = "게임 고유 번호")
     @Id
     @Column(name = "game_id")
     private Integer id;
 
+    @ApiModelProperty(example = "게임 이름")
     @Column(name="game_name")
     private String name;
 
+    @ApiModelProperty(name = "썸네일 파일 정보")
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="thumbnail_file_id", unique = true)
     private ImageFile thumbnailFile;
 
+    @ApiModelProperty(example = "게임 상태 - JUDGE_WAIT : 심사 대기, APPROVED : 승인됨, RETURNED : 반려됨, UPLOADED : 업로드됨")
     @Column(name = "game_status")
     private String gameStatus;
 

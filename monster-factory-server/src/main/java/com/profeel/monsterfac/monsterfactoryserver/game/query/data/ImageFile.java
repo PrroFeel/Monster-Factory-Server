@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.query.data;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,10 +25,12 @@ import javax.persistence.Table;
 @Table(name="tbl_image_files")
 public class ImageFile {
 
+    @ApiModelProperty(example = "파일 고유 번호")
     @Id
     @Column(name = "file_id")
     private Integer id;
 
+    @ApiModelProperty(example = "파일 url")
     @Column(name = "file_url")
     private String url;
 
