@@ -66,4 +66,8 @@ public class GameQueryService {
     public List<GameSummaryData> getUploadedGameSummaryList() {
         return gameSummaryDataDao.findAllByGameStatus("UPLOADED");
     }
+
+    public List<GameSummaryData> getWaitedGameList() {
+        return gameSummaryDataDao.findAllByGameStatus("JUDGE_WAIT");
+    }
 }

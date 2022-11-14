@@ -70,4 +70,20 @@ public class GameQueryController {
                 )
         );
     }
+
+
+    @ApiOperation(value = "심사 대기 게임 목록 조회", notes = "심사 대기 중인 게임 목록을 조회하는 api" ,response = GameSummaryData.class)
+    @GetMapping("/waited")
+    public ResponseEntity<ResponseDTO> findWaitingGameList(){
+        System.out.println("[GameController] findWaitedGameList -- GET");
+
+        List<GameSummaryData> gameSummaryDataList = gameQueryService.getWaitedGameList();
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"심사 대기 중인 모든 게임 목록 조회"
+                        , gameSummaryDataList
+                )
+        );
+    }
 }
