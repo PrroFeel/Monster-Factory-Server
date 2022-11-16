@@ -4,6 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Gam
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.repository.GameRepository;
 import com.profeel.monsterfac.monsterfactoryserver.project.command.application.exception.NotFoundProjectException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -20,12 +21,15 @@ import org.springframework.stereotype.Service;
  * @version 1
  */
 @Service
+@Transactional(readOnly = true)
 public class GameAppQueryService {
     private GameRepository gameRepository;
+
 
     public GameAppQueryService(GameRepository gameRepository){
         this.gameRepository = gameRepository;
     }
+
 
     public boolean isValidable(Integer id){
         boolean result =  gameRepository.existsById(id);

@@ -10,6 +10,7 @@ import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectInf
 import com.profeel.monsterfac.monsterfactoryserver.project.query.data.ProjectSummaryData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import java.util.List;
  * @version 1
  */
 @Service
+@Transactional(readOnly = true)
 public class ProjectQueryService {
     private ProjectInfoDataDao projectInfoDataDao;
     private EditInfoDataDao editInfoDataDao;
