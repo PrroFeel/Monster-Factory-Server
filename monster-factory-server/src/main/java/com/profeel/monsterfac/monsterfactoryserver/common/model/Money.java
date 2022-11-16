@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.common.model;
 
+import com.profeel.monsterfac.monsterfactoryserver.common.exception.NagativeMoneyException;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -45,4 +47,24 @@ public class Money implements Serializable {
     public String toString() {
         return Integer.toString(value);
     }
+
+    public void decrease(int amount){
+        int result = this.value - amount;
+        if(result < 0){
+            throw new NagativeMoneyException("소유한 coin 이 충분하지 않습니다");
+        }
+        if(amount != 0){
+            this.value = result;
+        }
+    }
+
+    public void increase(int amount){
+        int result = this.value + amount;
+        if(amount != 0){
+            this.value = result;
+        }
+        this.value = result;
+    }
+
+
 }
