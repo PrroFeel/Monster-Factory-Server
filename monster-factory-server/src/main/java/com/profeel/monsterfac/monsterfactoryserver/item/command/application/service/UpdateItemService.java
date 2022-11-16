@@ -47,14 +47,20 @@ public class UpdateItemService {
                 registItemRequestInfo.getItemName(),
                 registItemRequestInfo.getItemPrice(),
                 itemFileInfo,
-                new ItemCategory(registItemRequestInfo.getItemCategoryCode())
+                new ItemCategory(registItemRequestInfo.getItemCategoryCode()),
+                registItemRequestInfo.getItemExplanation(),
+                registItemRequestInfo.getItemPower(),
+                registItemRequestInfo.getItemObjectName()
         );
 
         ItemResponseDTO itemResponseDTO = new ItemResponseDTO(
                 targetItem.getItemName(),
                 itemFileInfo.getUrl(),
                 targetItem.getItemPrice(),
-                targetItem.getCategoryId()
+                targetItem.getCategoryId(),
+                targetItem.getItemExplanation(),
+                targetItem.getItemPower(),
+                targetItem.getItemObjectName()
         );
 
         return itemResponseDTO;

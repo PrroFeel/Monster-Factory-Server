@@ -5,6 +5,7 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -82,6 +83,7 @@ public class S3UploaderService {
     public String imageUpload(File uploadFile, String savePath){
         // S3 버킷 폴더에 업로드
         amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile));
+//                .withCannedAcl(CannedAccessControlList.PublicRead));
 
         // 임시 저장된 File 객체 제거
         removeFile(uploadFile);

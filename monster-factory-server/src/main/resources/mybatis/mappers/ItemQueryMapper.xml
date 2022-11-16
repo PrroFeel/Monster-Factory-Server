@@ -8,6 +8,9 @@
         <id property="itemId" column="item_id"/>
         <result property="itemName" column="item_name"/>
         <result property="itemPrice" column="item_price"/>
+        <result property="itemExplanation" column="item_explanation"/>
+        <result property="itemObjectName" column="item_object_name"/>
+        <result property="itemPower" column="item_power"/>
         <association property="itemImgData" javaType="com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemImgData">
             <id property="itemImgId" column="file_id"/>
             <result property="itemImgUrl" column="file_url"/>

@@ -4,6 +4,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.dto.RegistInventoryRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.service.DeleteInventoryService;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.service.RegistInventoryService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Inventory API"}, description = "inventory 관련 api")
 @RestController
 @RequestMapping("/inventory")
 public class InventoryController {

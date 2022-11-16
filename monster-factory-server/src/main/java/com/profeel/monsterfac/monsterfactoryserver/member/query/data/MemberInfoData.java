@@ -24,6 +24,7 @@ public class MemberInfoData {
     private String memberGender;
     private int memberMoney;
 
+
     public MemberInfoData(String memberId, Date memberBirthday, String memberGender, int memberMoney) {
         this.memberId = memberId;
         this.memberBirthday = memberBirthday;
