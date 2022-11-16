@@ -1,41 +1,42 @@
-package com.profeel.monsterfac.monsterfactoryserver.item.query.data;
+package com.profeel.monsterfac.monsterfactoryserver.inventory.query.data;
 
-import lombok.NoArgsConstructor;
+import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemCategoryData;
+import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemImgData;
 
 /**
  * <pre>
- * Class : ItemData
+ * Class : InventoryItemData
  * Comment: 클래스에 대한 간단 설명
  * History
  * ================================================================
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
- * 2022-11-11       최은진           최초 생성
+ * 2022-11-16       최은진           최초 생성
  * </pre>
  *
  * @author 최은진(최초 작성자)
  * @version 1(클래스 버전)
  */
 
-@NoArgsConstructor
-public class ItemData {
+public class InventoryItemData {
 
     private int itemId;
     private String itemName;
     private int itemPrice;
-    private ItemImgData itemImgData;
-    private ItemCategoryData itemCategoryData;
+    private InventoryItemImgData inventoryItemImgData;
+    private InventoryItemCategoryData inventoryItemCategoryData;
     private String itemExplanation;
     private int itemPower;
     private String itemObjectName;
 
+    public InventoryItemData() {}
 
-    public ItemData(int itemId, String itemName, int itemPrice, ItemImgData itemImgData, ItemCategoryData itemCategoryData, String itemExplanation, int itemPower, String itemObjectName) {
+    public InventoryItemData(int itemId, String itemName, int itemPrice, InventoryItemImgData inventoryItemImgData, InventoryItemCategoryData inventoryItemCategoryData, String itemExplanation, int itemPower, String itemObjectName) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
-        this.itemImgData = itemImgData;
-        this.itemCategoryData = itemCategoryData;
+        this.inventoryItemImgData = inventoryItemImgData;
+        this.inventoryItemCategoryData = inventoryItemCategoryData;
         this.itemExplanation = itemExplanation;
         this.itemPower = itemPower;
         this.itemObjectName = itemObjectName;
@@ -65,20 +66,20 @@ public class ItemData {
         this.itemPrice = itemPrice;
     }
 
-    public ItemImgData getItemImgData() {
-        return itemImgData;
+    public InventoryItemImgData getInventoryItemImgData() {
+        return inventoryItemImgData;
     }
 
-    public void setItemImgData(ItemImgData itemUrl) {
-        this.itemImgData = itemUrl;
+    public void setInventoryItemImgData(InventoryItemImgData inventoryItemImgData) {
+        this.inventoryItemImgData = inventoryItemImgData;
     }
 
-    public ItemCategoryData getItemCategoryData() {
-        return itemCategoryData;
+    public InventoryItemCategoryData getInventoryItemCategoryData() {
+        return inventoryItemCategoryData;
     }
 
-    public void setItemCategoryData(ItemCategoryData categoryName) {
-        this.itemCategoryData = categoryName;
+    public void setInventoryItemCategoryData(InventoryItemCategoryData inventoryItemCategoryData) {
+        this.inventoryItemCategoryData = inventoryItemCategoryData;
     }
 
     public String getItemExplanation() {
@@ -107,13 +108,13 @@ public class ItemData {
 
     @Override
     public String toString() {
-        return "ItemData{" +
+        return "InventoryItemData{" +
                 "itemId=" + itemId +
                 ", itemName='" + itemName + '\'' +
                 ", itemPrice=" + itemPrice +
-                ", itemImgData=" + itemImgData +
-                ", itemCategoryData=" + itemCategoryData +
-                ", itemExplanation=" + itemExplanation +
+                ", inventoryItemImgData=" + inventoryItemImgData +
+                ", inventoryItemCategoryData=" + inventoryItemCategoryData +
+                ", itemExplanation='" + itemExplanation + '\'' +
                 ", itemPower=" + itemPower +
                 ", itemObjectName='" + itemObjectName + '\'' +
                 '}';

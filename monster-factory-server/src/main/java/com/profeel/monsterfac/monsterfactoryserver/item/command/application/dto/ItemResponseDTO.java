@@ -23,12 +23,18 @@ public class ItemResponseDTO {
     private String itemImgUrl;
     private int itemPrice;
     private ItemCategory categoryId;
+    private String itemExplanation;
+    private int itemPower;
+    private String itemObjectName;
 
-    public ItemResponseDTO(String itemName, String itemImgUrl, int itemPrice, ItemCategory categoryId) {
+    public ItemResponseDTO(String itemName, String itemImgUrl, int itemPrice, ItemCategory categoryId, String itemExplanation, int itemPower, String itemObjectName) {
         this.itemName = itemName;
         this.itemImgUrl = itemImgUrl;
         this.itemPrice = itemPrice;
         this.categoryId = categoryId;
+        this.itemExplanation = itemExplanation;
+        this.itemPower = itemPower;
+        this.itemObjectName = itemObjectName;
     }
 
     public String getItemName() {
@@ -63,13 +69,40 @@ public class ItemResponseDTO {
         this.categoryId = categoryId;
     }
 
+    public String getItemExplanation() {
+        return itemExplanation;
+    }
+
+    public void setItemExplanation(String itemExplanation) {
+        this.itemExplanation = itemExplanation;
+    }
+
+    public int getItemPower() {
+        return itemPower;
+    }
+
+    public void setItemPower(int itemPower) {
+        this.itemPower = itemPower;
+    }
+
+    public String getItemObjectName() {
+        return itemObjectName;
+    }
+
+    public void setItemObjectName(String itemObjectName) {
+        this.itemObjectName = itemObjectName;
+    }
+
     @Override
     public String toString() {
         return "ItemResponseDTO{" +
                 "itemName='" + itemName + '\'' +
-                ", itemImgUrl=" + itemImgUrl +
+                ", itemImgUrl='" + itemImgUrl + '\'' +
                 ", itemPrice=" + itemPrice +
                 ", categoryId=" + categoryId +
+                ", itemExplanation=" + itemExplanation +
+                ", itemPower=" + itemPower +
+                ", itemObjectName='" + itemObjectName + '\'' +
                 '}';
     }
 }

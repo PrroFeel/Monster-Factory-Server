@@ -2,6 +2,8 @@ package com.profeel.monsterfac.monsterfactoryserver.category.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.category.query.data.CategoryData;
 import com.profeel.monsterfac.monsterfactoryserver.category.query.service.CategoryFindAllService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ import java.util.List;
  * @version 1(클래스 버전)
  */
 
+@Api(tags = {"Category 조회 API"}, description = "item category 조회 api")
 @RestController
 @RequestMapping("/categorys")
 public class CategoryQueryController {
@@ -36,6 +39,7 @@ public class CategoryQueryController {
         this.categoryFindAllService = categoryFindAllService;
     }
 
+    @ApiOperation(value = "카테고리 목록 조회", notes = "카테고리 목록을 조회하는 api")
     @GetMapping
     public ResponseEntity<?> getCategorys() {
 

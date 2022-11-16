@@ -50,7 +50,10 @@ public class RegistItemService {
                 registItemRequest.getItemName(),
                 registItemRequest.getItemPrice(),
                 itemFileInfo,
-                new ItemCategory(registItemRequest.getItemCategoryCode())
+                new ItemCategory(registItemRequest.getItemCategoryCode()),
+                registItemRequest.getItemExplanation(),
+                registItemRequest.getItemPower(),
+                registItemRequest.getItemObjectName()
         );
 
         newItem = itemRepository.save(newItem);
@@ -59,7 +62,10 @@ public class RegistItemService {
                 newItem.getItemName(),
                 itemFileInfo.getUrl(),
                 newItem.getItemPrice(),
-                newItem.getCategoryId()
+                newItem.getCategoryId(),
+                newItem.getItemExplanation(),
+                newItem.getItemPower(),
+                newItem.getItemObjectName()
         );
 
         return itemResponseDTO;
