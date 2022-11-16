@@ -25,13 +25,20 @@ public class ItemData {
     private int itemPrice;
     private ItemImgData itemImgData;
     private ItemCategoryData itemCategoryData;
+    private String itemExplanation;
+    private int itemPower;
+    private String itemObjectName;
 
-    public ItemData(int itemId, String itemName, int itemPrice, ItemImgData itemImgData, ItemCategoryData itemCategoryData) {
+
+    public ItemData(int itemId, String itemName, int itemPrice, ItemImgData itemImgData, ItemCategoryData itemCategoryData, String itemExplanation, int itemPower, String itemObjectName) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemImgData = itemImgData;
         this.itemCategoryData = itemCategoryData;
+        this.itemExplanation = itemExplanation;
+        this.itemPower = itemPower;
+        this.itemObjectName = itemObjectName;
     }
 
     public int getItemId() {
@@ -74,6 +81,30 @@ public class ItemData {
         this.itemCategoryData = categoryName;
     }
 
+    public String getItemExplanation() {
+        return itemExplanation;
+    }
+
+    public void setItemExplanation(String itemExplanation) {
+        this.itemExplanation = itemExplanation;
+    }
+
+    public int getItemPower() {
+        return itemPower;
+    }
+
+    public void setItemPower(int itemPower) {
+        this.itemPower = itemPower;
+    }
+
+    public String getItemObjectName() {
+        return itemObjectName;
+    }
+
+    public void setItemObjectName(String itemObjectName) {
+        this.itemObjectName = itemObjectName;
+    }
+
     @Override
     public String toString() {
         return "ItemData{" +
@@ -82,6 +113,9 @@ public class ItemData {
                 ", itemPrice=" + itemPrice +
                 ", itemImgData=" + itemImgData +
                 ", itemCategoryData=" + itemCategoryData +
+                ", itemExplanation=" + itemExplanation +
+                ", itemPower=" + itemPower +
+                ", itemObjectName='" + itemObjectName + '\'' +
                 '}';
     }
 }

@@ -23,14 +23,20 @@ public class RegistItemRequestDTO {
     private MultipartFile itemImgFile;
     private int itemPrice;
     private int itemCategoryCode;
+    private String itemExplanation;
+    private int itemPower;
+    private String itemObjectName;
 
     public RegistItemRequestDTO() {};
 
-    public RegistItemRequestDTO(String itemName, MultipartFile itemImgFile, int itemPrice, int itemCategoryCode) {
+    public RegistItemRequestDTO(String itemName, MultipartFile itemImgFile, int itemPrice, int itemCategoryCode, String itemExplanation, int itemPower, String itemObjectName) {
         this.itemName = itemName;
         this.itemImgFile = itemImgFile;
         this.itemPrice = itemPrice;
         this.itemCategoryCode = itemCategoryCode;
+        this.itemExplanation = itemExplanation;
+        this.itemPower = itemPower;
+        this.itemObjectName = itemObjectName;
     }
 
     public String getItemName() {
@@ -65,6 +71,30 @@ public class RegistItemRequestDTO {
         this.itemCategoryCode = itemCategoryCode;
     }
 
+    public String getItemExplanation() {
+        return itemExplanation;
+    }
+
+    public void setItemExplanation(String itemExplanation) {
+        this.itemExplanation = itemExplanation;
+    }
+
+    public int getItemPower() {
+        return itemPower;
+    }
+
+    public void setItemPower(int itemPower) {
+        this.itemPower = itemPower;
+    }
+
+    public String getItemObjectName() {
+        return itemObjectName;
+    }
+
+    public void setItemObjectName(String itemObjectName) {
+        this.itemObjectName = itemObjectName;
+    }
+
     @Override
     public String toString() {
         return "RegistItemRequestDTO{" +
@@ -72,6 +102,9 @@ public class RegistItemRequestDTO {
                 ", itemImgFile=" + itemImgFile +
                 ", itemPrice=" + itemPrice +
                 ", itemCategoryCode=" + itemCategoryCode +
+                ", itemExplanation=" + itemExplanation +
+                ", itemPower=" + itemPower +
+                ", itemObjectName='" + itemObjectName + '\'' +
                 '}';
     }
 }
