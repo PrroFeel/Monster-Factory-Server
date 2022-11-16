@@ -109,6 +109,7 @@ public class Item {
         if(itemPrice < 0) {
             throw new ItemPriceException("아이템 가격은 음수일 수 없습니다");
         }
+        this.itemPrice = itemPrice;
     }
 
     public void changeItem(String itemName, int itemPrice, ImageFileInfo itemImgFile, ItemCategory itemCategoryCode, String itemExplanation, int itemPower, String itemObjectName) {
