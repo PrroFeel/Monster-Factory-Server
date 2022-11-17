@@ -61,27 +61,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(jwtAccessDeniedHandler)
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/api/**").hasAnyRole("USER", "ADMIN")
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                    .antMatchers("/auth/**").permitAll()
+                    .antMatchers("/api/**").hasAnyRole("USER", "ADMIN")
                 .and()
                 .cors()
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider))
-                .and()
-                .logout()
-                .logoutUrl("/auth/logout")
-                .logoutSuccessUrl("/auth/login");
+                .and();
+//                .logout()
+//                .logoutUrl("/auth/logout")
+//                .logoutSuccessUrl("/auth/login");
 
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         configuration.setAllowedMethods(Arrays.asList("GET", "PUT", "POST", "DELETE", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Content-Type", "Access-Control-Allow-Headers", "Authorization", "X-Requested-With"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
