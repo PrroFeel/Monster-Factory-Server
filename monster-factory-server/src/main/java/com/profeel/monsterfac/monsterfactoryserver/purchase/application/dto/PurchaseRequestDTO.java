@@ -13,28 +13,18 @@ package com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 public class PurchaseRequestDTO {
-    private String purchaserId;
     private int purchasedItemId;
     private String purchaseDatetime;
 
     protected PurchaseRequestDTO(){}
 
-    public PurchaseRequestDTO(String purchaserId, int purchasedItemId, String purchaseDatetime) {
-        this.purchaserId = purchaserId;
+    public PurchaseRequestDTO( int purchasedItemId, String purchaseDatetime) {
         this.purchasedItemId = purchasedItemId;
         this.purchaseDatetime = purchaseDatetime;
     }
 
-    public String getPurchaserId() {
-        return purchaserId;
-    }
-
-    public void setPurchaserId(String purchaserId) {
-        this.purchaserId = purchaserId;
-    }
 
     public int getPurchasedItemId() {
         return purchasedItemId;

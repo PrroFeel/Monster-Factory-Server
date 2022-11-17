@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.purchase.infra.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
+import com.profeel.monsterfac.monsterfactoryserver.common.query.service.MoneyQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.history.dto.LogCoinVarianceRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.history.service.CoinVarianceService;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.command.application.dto.RegistInventoryRequestDTO;
@@ -11,8 +12,6 @@ import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Ite
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.service.ReqMemberService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
-import com.profeel.monsterfac.monsterfactoryserver.member.query.data.MemberData;
-import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchasedItem;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchaser;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.service.PurchaseService;
@@ -37,24 +36,26 @@ public class PurchaseServiceImpl implements PurchaseService {
     private ItemAppQueryService itemQueryService;
     private RegistInventoryService registInventoryService;
     private ReqMemberService reqMemberService;
-    private MemberQueryService memberQueryService;
+
+    private MoneyQueryService moneyQueryService;
     private CoinVarianceService coinVarianceService;
 
     @Autowired
     public PurchaseServiceImpl(ItemAppQueryService itemQueryService,
                                ReqMemberService reqMemberService,
                                CoinVarianceService coinVarianceService,
-                               RegistInventoryService registInventoryService){
+                               RegistInventoryService registInventoryService,
+                               MoneyQueryService moneyQueryService){
         this.itemQueryService = itemQueryService;
         this.reqMemberService =reqMemberService;
         this.coinVarianceService = coinVarianceService;
         this.registInventoryService = registInventoryService;
+        this.moneyQueryService = moneyQueryService;
     }
 
     public Purchaser changeMoneyAndCreatePurchaser(String userId, int amount){
-        MemberId memberId = reqMemberService.decreaseMoney(userId, amount);
-        MemberData memberData = memberQueryService.getMemberData(memberId.getId());
-        return new Purchaser(memberId);
+        Member member = reqMemberService.decreaseMoney(userId, amount);
+        return new Purchaser(new MemberId(member.getMemberId()), member.getMoney().getValue());
     }
 
     public PurchasedItem createPurchasedItem(Integer itemId){

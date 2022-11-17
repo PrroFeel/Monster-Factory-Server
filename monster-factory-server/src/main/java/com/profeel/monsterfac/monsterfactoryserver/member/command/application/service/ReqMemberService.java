@@ -8,7 +8,6 @@ import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dt
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.TokenDTO;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.exception.LoginFailedException;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
-import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Password;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,28 +87,30 @@ public class ReqMemberService {
 
     }
 
-    public MemberId decreaseMoney(String memberId, int amount){
+    @Transactional
+    public Member decreaseMoney(String memberId, int amount){
         Member member = memberRepository.findByMemberId(memberId);
 
         if(member == null) {
             throw new LoginFailedException("가입되지 않은 회원입니다");
         }
 
-        member.getMoney().decrease(amount);
+        member.decreaseMoney(amount);
 
-        return new MemberId(member.getMemberId());
+        return member;
     }
 
-    public MemberId increaseMoney(String memberId, int amount){
+    @Transactional
+    public Member increaseMoney(String memberId, int amount){
         Member member = memberRepository.findByMemberId(memberId);
 
         if(member == null) {
             throw new LoginFailedException("가입되지 않은 회원입니다");
         }
 
-        member.getMoney().increase(amount);
+        member.increaseMoney(amount);
 
-        return new MemberId(member.getMemberId());
+        return member;
     }
 
 }

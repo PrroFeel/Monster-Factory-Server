@@ -12,6 +12,10 @@
     </resultMap>
 
     <select id="findMoneyByMemberId" resultMap="moneyResultMap">
-        SELECT * FROM tbl_members M WHERE M.member_id = #{memberId}
+        SELECT
+                M.member_money
+              , M.member_id
+        FROM tbl_members M
+        WHERE M.member_id = #{memberId}
     </select>
 </mapper>

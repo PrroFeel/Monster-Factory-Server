@@ -16,6 +16,7 @@ import java.util.Objects;
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
  * 2022-11-03       최은진           최초 생성
+ * 2022-11-17       최윤서           money 증감 로직 추가
  * </pre>
  *
  * @author 최은진(최초 작성자)
@@ -48,21 +49,16 @@ public class Money implements Serializable {
         return Integer.toString(value);
     }
 
-    public void decrease(int amount){
+    public Money decrease(int amount){
         int result = this.value - amount;
         if(result < 0){
             throw new NagativeMoneyException("소유한 coin 이 충분하지 않습니다");
         }
-        if(amount != 0){
-            this.value = result;
-        }
+        return new Money(result);
     }
 
-    public void increase(int amount){
-        int result = this.value + amount;
-        if(amount != 0){
-            this.value = result;
-        }
+    public Money increase(int amount){
+        return new Money( this.value + amount);
     }
 
 

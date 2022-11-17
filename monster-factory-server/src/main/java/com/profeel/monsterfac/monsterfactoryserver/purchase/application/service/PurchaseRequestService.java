@@ -33,13 +33,13 @@ public class PurchaseRequestService {
     }
 
     @Transactional
-    int purchaseItem(PurchaseRequestDTO purchaseRequest){
+    public int purchaseItem(String userId, PurchaseRequestDTO purchaseRequest){
 
         PurchasedItem purchasedItem = purchaseService.createPurchasedItem(purchaseRequest.getPurchasedItemId());
-        Purchaser purchaser = purchaseService.changeMoneyAndCreatePurchaser(purchaseRequest.getPurchaserId(), purchasedItem.getPrice());
+        Purchaser purchaser = purchaseService.changeMoneyAndCreatePurchaser(userId, purchasedItem.getPrice());
         purchaseService.putInventory(purchaser.getMemberId().getId(), purchasedItem.getItemId().getId());
 
-        Purchase newPurchase = purchaseRepository.save(
+        purchaseRepository.save(
                 new Purchase(
                         purchaser,
                         purchasedItem,
@@ -47,8 +47,11 @@ public class PurchaseRequestService {
                 )
         );
 
-        purchaseService.logCoinDecrease(purchaser.getMemberId().getId(), purchaseRequest.getPurchaseDatetime(), newPurchase.getId(), purchasedItem.getPrice(),"아이템 구매");
+//        if(purchasedItem.getPrice() != 0){
+//            purchaseService.logCoinDecrease(purchaser.getMemberId().getId(), purchaseRequest.getPurchaseDatetime(), newPurchase.getId(), purchasedItem.getPrice(),"아이템 구매");
+//        }
 
-        return newPurchase.getId();
+
+        return purchaser.getBalance();
     }
 }

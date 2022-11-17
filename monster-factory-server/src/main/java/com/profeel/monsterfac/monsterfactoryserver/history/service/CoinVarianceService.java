@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 @Service
 public class CoinVarianceService {
@@ -33,7 +32,7 @@ public class CoinVarianceService {
 
     @Transactional
     public boolean logCoinVarianceHistory(LogCoinVarianceRequestDTO logCoinVarianceRequest){
-        if(logCoinVarianceRequest.getAmount() <= 0){
+        if(logCoinVarianceRequest.getAmount() < 0){
             throw new NotVarifyCoinException("변동량은 0이거나 음수일 수 없습니다");
         }
         CoinVariance coinVariance = coinVarianceRepository.save(
