@@ -29,7 +29,7 @@ public class CoinVariance {
 
     @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    int memberId;
+    String memberId;
 
 
     @Column(name="coin_variance_datetime")
@@ -39,7 +39,7 @@ public class CoinVariance {
     String variancedContent;
 
     @Column(name="varianced_content_id")
-    String variancedContentId;
+    int variancedContentId;
 
     @Column(name="coin_variance_action")
     String action;
@@ -54,7 +54,7 @@ public class CoinVariance {
 
     protected CoinVariance(){}
 
-    public CoinVariance(int memberId, String varianceDateTime, String variancedContent, String variancedContentId, String action, int amount, String remarks) {
+    public CoinVariance(String memberId, String varianceDateTime, String variancedContent, int variancedContentId, String action, int amount, String remarks) {
         this.memberId = memberId;
         this.varianceDateTime = varianceDateTime;
         this.variancedContent = variancedContent;
@@ -68,7 +68,7 @@ public class CoinVariance {
         return id;
     }
 
-    public int getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
@@ -92,7 +92,7 @@ public class CoinVariance {
         return remarks;
     }
 
-    public String getVariancedContentId() {
+    public int getVariancedContentId() {
         return variancedContentId;
     }
 }

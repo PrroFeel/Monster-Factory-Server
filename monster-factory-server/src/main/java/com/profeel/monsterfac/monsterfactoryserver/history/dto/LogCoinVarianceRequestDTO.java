@@ -13,15 +13,14 @@ package com.profeel.monsterfac.monsterfactoryserver.history.dto;
  *
  * @author 최윤서
  * @version 1
- * @see 참고할 class 또는 외부 url
  */
 public class LogCoinVarianceRequestDTO {
-    int memberId;
+    String memberId;
     String varianceDateTime;
 
     String variancedContent;
 
-    String variancedContentId;
+    Integer variancedContentId;
 
     String action;
 
@@ -31,7 +30,7 @@ public class LogCoinVarianceRequestDTO {
 
     protected LogCoinVarianceRequestDTO(){}
 
-    public LogCoinVarianceRequestDTO(int memberId, String varianceDateTime, String variancedContent, String variancedContentId, String action, int amount, String remarks) {
+    public LogCoinVarianceRequestDTO(String memberId, String varianceDateTime, String variancedContent, Integer variancedContentId, String action, int amount, String remarks) {
         this.memberId = memberId;
         this.varianceDateTime = varianceDateTime;
         this.variancedContent = variancedContent;
@@ -41,21 +40,12 @@ public class LogCoinVarianceRequestDTO {
         this.remarks = remarks;
     }
 
-    @Override
-    public String toString() {
-        return "LogCoinVarianceRequestDTO{" +
-                "memberId=" + memberId +
-                ", varianceDateTime='" + varianceDateTime + '\'' +
-                ", variancedContent='" + variancedContent + '\'' +
-                ", variancedContentId='" + variancedContentId + '\'' +
-                ", action='" + action + '\'' +
-                ", amount=" + amount +
-                ", remarks='" + remarks + '\'' +
-                '}';
+    public String getMemberId() {
+        return memberId;
     }
 
-    public int getMemberId() {
-        return memberId;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public String getVarianceDateTime() {
@@ -74,11 +64,11 @@ public class LogCoinVarianceRequestDTO {
         this.variancedContent = variancedContent;
     }
 
-    public String getVariancedContentId() {
+    public Integer getVariancedContentId() {
         return variancedContentId;
     }
 
-    public void setVariancedContentId(String variancedContentId) {
+    public void setVariancedContentId(Integer variancedContentId) {
         this.variancedContentId = variancedContentId;
     }
 
@@ -104,5 +94,18 @@ public class LogCoinVarianceRequestDTO {
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    @Override
+    public String toString() {
+        return "LogCoinVarianceRequestDTO{" +
+                "memberId='" + memberId + '\'' +
+                ", varianceDateTime='" + varianceDateTime + '\'' +
+                ", variancedContent='" + variancedContent + '\'' +
+                ", variancedContentId=" + variancedContentId +
+                ", action='" + action + '\'' +
+                ", amount=" + amount +
+                ", remarks='" + remarks + '\'' +
+                '}';
     }
 }
