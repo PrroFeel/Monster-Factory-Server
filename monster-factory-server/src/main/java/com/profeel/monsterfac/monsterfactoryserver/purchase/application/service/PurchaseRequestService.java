@@ -35,7 +35,7 @@ public class PurchaseRequestService {
     @Transactional
     public Purchase purchaseItem(String userId, PurchaseRequestDTO purchaseRequest){
 
-        PurchaseItem purchasedItem = purchaseService.createPurchasedItem(purchaseRequest.getPurchasedItemId());
+        PurchaseItem purchasedItem = purchaseService.createPurchasedItem(purchaseRequest.getPurchaseItemId());
         Purchaser purchaser = purchaseService.changeMoneyAndCreatePurchaser(userId, purchasedItem.getPrice());
         purchaseService.putInventory(purchaser.getMemberId().getId(), purchasedItem.getItemId().getId());
 

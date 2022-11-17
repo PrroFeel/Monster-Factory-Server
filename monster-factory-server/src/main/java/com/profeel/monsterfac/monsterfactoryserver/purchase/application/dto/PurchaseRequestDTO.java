@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * <pre>
  * Class : PurchaseRequestDTO
@@ -15,23 +17,26 @@ package com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto;
  * @version 1
  */
 public class PurchaseRequestDTO {
-    private int purchasedItemId;
+    @ApiModelProperty(name = "구매한 item 고유 번호", example = "3")
+    private int purchaseItemId;
+
+    @ApiModelProperty(name = "구매한 날짜 및 시간", example = "2022-11-18 07:01:00", notes = "\"yyyy-dd-MM HH:mm:ss\" 와 같은 포맷을 지켜야 한다")
     private String purchaseDatetime;
 
     protected PurchaseRequestDTO(){}
 
-    public PurchaseRequestDTO( int purchasedItemId, String purchaseDatetime) {
-        this.purchasedItemId = purchasedItemId;
+    public PurchaseRequestDTO( int purchaseItemId, String purchaseDatetime) {
+        this.purchaseItemId = purchaseItemId;
         this.purchaseDatetime = purchaseDatetime;
     }
 
 
-    public int getPurchasedItemId() {
-        return purchasedItemId;
+    public int getPurchaseItemId() {
+        return purchaseItemId;
     }
 
-    public void setPurchasedItemId(int purchasedItemId) {
-        this.purchasedItemId = purchasedItemId;
+    public void setPurchaseItemId(int purchasedItemId) {
+        this.purchaseItemId = purchasedItemId;
     }
 
     public String getPurchaseDatetime() {

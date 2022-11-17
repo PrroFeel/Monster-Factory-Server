@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * <pre>
  * Class : PurchaseResponseDTO
@@ -16,9 +18,16 @@ package com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto;
  * @see 참고할 class 또는 외부 url
  */
 public class PurchaseResponseDTO {
+    @ApiModelProperty(example = "구매 처리 고유 번호")
     private int purchaseId;
+
+    @ApiModelProperty(example = "구매된 아이템 이름")
     private String purchasedItemName;
+
+    @ApiModelProperty(example = "구매자 ID")
     private String purchaserId;
+
+    @ApiModelProperty(example = "구매자의 구매 후 잔금")
     private int balace;
 
     protected PurchaseResponseDTO(){}
