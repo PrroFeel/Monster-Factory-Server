@@ -47,16 +47,16 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     public Purchaser changeMoneyAndCreatePurchaser(String userId, int amount){
-
         return new Purchaser(reqMemberService.decreaseMoney(userId, amount));
     }
 
-    public PurchasedItem putInventoryAndCreatePurchasedItem(String userId, Integer itemId){
+    public PurchasedItem createPurchasedItem(Integer itemId){
         Item item = itemQueryService.getItem(itemId);
+        return new PurchasedItem(new ItemId(item.getItemId()), item.getItemName(), item.getItemPrice());
+    }
 
-        registInventoryService.registInventory(new RegistInventoryRequestDTO(userId, item.getItemId()));
-
-        return new PurchasedItem(new ItemId(item.getItemId()), item.getItemName());
+    public void putInventory(String userId, int itmeId){
+        registInventoryService.registInventory(new RegistInventoryRequestDTO(userId, itmeId));
     }
 
     public boolean logCoinDecrease(String userId,String dateTime, Integer purchaseId, Integer decreaseAmount, String remarks){

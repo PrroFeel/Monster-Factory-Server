@@ -2,8 +2,6 @@ package com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model;
 
 import javax.persistence.*;
 
-import static com.profeel.monsterfac.monsterfactoryserver.common.service.DateService.getCurrentDatetimeWithFormating;
-
 /**
  * <pre>
  * Class : Purchase
@@ -35,13 +33,14 @@ public class Purchase {
     PurchasedItem purchaedItem;
 
     @Column(name="purchase_datatime")
-    String PurchaseDatetime;
+    String purchaseDatetime;
 
     protected Purchase(){}
-    public Purchase(Purchaser purchaser, PurchasedItem purchaedItem) {
+    public Purchase(Purchaser purchaser, PurchasedItem purchaedItem, String purchaseDatetime) {
         this.purchaser = purchaser;
         this.purchaedItem = purchaedItem;
-        this.PurchaseDatetime = getCurrentDatetimeWithFormating();
+//        this.purchaseDatetime = getCurrentDatetimeWithFormating();
+        this.purchaseDatetime = purchaseDatetime;
     }
 
     public int getId() {
@@ -57,6 +56,6 @@ public class Purchase {
     }
 
     public String getPurchaseDatetime() {
-        return PurchaseDatetime;
+        return purchaseDatetime;
     }
 }

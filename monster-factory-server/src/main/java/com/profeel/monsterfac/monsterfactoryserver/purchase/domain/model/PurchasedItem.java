@@ -23,20 +23,28 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class PurchasedItem {
     @AttributeOverride(name="id", column = @Column(name="purchased_item_id"))
-    ItemId id;
+    ItemId itemId;
 
     @Column(name="purchased_item_name")
     String name;
 
+    @Column(name="purchased_item_price")
+    int price;
+
     protected PurchasedItem(){}
 
-    public PurchasedItem(ItemId id, String name) {
-        this.id = id;
+    public PurchasedItem(ItemId itemId, String name, int price) {
+        this.itemId = itemId;
         this.name = name;
+        this.price = price;
     }
 
-    public ItemId getId() {
-        return id;
+    public ItemId getItemId() {
+        return itemId;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     public String getName() {

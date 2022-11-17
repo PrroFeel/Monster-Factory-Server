@@ -21,6 +21,7 @@ import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchas
 public interface PurchaseService {
 
     Purchaser changeMoneyAndCreatePurchaser(String userId, int amount);
-    PurchasedItem putInventoryAndCreatePurchasedItem(String userId, Integer itemId);
+    PurchasedItem createPurchasedItem(Integer itemId);
+    void putInventory(String userId, int itmeId);
     boolean logCoinDecrease(String userId,String dateTime, Integer purchaseId, Integer decreaseAmount, String remarks);
 }
