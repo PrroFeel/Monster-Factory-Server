@@ -1,6 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.purchase.domain.service;
 
-import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchasedItem;
+import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchaseItem;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchaser;
 
 /**
@@ -21,7 +21,7 @@ import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchas
 public interface PurchaseService {
 
     Purchaser changeMoneyAndCreatePurchaser(String userId, int amount);
-    PurchasedItem createPurchasedItem(Integer itemId);
+    PurchaseItem createPurchasedItem(Integer itemId);
     void putInventory(String userId, int itmeId);
     boolean logCoinDecrease(String userId,String dateTime, Integer purchaseId, Integer decreaseAmount, String remarks);
 }

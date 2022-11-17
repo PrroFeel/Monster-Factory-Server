@@ -12,7 +12,7 @@ import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Ite
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.service.ReqMemberService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
-import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchasedItem;
+import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchaseItem;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchaser;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,9 +58,9 @@ public class PurchaseServiceImpl implements PurchaseService {
         return new Purchaser(new MemberId(member.getMemberId()), member.getMoney().getValue());
     }
 
-    public PurchasedItem createPurchasedItem(Integer itemId){
+    public PurchaseItem createPurchasedItem(Integer itemId){
         Item item = itemQueryService.getItem(itemId);
-        return new PurchasedItem(new ItemId(item.getItemId()), item.getItemName(), item.getItemPrice());
+        return new PurchaseItem(new ItemId(item.getItemId()), item.getItemName(), item.getItemPrice());
     }
 
     public void putInventory(String userId, int itmeId){

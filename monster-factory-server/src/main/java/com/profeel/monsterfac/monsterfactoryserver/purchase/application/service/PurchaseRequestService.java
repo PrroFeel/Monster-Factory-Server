@@ -2,7 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.purchase.application.service
 
 import com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto.PurchaseRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchase;
-import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchasedItem;
+import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchaseItem;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchaser;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.repository.PurchaseRepository;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.service.PurchaseService;
@@ -33,13 +33,13 @@ public class PurchaseRequestService {
     }
 
     @Transactional
-    public int purchaseItem(String userId, PurchaseRequestDTO purchaseRequest){
+    public Purchase purchaseItem(String userId, PurchaseRequestDTO purchaseRequest){
 
-        PurchasedItem purchasedItem = purchaseService.createPurchasedItem(purchaseRequest.getPurchasedItemId());
+        PurchaseItem purchasedItem = purchaseService.createPurchasedItem(purchaseRequest.getPurchasedItemId());
         Purchaser purchaser = purchaseService.changeMoneyAndCreatePurchaser(userId, purchasedItem.getPrice());
         purchaseService.putInventory(purchaser.getMemberId().getId(), purchasedItem.getItemId().getId());
 
-        purchaseRepository.save(
+        Purchase purchase = purchaseRepository.save(
                 new Purchase(
                         purchaser,
                         purchasedItem,
@@ -52,6 +52,6 @@ public class PurchaseRequestService {
 //        }
 
 
-        return purchaser.getBalance();
+        return purchase;
     }
 }

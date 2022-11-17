@@ -21,7 +21,7 @@ import javax.persistence.Embeddable;
  * @version 1
  */
 @Embeddable
-public class PurchasedItem {
+public class PurchaseItem {
     @AttributeOverride(name="id", column = @Column(name="purchased_item_id"))
     ItemId itemId;
 
@@ -31,9 +31,9 @@ public class PurchasedItem {
     @Column(name="purchased_item_price")
     int price;
 
-    protected PurchasedItem(){}
+    protected PurchaseItem(){}
 
-    public PurchasedItem(ItemId itemId, String name, int price) {
+    public PurchaseItem(ItemId itemId, String name, int price) {
         this.itemId = itemId;
         this.name = name;
         this.price = price;

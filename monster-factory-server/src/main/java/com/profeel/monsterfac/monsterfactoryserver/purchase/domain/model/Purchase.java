@@ -30,15 +30,15 @@ public class Purchase {
     Purchaser purchaser;
 
     @Embedded
-    PurchasedItem purchaedItem;
+    PurchaseItem purchaeItem;
 
     @Column(name="purchase_datatime")
     String purchaseDatetime;
 
     protected Purchase(){}
-    public Purchase(Purchaser purchaser, PurchasedItem purchaedItem, String purchaseDatetime) {
+    public Purchase(Purchaser purchaser, PurchaseItem purchaeItem, String purchaseDatetime) {
         this.purchaser = purchaser;
-        this.purchaedItem = purchaedItem;
+        this.purchaeItem = purchaeItem;
 //        this.purchaseDatetime = getCurrentDatetimeWithFormating();
         this.purchaseDatetime = purchaseDatetime;
     }
@@ -51,8 +51,8 @@ public class Purchase {
         return purchaser;
     }
 
-    public PurchasedItem getPurchaedItem() {
-        return purchaedItem;
+    public PurchaseItem getPurchaeItem() {
+        return purchaeItem;
     }
 
     public String getPurchaseDatetime() {

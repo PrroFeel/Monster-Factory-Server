@@ -2,7 +2,9 @@ package com.profeel.monsterfac.monsterfactoryserver.purchase.presentation.contro
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto.PurchaseRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.purchase.application.dto.PurchaseResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.application.service.PurchaseRequestService;
+import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,11 +45,20 @@ public class PurchaseController {
         System.out.println("purchaseRequest : " +purchaseRequest);
 
         // 필수 데이터 유무 검사
+
+
+        Purchase purchased = purchaseRequestService.purchaseItem(userId, purchaseRequest);
+
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         , "아이템 구매 성공"
-                        , "구매 후 잔금 :"+purchaseRequestService.purchaseItem(userId, purchaseRequest)
+                        , new PurchaseResponseDTO(
+                                purchased.getId(),
+                            purchased.getPurchaeItem().getName(),
+                            purchased.getPurchaser().getMemberId().getId(),
+                            purchased.getPurchaser().getBalance()
+                        )
                 )
         );
     }
