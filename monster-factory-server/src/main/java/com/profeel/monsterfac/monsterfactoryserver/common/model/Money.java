@@ -63,7 +63,6 @@ public class Money implements Serializable {
         if(amount != 0){
             this.value = result;
         }
-        this.value = result;
     }
 
 

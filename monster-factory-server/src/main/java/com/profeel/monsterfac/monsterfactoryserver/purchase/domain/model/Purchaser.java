@@ -25,12 +25,20 @@ public class Purchaser {
     @AttributeOverride(name="id", column = @Column(name="purchaser_member_id"))
     MemberId memberId;
 
+    Integer balance;
+
+
     protected Purchaser(){}
-    public Purchaser(MemberId memberId) {
+    public Purchaser(MemberId memberId, Integer balance) {
         this.memberId = memberId;
+        this.balance = balance;
     }
 
     public MemberId getMemberId() {
         return memberId;
+    }
+
+    public Integer getBalance() {
+        return balance;
     }
 }

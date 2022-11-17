@@ -9,6 +9,10 @@ import com.profeel.monsterfac.monsterfactoryserver.item.command.application.serv
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.Item;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.ItemId;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.service.ReqMemberService;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
+import com.profeel.monsterfac.monsterfactoryserver.member.query.data.MemberData;
+import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.PurchasedItem;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchaser;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.service.PurchaseService;
@@ -33,6 +37,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     private ItemAppQueryService itemQueryService;
     private RegistInventoryService registInventoryService;
     private ReqMemberService reqMemberService;
+    private MemberQueryService memberQueryService;
     private CoinVarianceService coinVarianceService;
 
     @Autowired
@@ -47,7 +52,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     public Purchaser changeMoneyAndCreatePurchaser(String userId, int amount){
-        return new Purchaser(reqMemberService.decreaseMoney(userId, amount));
+        MemberId memberId = reqMemberService.decreaseMoney(userId, amount);
+        MemberData memberData = memberQueryService.getMemberData(memberId.getId());
+        return new Purchaser(memberId);
     }
 
     public PurchasedItem createPurchasedItem(Integer itemId){

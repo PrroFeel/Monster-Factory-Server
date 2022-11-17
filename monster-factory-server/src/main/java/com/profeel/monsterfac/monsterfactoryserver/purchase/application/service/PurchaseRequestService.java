@@ -7,6 +7,7 @@ import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.model.Purchas
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.repository.PurchaseRepository;
 import com.profeel.monsterfac.monsterfactoryserver.purchase.domain.service.PurchaseService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -31,6 +32,7 @@ public class PurchaseRequestService {
         this.purchaseService = purchaseService;
     }
 
+    @Transactional
     int purchaseItem(PurchaseRequestDTO purchaseRequest){
 
         PurchasedItem purchasedItem = purchaseService.createPurchasedItem(purchaseRequest.getPurchasedItemId());
