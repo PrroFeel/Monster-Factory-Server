@@ -72,9 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(new JwtSecurityConfig(tokenProvider))
                 .and();
-//                .logout()
-//                .logoutUrl("/auth/logout")
-//                .logoutSuccessUrl("/auth/login");
 
     }
 
