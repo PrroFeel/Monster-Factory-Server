@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.model.Money;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,6 +16,7 @@ import java.util.Date;
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
  * 2022-11-03       최은진           최초 생성
+ * 2022-11-18       최윤서           money 증감 로직 추가
  * </pre>
  *
  * @author 최은진(최초 작성자)
@@ -23,6 +25,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="tbl_members")
+@DynamicUpdate
 public class Member {
 
     @Id
@@ -128,4 +131,17 @@ public class Member {
     public void setAuth(String auth) {
         this.auth = auth;
     }
+
+    public void decreaseMoney(int amount){
+        if(amount != 0){
+            this.money = this.money.decrease(amount);
+        }
+    }
+
+    public void increaseMoney(int amount){
+        if(amount != 0){
+            this.money = this.money.increase(amount);
+        }
+    }
+
 }

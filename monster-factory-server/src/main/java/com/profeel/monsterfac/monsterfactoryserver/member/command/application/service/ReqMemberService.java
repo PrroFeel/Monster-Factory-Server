@@ -1,15 +1,15 @@
 package com.profeel.monsterfac.monsterfactoryserver.member.command.application.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.model.Money;
-import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.MemberDTO;
-import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.TokenDTO;
 import com.profeel.monsterfac.monsterfactoryserver.jwt.TokenProvider;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.LoginDTO;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.MemberDTO;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.SignUpDTO;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.application.dto.TokenDTO;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.exception.LoginFailedException;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Password;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.repository.MemberRepository;
-import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.exception.LoginFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -85,6 +85,32 @@ public class ReqMemberService {
 
         return tokenDto;
 
+    }
+
+    @Transactional
+    public Member decreaseMoney(String memberId, int amount){
+        Member member = memberRepository.findByMemberId(memberId);
+
+        if(member == null) {
+            throw new LoginFailedException("가입되지 않은 회원입니다");
+        }
+
+        member.decreaseMoney(amount);
+
+        return member;
+    }
+
+    @Transactional
+    public Member increaseMoney(String memberId, int amount){
+        Member member = memberRepository.findByMemberId(memberId);
+
+        if(member == null) {
+            throw new LoginFailedException("가입되지 않은 회원입니다");
+        }
+
+        member.increaseMoney(amount);
+
+        return member;
     }
 
 }
