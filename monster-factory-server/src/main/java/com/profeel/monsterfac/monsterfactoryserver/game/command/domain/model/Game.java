@@ -1,5 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model;
 
+import com.profeel.monsterfac.monsterfactoryserver.common.exception.NagativeMoneyException;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.exception.NotApprovedStatusException;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.exception.RewardNullException;
@@ -139,6 +140,9 @@ public class Game {
     public void registReward(Reward newReward){
         if(newReward.getMoney()== 0 && newReward.getRewardItems().isEmpty()){
             throw  new IllegalArgumentException("게임 보상 내용이 존재하지 않습니다");
+        }
+        if(newReward.getMoney()<0){
+            throw new NagativeMoneyException("게임 보상 머니는 음수가 될 수 없습니다");
         }
         if(!verifyApprovedStatus()){
             throw new NotApprovedStatusException("승인된 게임만 보상을 등록할 수 있습니다");

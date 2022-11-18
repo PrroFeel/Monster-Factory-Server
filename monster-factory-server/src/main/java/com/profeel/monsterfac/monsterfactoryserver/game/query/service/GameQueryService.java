@@ -14,6 +14,7 @@ import com.profeel.monsterfac.monsterfactoryserver.member.query.service.MemberQu
 import com.profeel.monsterfac.monsterfactoryserver.project.query.service.ProjectQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ import java.util.List;
  * @version 1
  */
 @Service
+@Transactional(readOnly = true)
 public class GameQueryService {
 
     private MemberQueryService memberQueryService;

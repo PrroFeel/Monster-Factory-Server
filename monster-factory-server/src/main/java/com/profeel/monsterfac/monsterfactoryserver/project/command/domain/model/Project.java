@@ -31,7 +31,7 @@ public class Project {
     @Id
     @Column(name = "project_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(name="project_name")
     private String name;
@@ -49,12 +49,6 @@ public class Project {
 
     @Embedded
     private Developer developer;
-
-//    @ElementCollection(fetch = FetchType.LAZY)
-//    @CollectionTable(name="tbl_placed_towers", joinColumns = @JoinColumn(name="project_id"))
-//    @OrderColumn(name="placed_tower_idx")
-//    private List<PlacedTower> placedTowers;
-
 
     @Embedded
     private PlacedObjects placedObjects;

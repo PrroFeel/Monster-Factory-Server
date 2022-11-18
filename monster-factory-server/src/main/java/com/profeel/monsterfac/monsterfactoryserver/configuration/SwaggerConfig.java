@@ -19,6 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * DATE             AUTHOR           NOTE
  * ----------------------------------------------------------------
  * 2022-11-10       최은진           최초 생성
+ * 2022-11-14       최윤서           basePackage 설정
  * </pre>
  *
  * @author 최은진(최초 작성자)
@@ -44,7 +45,7 @@ public class SwaggerConfig {
                 .groupName("Monster Factory")
                 .useDefaultResponseMessages(false)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.profeel.monsterfac.monsterfactoryserver"))
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(commonInfo());
