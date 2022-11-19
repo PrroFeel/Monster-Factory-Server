@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.play.command.presentation;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
+import com.profeel.monsterfac.monsterfactoryserver.play.command.application.dto.GetRewardResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.play.command.application.dto.RegistPlayResultDTO;
 import com.profeel.monsterfac.monsterfactoryserver.play.command.application.service.GetRewardService;
 import com.profeel.monsterfac.monsterfactoryserver.play.command.application.service.RegistPlayResultService;
@@ -51,7 +52,7 @@ public class PlayController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "플레이 결과 추가 성공", registPlayResultService.registPlayResult(registPlayResultInfo)));
     }
 
-    @ApiOperation(value = "게임 보상", notes = "게임 보상 머니 수령 api")
+    @ApiOperation(value = "게임 보상", notes = "게임 보상 머니 수령 api", response = GetRewardResponseDTO.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name ="game", value = "클리어한 게임 고유 번호"),
             @ApiImplicitParam(name="user", value="수령 받을 유저 id(토큰으로 대체될 예정)")
