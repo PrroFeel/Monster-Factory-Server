@@ -33,7 +33,7 @@ public class GameInfoData {
     private String name;
 
     @ApiModelProperty(name = "썸네일 파일 정보")
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne
     @JoinColumn(name="thumbnail_file_id", unique = true)
     private ImageFileData thumbnailFile;
 
@@ -54,9 +54,13 @@ public class GameInfoData {
     @Column(name="project_id")
     private Integer projectId;
 
+    @ApiModelProperty(example = "보상 코인")
+    @Column(name="game_reward_money")
+    private Integer rewardMoney;
+
     protected GameInfoData(){}
 
-    public GameInfoData(Integer id, String name, ImageFileData thumbnailFile, String gameStatus, String developerMemberId, String gameDescription, Integer projectId) {
+    public GameInfoData(Integer id, String name, ImageFileData thumbnailFile, String gameStatus, String developerMemberId, String gameDescription, Integer projectId, Integer rewardMoney) {
         this.id = id;
         this.name = name;
         this.thumbnailFile = thumbnailFile;
@@ -64,6 +68,7 @@ public class GameInfoData {
         this.developerMemberId = developerMemberId;
         this.gameDescription = gameDescription;
         this.projectId = projectId;
+        this.rewardMoney = rewardMoney;
     }
 
     public Integer getId() {
@@ -92,5 +97,9 @@ public class GameInfoData {
 
     public Integer getProjectId() {
         return projectId;
+    }
+
+    public Integer getRewardMoney() {
+        return rewardMoney;
     }
 }
