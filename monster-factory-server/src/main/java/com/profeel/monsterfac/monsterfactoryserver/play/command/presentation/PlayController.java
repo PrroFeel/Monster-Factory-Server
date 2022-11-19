@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1(클래스 버전)
  */
 
-@Api(tags = {"Play API"}, description = "게임 플레이와 관련된 api들")
+@Api(tags = {"Play API"}, description = "게임 플레이와 관련된 api")
 @RestController
 @RequestMapping("/play")
 public class PlayController {
@@ -52,7 +52,7 @@ public class PlayController {
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "플레이 결과 추가 성공", registPlayResultService.registPlayResult(registPlayResultInfo)));
     }
 
-    @ApiOperation(value = "게임 보상", notes = "게임 보상 머니 수령 api", response = GetRewardResponseDTO.class)
+    @ApiOperation(value = "게임 보상 수령(플레이 결과를 추가하면 서버에서 판단 후 수령하는 방식으로 갈 수 있습니다(고민중,,,,,) )", notes = "게임 보상 머니 수령 api", response = GetRewardResponseDTO.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name ="game", value = "클리어한 게임 고유 번호"),
             @ApiImplicitParam(name="user", value="수령 받을 유저 id(토큰으로 대체될 예정)")
