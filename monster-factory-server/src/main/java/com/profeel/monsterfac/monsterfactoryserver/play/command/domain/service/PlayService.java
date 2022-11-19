@@ -1,6 +1,8 @@
 package com.profeel.monsterfac.monsterfactoryserver.play.command.domain.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
+import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameRewardData;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
 import com.profeel.monsterfac.monsterfactoryserver.play.command.domain.model.PlayGame;
 import com.profeel.monsterfac.monsterfactoryserver.play.command.domain.model.Player;
 
@@ -25,4 +27,8 @@ public interface PlayService {
     Player createPlayer(String playerId);
 
     PlayGame createPlayGame(int gameId);
+
+    GameRewardData getGameRewardById(int gameId);
+
+    Member increaseMoneyWithReward(String userId, Integer rewardMoney);
 }
