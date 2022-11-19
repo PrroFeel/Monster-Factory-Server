@@ -1,7 +1,5 @@
 package com.profeel.monsterfac.monsterfactoryserver.history.entity;
 
-import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
-
 import javax.persistence.*;
 
 /**
@@ -27,9 +25,8 @@ public class CoinVariance {
     @Column(name = "coin_variance_id")
     private int id;
 
-    @ManyToOne(targetEntity = Member.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    String memberId;
+    @Embedded
+    Changer changer;
 
 
     @Column(name="coin_variance_datetime")
@@ -54,8 +51,8 @@ public class CoinVariance {
 
     protected CoinVariance(){}
 
-    public CoinVariance(String memberId, String varianceDateTime, String variancedContent, int variancedContentId, String action, int amount, String remarks) {
-        this.memberId = memberId;
+    public CoinVariance(Changer changer, String varianceDateTime, String variancedContent, int variancedContentId, String action, int amount, String remarks) {
+        this.changer = changer;
         this.varianceDateTime = varianceDateTime;
         this.variancedContent = variancedContent;
         this.variancedContentId = variancedContentId;
@@ -68,8 +65,8 @@ public class CoinVariance {
         return id;
     }
 
-    public String getMemberId() {
-        return memberId;
+    public Changer getChanger() {
+        return changer;
     }
 
     public String getVarianceDateTime() {

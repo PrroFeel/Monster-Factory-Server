@@ -35,6 +35,10 @@ public class GetRewardService {
 
         Member member = playService.increaseMoneyWithReward(userId, gameRewardData.getRewardMoney());
 
+        if(gameRewardData.getRewardMoney().intValue() != 0){
+            playService.logCoinIncrease(member.getMemberId(), 1, gameRewardData.getRewardMoney().intValue(), "클리어 보상 수령");
+        }
+
         return new GetRewardResponseDTO(
                 gameRewardData.getRewardMoney(),
                 member.getMoney().getValue()

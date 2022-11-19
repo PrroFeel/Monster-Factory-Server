@@ -67,11 +67,10 @@ public class PurchaseServiceImpl implements PurchaseService {
         registInventoryService.registInventory(new RegistInventoryRequestDTO(userId, itmeId));
     }
 
-    public boolean logCoinDecrease(String userId,String dateTime, Integer purchaseId, Integer decreaseAmount, String remarks){
+    public boolean logCoinDecrease(String userId, Integer purchaseId, Integer decreaseAmount, String remarks){
         return coinVarianceService.logCoinVarianceHistory(
                 new LogCoinVarianceRequestDTO(
                         userId,
-                        dateTime,
                         "상점",
                         purchaseId,
                         "USE",

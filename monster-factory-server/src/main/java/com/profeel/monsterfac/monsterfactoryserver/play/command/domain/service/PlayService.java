@@ -31,4 +31,6 @@ public interface PlayService {
     GameRewardData getGameRewardById(int gameId);
 
     Member increaseMoneyWithReward(String userId, Integer rewardMoney);
+
+    boolean logCoinIncrease(String userId,Integer playResultId, Integer increaseAmount, String remarks);
 }

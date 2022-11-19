@@ -4,6 +4,8 @@ import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainServi
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameId;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameRewardData;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.service.GameQueryService;
+import com.profeel.monsterfac.monsterfactoryserver.history.dto.LogCoinVarianceRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.history.service.CoinVarianceService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.application.service.ReqMemberService;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.Member;
 import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
@@ -34,11 +36,15 @@ public class PlayServiceImpl implements PlayService {
     private final ReqMemberService reqMemberService;
     private final GameQueryService gameQueryService;
 
+    private final CoinVarianceService coinVarianceService;
+
     @Autowired
     public PlayServiceImpl(ReqMemberService reqMemberService,
-                           GameQueryService gameQueryService){
+                           GameQueryService gameQueryService,
+                           CoinVarianceService coinVarianceService){
         this.gameQueryService =gameQueryService;
         this.reqMemberService =reqMemberService;
+        this.coinVarianceService = coinVarianceService;
     }
 
 
@@ -60,6 +66,19 @@ public class PlayServiceImpl implements PlayService {
     @Override
     public Member increaseMoneyWithReward(String userId, Integer rewardMoney) {
         return reqMemberService.increaseMoney(userId, rewardMoney);
+    }
+
+    public boolean logCoinIncrease(String userId,Integer playResultId, Integer increaseAmount, String remarks){
+        return coinVarianceService.logCoinVarianceHistory(
+                new LogCoinVarianceRequestDTO(
+                        userId,
+                        "게임 플레이",
+                        playResultId,
+                        "GET",
+                        increaseAmount,
+                        remarks
+                )
+        );
     }
 
 }
