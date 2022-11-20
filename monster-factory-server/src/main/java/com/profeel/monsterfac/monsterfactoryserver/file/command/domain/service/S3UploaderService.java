@@ -8,6 +8,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -31,7 +32,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-//@PropertySource("classpath:aws.yml")
+@PropertySource("classpath:aws.yml")
 public class S3UploaderService {
 
     @Value("${cloud.aws.s3.buket}")
