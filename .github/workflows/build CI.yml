@@ -22,7 +22,7 @@ jobs:
     - name: Set secret yml file
       uses: microsoft/variable-substitution@v1
       with:
-        files: monster-factory-server/src/main/resources/application.yml
+        files: ./src/main/resources/application.yml
       env:
         spring.datasource.url: ${{ secrets.DATASOURCE_URL }} 
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }} 
@@ -35,6 +35,12 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file monster-factory-server/pom.xml
+      
+    - name: docker push
+      run: |
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/monsterfac-back:latest ./
+        docker push ${{ secrets.DOCKER_USERNAME }}/monsterfac-back:latest
     
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
