@@ -8,8 +8,6 @@ server:
       force: true
 
 
-
-
 spring:
   profiles:
     group:
@@ -42,18 +40,8 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
 mybatis:
   mapper-locations: mybatis/**/*.xml
-
-cloud:
-  aws:
-    region:
-      static: ap-northeast-2
-    stack:
-      #  설정 CloudForamtion 없이도 프로젝트 시작할 수 있도록 설정
-      auto: false
 
 logging:
   level:
