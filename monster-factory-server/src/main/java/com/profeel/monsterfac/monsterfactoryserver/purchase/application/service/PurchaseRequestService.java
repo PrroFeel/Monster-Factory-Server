@@ -47,9 +47,9 @@ public class PurchaseRequestService {
                 )
         );
 
-//        if(purchasedItem.getPrice() != 0){
-//            purchaseService.logCoinDecrease(purchaser.getMemberId().getId(), purchaseRequest.getPurchaseDatetime(), newPurchase.getId(), purchasedItem.getPrice(),"아이템 구매");
-//        }
+        if(purchasedItem.getPrice() != 0){
+            purchaseService.logCoinDecrease(purchaser.getMemberId().getId(), purchase.getId(), purchasedItem.getPrice(),"아이템 구매");
+        }
 
 
         return purchase;

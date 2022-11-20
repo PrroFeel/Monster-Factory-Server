@@ -90,34 +90,35 @@ public class GameQueryController {
         );
     }
 
-    @ApiOperation(value = "게임 상세 정보 조회(추가 예정)", notes = "게임에 대해 각종 정보를 조회하는 api" ,response = GameInfoData.class)
+    @ApiOperation(value = "게임 상세 정보 조회", notes = "게임에 대해 각종 정보를 조회하는 api로 기본 상세 정보, 플레이수, 랭킹 정보를 포함한다" ,response = GameInfoData.class)
+    @ApiImplicitParam(name = "id", value = "조회할 게임 고유 번호")
     @GetMapping("/{id}/detail")
     public ResponseEntity<ResponseDTO> findGameInfoById(@PathVariable("id") Integer gameId){
         System.out.println("[GameController] findGameInfoById -- GET");
 
         System.out.println("gameId  : " + gameId);
 
-        GameInfoData gameInfoData = gameQueryService.getGameInfoData(gameId);
+//        GameInfoData gameInfoData = gameQueryService.getGameInfoData(gameId);
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         ,"게임 기본 정보 조회"
-                        , gameInfoData
+                        , gameQueryService.findGameDetailsById(gameId)
                 )
         );
     }
 
     @ApiOperation(value = "게임 로드 정보 조회", notes = "게임 load 시 필요한 각종 오브젝트 정보를 조회하는 api" ,response = GameLoadResponseDTO.class)
+    @ApiImplicitParam(name = "id", value = "조회할 게임 고유 번호")
     @GetMapping("/{id}/load")
     public ResponseEntity<ResponseDTO> findGameLoadInfoById(@PathVariable("id") Integer gameId){
         System.out.println("[GameController] findGameLoadInfoById -- GET");
-
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         ,"게임 load 필요 정보 조회"
-                        , gameQueryService.findGameLoadInfoById(gameId)
+                        , gameQueryService.findGameLoadInfoById(gameId).getEditInfoData()
                 )
         );
     }

@@ -23,5 +23,5 @@ public interface PurchaseService {
     Purchaser changeMoneyAndCreatePurchaser(String userId, int amount);
     PurchaseItem createPurchasedItem(Integer itemId);
     void putInventory(String userId, int itmeId);
-    boolean logCoinDecrease(String userId,String dateTime, Integer purchaseId, Integer decreaseAmount, String remarks);
+    boolean logCoinDecrease(String userId, Integer purchaseId, Integer decreaseAmount, String remarks);
 }

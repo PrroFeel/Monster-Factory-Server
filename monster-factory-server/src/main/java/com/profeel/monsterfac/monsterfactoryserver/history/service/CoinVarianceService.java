@@ -1,9 +1,11 @@
 package com.profeel.monsterfac.monsterfactoryserver.history.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.history.dto.LogCoinVarianceRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.history.entity.Changer;
 import com.profeel.monsterfac.monsterfactoryserver.history.entity.CoinVariance;
 import com.profeel.monsterfac.monsterfactoryserver.history.exception.NotVarifyCoinException;
 import com.profeel.monsterfac.monsterfactoryserver.history.repository.CoinVarianceRepository;
+import com.profeel.monsterfac.monsterfactoryserver.member.command.domain.model.MemberId;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +39,7 @@ public class CoinVarianceService {
         }
         CoinVariance coinVariance = coinVarianceRepository.save(
                 new CoinVariance(
-                        logCoinVarianceRequest.getMemberId(),
+                        new Changer(new MemberId(logCoinVarianceRequest.getMemberId())),
                         logCoinVarianceRequest.getVarianceDateTime(),
                         logCoinVarianceRequest.getVariancedContent(),
                         logCoinVarianceRequest.getVariancedContentId(),

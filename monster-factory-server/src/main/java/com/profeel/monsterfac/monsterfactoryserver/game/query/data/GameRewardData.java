@@ -32,7 +32,8 @@ public class GameRewardData {
     @ApiModelProperty(example = "보상 코인")
     @Column(name="game_reward_money")
     private Integer rewardMoney;
-
+    @Column(name="project_id")
+    private Integer projectId;
 
     @ApiModelProperty(example = "보상 코인")
     @ElementCollection
@@ -40,8 +41,7 @@ public class GameRewardData {
     @OrderColumn(name="reward_item_idx")
     private List<RewardItemData> rewardItems;
 
-    @Column(name="project_id")
-    private Integer projectId;
+
 
     protected GameRewardData(){}
 

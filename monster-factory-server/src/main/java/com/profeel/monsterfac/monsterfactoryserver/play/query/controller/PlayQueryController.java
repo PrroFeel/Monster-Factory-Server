@@ -28,7 +28,7 @@ import java.util.List;
  * @version 1(클래스 버전)
  */
 
-@Api(tags = {"Ranking API"}, description = "게임 랭킹 조회 api")
+@Api(tags = {"Play 조회 API"}, description = "게임 플레이 관련 조회 api")
 @RestController
 @RequestMapping("/play")
 public class PlayQueryController {

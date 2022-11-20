@@ -1,5 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.history.dto;
 
+import static com.profeel.monsterfac.monsterfactoryserver.common.service.DateService.getCurrentDatetimeWithFormating;
+
 /**
  * <pre>
  * Class : LogCoinVarianceDTO
@@ -33,6 +35,16 @@ public class LogCoinVarianceRequestDTO {
     public LogCoinVarianceRequestDTO(String memberId, String varianceDateTime, String variancedContent, Integer variancedContentId, String action, int amount, String remarks) {
         this.memberId = memberId;
         this.varianceDateTime = varianceDateTime;
+        this.variancedContent = variancedContent;
+        this.variancedContentId = variancedContentId;
+        this.action = action;
+        this.amount = amount;
+        this.remarks = remarks;
+    }
+
+    public LogCoinVarianceRequestDTO(String memberId, String variancedContent, Integer variancedContentId, String action, int amount, String remarks) {
+        this.memberId = memberId;
+        this.varianceDateTime = getCurrentDatetimeWithFormating();
         this.variancedContent = variancedContent;
         this.variancedContentId = variancedContentId;
         this.action = action;

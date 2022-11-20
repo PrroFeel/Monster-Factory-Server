@@ -6,6 +6,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.exception.ValidationEr
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.SubmitGameRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.UploadGameRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.service.GameRequestValidator;
+import com.profeel.monsterfac.monsterfactoryserver.play.command.application.service.GetRewardService;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.service.SubmitGameService;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.service.UpdateGameSerive;
 import io.swagger.annotations.*;
@@ -43,12 +44,17 @@ public class GameController {
     private GameRequestValidator gameRequestValidator;
     private UpdateGameSerive updateGameSerive;
     private SubmitGameService submitGameService;
+
+    private GetRewardService getRewardService;
     @Autowired
-    public GameController(GameRequestValidator gameRequestValidator, SubmitGameService submitGameService,
-                          UpdateGameSerive updateGameSerive){
+    public GameController(GameRequestValidator gameRequestValidator,
+                          SubmitGameService submitGameService,
+                          UpdateGameSerive updateGameSerive,
+                          GetRewardService getRewardService){
         this.gameRequestValidator = gameRequestValidator;
         this.submitGameService = submitGameService;
         this.updateGameSerive = updateGameSerive;
+        this.getRewardService = getRewardService;
     }
 
     @ApiOperation(value = "게임 심사 제출", notes = "게임 정보를 저장하고 심사 제출 하는 api")
@@ -85,4 +91,7 @@ public class GameController {
                 )
         );
     }
+
+
+
 }
