@@ -22,7 +22,7 @@ jobs:
     - name: Set secret yml file
       uses: microsoft/variable-substitution@v1
       with:
-        files: ./monster-factory-server/src/main/resources/aws.yml
+        files: ./monster-factory-server/src/main/resources/application.yml
       env:
         spring.datasource.url: ${{ secrets.DATASOURCE_URL }} 
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }} 
