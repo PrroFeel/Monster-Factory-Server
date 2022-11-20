@@ -44,12 +44,6 @@ spring:
       matching-strategy: ant_path_matcher
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${{ secrets.DATASOURCE_URL }}
-    username: ${{ secrets.DATASOURCE_USERNAME }}
-    password: ${{ secrets.DATASOURCE_PASSWORD }}
-
-jwt:
-  secret: ${{ secrets.JWT_SECRET }}
 mybatis:
   mapper-locations: mybatis/**/*.xml
 
@@ -60,12 +54,6 @@ cloud:
     stack:
       #  설정 CloudForamtion 없이도 프로젝트 시작할 수 있도록 설정
       auto: false
-    credentials:
-      access-key: ${{ secrets.AWS_ACCESS_KEY }}
-      secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    s3:
-      # 파일 업로드 및 다운로드 될 버킷
-      buket: ${{ secrets.AWS_S3_BUCKET }}
 
 logging:
   level:
