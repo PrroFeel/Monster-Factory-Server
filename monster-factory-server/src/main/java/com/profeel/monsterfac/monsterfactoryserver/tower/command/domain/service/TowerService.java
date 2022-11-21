@@ -1,5 +1,6 @@
 package com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.service;
 
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileInfo;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,4 +25,5 @@ public interface TowerService {
 
     ModelingFileInfo uploadFile(MultipartFile multipartFile) throws IOException;
 
+    ImageFileInfo uploadImage(MultipartFile towerImageFile) throws IOException;
 }
