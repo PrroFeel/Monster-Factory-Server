@@ -123,6 +123,9 @@ public class GameQueryController {
         );
     }
 
+
+    @ApiOperation(value = "게임 이름 중복 확인", notes = "게임 이름 중복 확인 api로 true 시 중복, false 시 중복이 아닙니다")
+    @ApiImplicitParam(name = "name", value = "확인 할 이름")
     @GetMapping("/duplicated")
     public ResponseEntity<ResponseDTO> checkDuplicatedName(@RequestParam("name") String gameName){
         System.out.println("[GameController] checkDuplicatedName -- GET");
