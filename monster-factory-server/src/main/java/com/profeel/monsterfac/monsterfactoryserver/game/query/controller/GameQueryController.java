@@ -122,4 +122,17 @@ public class GameQueryController {
                 )
         );
     }
+
+    @GetMapping("/duplicated")
+    public ResponseEntity<ResponseDTO> checkDuplicatedName(@RequestParam("name") String gameName){
+        System.out.println("[GameController] checkDuplicatedName -- GET");
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"게임 이름 중복 확인"
+                        , gameQueryService.checkDuplicatedName(gameName)
+                )
+        );
+    }
 }
