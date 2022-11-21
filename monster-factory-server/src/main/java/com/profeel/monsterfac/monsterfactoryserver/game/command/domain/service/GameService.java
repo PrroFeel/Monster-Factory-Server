@@ -28,4 +28,6 @@ public interface GameService {
 
     RewardItem createRewardItem(Integer id, Integer quantity);
 
+    boolean checkGameNameDuplicated(String name);
+
 }
