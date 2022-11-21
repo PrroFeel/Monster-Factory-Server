@@ -5,8 +5,8 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.*;
+import com.amazonaws.util.IOUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -34,7 +34,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 @PropertySource("classpath:aws.yml")
-public class S3UploaderService {
+public class S3Service {
 
     @Value("${cloud.aws.s3.buket}")
     private String bucket;
@@ -49,7 +49,6 @@ public class S3UploaderService {
 
     private AmazonS3 amazonS3Client;
 
-
     @PostConstruct
     private void init(){
 
@@ -59,32 +58,6 @@ public class S3UploaderService {
                 .withRegion(this.region)
                 .build();
     }
-
-
-    // 임시 저장 경로에 저장된 파일을 지우는 메소드
-//    private void removeFile(File targetFile){
-//        if(targetFile.delete()){
-//            System.out.println("File 삭제 성공");
-//            return;
-//        }
-//        System.out.println("파일 삭제 실패");
-//    }
-
-
-
-
-
-
-//    public String imageUpload(File uploadFile, String savePath){
-//        // S3 버킷 폴더에 업로드
-//        amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile));
-////                .withCannedAcl(CannedAccessControlList.PublicRead));
-//
-//        // 임시 저장된 File 객체 제거
-//        removeFile(uploadFile);
-//        // 업로드 url 반환
-//        return amazonS3Client.getUrl(this.bucket, savePath).toString();
-//    }
 
     public ObjectMetadata getObjectMetadata(MultipartFile multipartFile){
         long size = multipartFile.getSize(); // 파일 크기
@@ -105,17 +78,20 @@ public class S3UploaderService {
         return amazonS3Client.getUrl(this.bucket, savePath).toString();
     }
 
-    // multipart 파일을 s3 특정 폴더에 업로드 하기 위한 메소드
-//    public void modelUpload(File uploadFile, String savePath) throws IOException {
-//        amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile));
-//        removeFile(uploadFile);
-//        System.out.println("s3 url : " + amazonS3Client.getUrl(this.bucket, savePath).toString());
-//    }
 
     public void modelUpload(MultipartFile uploadFile, String savePath) throws IOException {
         amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile.getInputStream(), getObjectMetadata(uploadFile)));
         System.out.println("s3 url : " + amazonS3Client.getUrl(this.bucket, savePath).toString());
     }
 
+    public byte[] getFileObject(String savedPath) throws IOException {
+        S3Object s3Object = amazonS3Client.getObject(new GetObjectRequest(this.bucket, savedPath));
+        S3ObjectInputStream objectInputStream = s3Object.getObjectContent();
+        return IOUtils.toByteArray(objectInputStream);
+    }
+
+    public void deleteFileObject(String savedPath){
+        amazonS3Client.deleteObject(new DeleteObjectRequest(this.bucket, savedPath));
+    }
 
 }
