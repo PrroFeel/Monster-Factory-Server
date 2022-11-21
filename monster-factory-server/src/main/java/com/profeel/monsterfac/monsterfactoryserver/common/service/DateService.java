@@ -20,7 +20,7 @@ import java.util.Date;
 public class DateService {
 
     public static String getCurrentDatetimeWithFormating(){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-dd-MM HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         return format.format(now);
     }
