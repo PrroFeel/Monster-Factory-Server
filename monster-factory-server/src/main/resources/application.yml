@@ -13,7 +13,7 @@ spring:
     group:
       "local": "local, common"
       "development": "development, common"
-    active: local
+    active: development
 
 ---
 # ??
@@ -53,23 +53,24 @@ logging:
           EC2MetadataUtils: error
 
 
----
-# ?? ??? ??
-spring:
-  environment: "local"
-  config:
-    activate:
-      on-profile: "local"
-  file-dir: /src/main/resources/files/
+#---
+## ?? ??? ??
+#spring:
+#  environment: "local"
+#  config:
+#    activate:
+#      on-profile: "local"
+#  file-dir: /src/main/resources/files/
+#
+#---
+## ?? ??? ??
+#spring:
+#  environment: "development"
+#  config:
+#    activate:
+#      on-profile: "development"
+#  file-dir: /home/ubuntu/src/files
 
----
-# ?? ??? ??
-spring:
-  environment: "development"
-  config:
-    activate:
-      on-profile: "development"
-  file-dir: /src/ec2-user/files/
 
 
 
