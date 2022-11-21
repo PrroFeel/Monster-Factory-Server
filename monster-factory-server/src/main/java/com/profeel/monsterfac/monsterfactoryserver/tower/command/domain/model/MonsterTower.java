@@ -34,7 +34,9 @@ public class MonsterTower {
     @JoinColumn(name="tower_file_id", unique = true)
     private FileInfo towerModelingFileInfo;
 
-
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="tower_image_id", unique = true)
+    private FileInfo towerImageInfo;
 
     @Column(name="monster_name")
     private String monsterName;
@@ -43,16 +45,22 @@ public class MonsterTower {
     @JoinColumn(name="monster_file_id", unique = true)
     private FileInfo monsterModelingFileInfo;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name="monster_image_id", unique = true)
+    private FileInfo monsterImageFileInfo;
 
     @Column(name="ability")
     private String ability;
 
-    protected MonsterTower() {}
-    public MonsterTower(String towerName, FileInfo towerModelingFileInfo, String monsterName, FileInfo monsterModelingFileInfo, String ability) {
+    protected MonsterTower(){}
+
+    public MonsterTower( String towerName, FileInfo towerModelingFileInfo, FileInfo towerImageInfo, String monsterName, FileInfo monsterModelingFileInfo, FileInfo monsterImageFileInfo, String ability) {
         this.towerName = towerName;
         this.towerModelingFileInfo = towerModelingFileInfo;
+        this.towerImageInfo = towerImageInfo;
         this.monsterName = monsterName;
         this.monsterModelingFileInfo = monsterModelingFileInfo;
+        this.monsterImageFileInfo = monsterImageFileInfo;
         this.ability = ability;
     }
 
@@ -68,6 +76,14 @@ public class MonsterTower {
         return towerModelingFileInfo;
     }
 
+    public FileInfo getTowerImageInfo() {
+        return towerImageInfo;
+    }
+
+    public FileInfo getMonsterImageFileInfo() {
+        return monsterImageFileInfo;
+    }
+
     public String getMonsterName() {
         return monsterName;
     }
@@ -76,19 +92,8 @@ public class MonsterTower {
         return monsterModelingFileInfo;
     }
 
+
     public String getAbility() {
         return ability;
-    }
-
-    @Override
-    public String toString() {
-        return "MonsterTower{" +
-                "id=" + id +
-                ", towerName='" + towerName + '\'' +
-                ", towerModelingFileInfo=" + towerModelingFileInfo +
-                ", monsterName='" + monsterName + '\'' +
-                ", monsterModelingFileInfo=" + monsterModelingFileInfo +
-                ", ability='" + ability + '\'' +
-                '}';
     }
 }

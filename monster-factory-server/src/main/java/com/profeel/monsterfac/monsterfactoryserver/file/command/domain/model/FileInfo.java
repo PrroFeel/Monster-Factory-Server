@@ -37,6 +37,9 @@ public abstract class FileInfo implements Serializable {
     @Column(name="upload_datetime")
     private String uploadDatetime;  // 업로드 일시
 
+    @Column(name="delete_yn")
+    private boolean isDelete;
+
 
 
 
@@ -45,6 +48,7 @@ public abstract class FileInfo implements Serializable {
         this.extension = extension;
         this.savePath = savePath;
         this.uploadDatetime = uploadDatetime;
+        this.isDelete = false;
     }
 
     public FileInfo() {
@@ -70,6 +74,15 @@ public abstract class FileInfo implements Serializable {
         return uploadDatetime;
     }
 
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void deleteObject(){
+        this.savePath = null;
+        this.isDelete = true;
+    }
 
     @Override
     public String toString() {
