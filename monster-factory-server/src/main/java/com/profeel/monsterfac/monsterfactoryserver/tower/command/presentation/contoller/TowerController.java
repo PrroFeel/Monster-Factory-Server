@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/towers")
 public class TowerController {
 
     private RegistTowerService registTowerService;
@@ -38,7 +38,7 @@ public class TowerController {
         this.registTowerService = registTowerService;
     }
 
-    @PostMapping("/towers")
+    @PostMapping("")
     public ResponseEntity<ResponseDTO> registMonsterTower(RegistTowerRequestDTO registTowerRequest) throws IOException {
         System.out.println("[TowerController] registMonsterTower");
         System.out.println("registTowerRequest : " + registTowerRequest);
@@ -55,4 +55,6 @@ public class TowerController {
                 )
         );
     }
+
+
 }
