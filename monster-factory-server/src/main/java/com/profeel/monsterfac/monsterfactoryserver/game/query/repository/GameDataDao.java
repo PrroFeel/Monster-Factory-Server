@@ -3,6 +3,8 @@ package com.profeel.monsterfac.monsterfactoryserver.game.query.repository;
 import com.profeel.monsterfac.monsterfactoryserver.game.query.data.GameData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * <pre>
  * Class : GameDataRepositoy
@@ -18,4 +20,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 1
  */
 public interface GameDataDao extends JpaRepository<GameData, Integer> {
+    List<GameData> findByName(String gameName);
 }
