@@ -45,14 +45,14 @@ public class UploadFileService {
         ModelingFileInfo fileInfo = fileService.createModelingFileInfo(multipartFile);
 
         // s3 업로드
-        s3UploaderService.modelUpload(fileService.convertToFile(multipartFile), fileInfo.getSavePath());
+        s3UploaderService.modelUpload(multipartFile, fileInfo.getSavePath());
 
         return fileInfo;
     }
 
     public ImageFileInfo uploadImageFile(MultipartFile multipartFile) throws IOException {
         ImageFileInfo fileInfo = fileService.createImageFileInfo(multipartFile);
-        String url = s3UploaderService.imageUpload(fileService.convertToFile(multipartFile), fileInfo.getSavePath());
+        String url = s3UploaderService.imageUpload(multipartFile, fileInfo.getSavePath());
         fileInfo = new ImageFileInfo(fileInfo, url);
         return fileInfo;
     }
