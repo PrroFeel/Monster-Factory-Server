@@ -2,9 +2,11 @@ package com.profeel.monsterfac.monsterfactoryserver.category.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.category.query.data.CategoryData;
 import com.profeel.monsterfac.monsterfactoryserver.category.query.service.CategoryFindAllService;
+import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,10 +43,10 @@ public class CategoryQueryController {
 
     @ApiOperation(value = "카테고리 목록 조회", notes = "카테고리 목록을 조회하는 api")
     @GetMapping
-    public ResponseEntity<?> getCategorys() {
+    public ResponseEntity<ResponseDTO> getCategorys() {
 
         List<CategoryData> categoryDataList = categoryFindAllService.findAllCategorys();
 
-        return ResponseEntity.ok().body(categoryDataList);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "카테고리 목록 조회", categoryDataList));
     }
 }
