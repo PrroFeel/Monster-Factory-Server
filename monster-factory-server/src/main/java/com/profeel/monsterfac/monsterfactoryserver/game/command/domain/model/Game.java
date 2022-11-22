@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
+import static com.profeel.monsterfac.monsterfactoryserver.common.service.DateService.getCurrentDatetimeWithFormating;
 import static com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.GameStatus.fromString;
 
 /**
@@ -53,6 +54,9 @@ public class Game {
     @Embedded
     private Reward reward;
 
+    @Column(name="game_submit_datetime")
+    private String submitDatetime;
+
 
 
     @Embedded
@@ -66,6 +70,7 @@ public class Game {
         this.thumbnail = thumbnail;
         this.developProject = developProject;
         this.gameStatus = fromString("JUDGE_WAIT");
+        this.submitDatetime = getCurrentDatetimeWithFormating();
     }
 
     public Game(String name, String description,FileInfo thumbnail, Reward reward, GameStatus gameStatus, DevelopProject developProject) {
