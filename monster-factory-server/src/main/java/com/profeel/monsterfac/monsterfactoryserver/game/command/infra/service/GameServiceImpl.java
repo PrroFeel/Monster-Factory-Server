@@ -7,6 +7,7 @@ import com.profeel.monsterfac.monsterfactoryserver.game.command.application.exce
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.DevelopProject;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.RewardItem;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.service.GameService;
+import com.profeel.monsterfac.monsterfactoryserver.game.query.service.GameQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.application.exception.NotFoundItemException;
 import com.profeel.monsterfac.monsterfactoryserver.item.command.domain.model.ItemId;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
@@ -41,15 +42,19 @@ public class GameServiceImpl implements GameService {
 
     private ItemQueryService itemQueryService;
 
+    private GameQueryService gameQueryService;
+
     @Autowired
     public GameServiceImpl(
             ProjectAppQueryService projectAppQueryService,
             UploadFileService uploadFileService,
-            ItemQueryService itemQueryService
+            ItemQueryService itemQueryService,
+            GameQueryService gameQueryService
     ){
         this.projectAppQueryService = projectAppQueryService;
         this.uploadFileService = uploadFileService;
         this.itemQueryService = itemQueryService;
+        this.gameQueryService = gameQueryService;
     }
 
     @Override
@@ -79,5 +84,11 @@ public class GameServiceImpl implements GameService {
         ItemData itemData = itemDataList.get(0);
         return new RewardItem(new ItemId(itemData.getItemId()), itemData.getItemName(), quantity);
     }
+
+    @Override
+    public boolean checkGameNameDuplicated(String name) {
+        return gameQueryService.checkDuplicatedName(name);
+    }
+
 
 }

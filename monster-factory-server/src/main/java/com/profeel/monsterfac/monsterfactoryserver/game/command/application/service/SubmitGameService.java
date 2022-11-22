@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.game.command.application.ser
 
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.application.dto.SubmitGameRequestDTO;
+import com.profeel.monsterfac.monsterfactoryserver.game.command.application.exception.DuplicatedGameNameException;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.DevelopProject;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.model.Game;
 import com.profeel.monsterfac.monsterfactoryserver.game.command.domain.repository.GameRepository;
@@ -40,6 +41,10 @@ public class SubmitGameService {
 
     @Transactional
     public Integer submitGame(SubmitGameRequestDTO submitGameRequest) throws IOException {
+        if(gameService.checkGameNameDuplicated(submitGameRequest.getGameName())){
+            throw new DuplicatedGameNameException("동일한 이름의 게임이 이미 존재합니다");
+        }
+
         // project id 검증
         DevelopProject developProject = gameService.createProject(submitGameRequest.getProjectId());
 
