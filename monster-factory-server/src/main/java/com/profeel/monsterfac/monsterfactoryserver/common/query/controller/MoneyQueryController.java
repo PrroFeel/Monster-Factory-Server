@@ -7,6 +7,7 @@ import com.profeel.monsterfac.monsterfactoryserver.common.query.service.MoneyQue
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,10 +45,10 @@ public class MoneyQueryController {
 
     @ApiOperation(value = "유저 보유 머니 조회", notes = "특정 유저가 가진 게임 머니를 조회하는 api")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findMoneyByMemberId(@PathVariable("id") String memberId) {
+    public ResponseEntity<ResponseDTO> findMoneyByMemberId(@PathVariable("id") String memberId) {
 
         List<MoneyData> moneyDataList = moneyQueryService.findMoneyByMemberId(memberId);
 
-        return ResponseEntity.ok().body(moneyDataList);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "유저 보유 머니 조회", moneyDataList));
     }
 }
