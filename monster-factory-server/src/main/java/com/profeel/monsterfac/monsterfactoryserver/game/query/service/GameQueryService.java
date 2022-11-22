@@ -82,25 +82,27 @@ public class GameQueryService {
         return (gameDataDao.findById(gameId)).get();
     }
 
-    public List<GameSummaryData> getGameSummaryDataList(String memberId){
+    public List<GameSummaryData> getGameSummaryDataListByMemberId(String memberId){
         memberQueryService.isVailable(memberId);
         return gameSummaryDataDao.findAllByDeveloperMemberId(memberId);
     }
 
-    public List<GameSummaryData> getUploadedGameSummaryList() {
-        return gameSummaryDataDao.findAllByGameStatus("UPLOADED");
+    public List<GameSummaryData> getGameSummaryDataListByStatus(String status){
+        return gameSummaryDataDao.findAllByGameStatusOrderBySubmitDatetime(status);
     }
 
-    public List<GameSummaryData> getWaitedGameList() {
-        return gameSummaryDataDao.findAllByGameStatus("JUDGE_WAIT");
+    public List<GameSummaryData> getGameSummaryDataListByStatusIn(List<String> status){
+        return gameSummaryDataDao.findAllByGameStatusInOrderBySubmitDatetime(status);
     }
+
 
     public GameInfoData getGameInfoData(Integer gameId){
         isVailable(gameId);
         return gameInfoDataDao.findById(gameId).get();
     }
 
-    public GameDetailsResponseDTO findGameDetailsById(Integer gameId){
+
+    public GameDetailsResponseDTO findGameInfoAndRangkingAndPlayCountById(Integer gameId){
         return new GameDetailsResponseDTO(
                 getGameInfoData(gameId),
                 playQueryService.findPlayCountByGameId(gameId),
@@ -130,4 +132,6 @@ public class GameQueryService {
             return true;
         }
     }
+
+
 }
