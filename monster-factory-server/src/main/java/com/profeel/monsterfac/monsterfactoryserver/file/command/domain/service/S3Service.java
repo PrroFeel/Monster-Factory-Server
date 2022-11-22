@@ -5,8 +5,8 @@ import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.*;
+import com.amazonaws.util.IOUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -34,7 +34,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 @PropertySource("classpath:aws.yml")
-public class S3UploaderService {
+public class S3Service {
 
     @Value("${cloud.aws.s3.buket}")
     private String bucket;
