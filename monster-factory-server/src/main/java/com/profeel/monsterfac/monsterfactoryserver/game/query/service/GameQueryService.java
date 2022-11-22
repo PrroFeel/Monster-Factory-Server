@@ -123,4 +123,11 @@ public class GameQueryService {
     }
 
 
+    public boolean checkDuplicatedName(String gameName) {
+        if(gameDataDao.findByName(gameName).isEmpty()){
+            return false;
+        }else {
+            return true;
+        }
+    }
 }
