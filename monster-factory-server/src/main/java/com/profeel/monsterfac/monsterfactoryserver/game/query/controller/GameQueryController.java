@@ -100,7 +100,7 @@ public class GameQueryController {
             filters.add("APPROVED");
         } else if(filter.equals("r")){
             filters.add("RETURNED");
-        } else {
+        } else if(filter.equals("both")) {
             filters.add("APPROVED");
             filters.add("RETURNED");
         }
