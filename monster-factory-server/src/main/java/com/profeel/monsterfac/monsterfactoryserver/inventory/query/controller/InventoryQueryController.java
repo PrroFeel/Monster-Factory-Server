@@ -1,11 +1,13 @@
 package com.profeel.monsterfac.monsterfactoryserver.inventory.query.controller;
 
+import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.query.data.InventoryData;
 import com.profeel.monsterfac.monsterfactoryserver.inventory.query.service.InventoryQueryService;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,10 +45,10 @@ public class InventoryQueryController {
 
     @ApiOperation(value = "인벤토리 조회", notes = "인벤토리 정보가 나오는 api이다")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findInventoryItemByMemberId(@PathVariable("id") String memberId) {
+    public ResponseEntity<ResponseDTO> findInventoryItemByMemberId(@PathVariable("id") String memberId) {
 
         List<InventoryData> inventoryDataList = inventoryQueryService.findInventoryItemByMemberId(memberId);
 
-        return ResponseEntity.ok().body(inventoryDataList);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "인벤토리 조회", inventoryDataList));
     }
 }

@@ -1,10 +1,12 @@
 package com.profeel.monsterfac.monsterfactoryserver.play.query.controller;
 
+import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.play.query.data.PlayRankData;
 import com.profeel.monsterfac.monsterfactoryserver.play.query.service.PlayQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,10 +44,10 @@ public class PlayQueryController {
 
     @ApiOperation(value = "플레이 랭킹 조회", notes = "플레이 랭킹이 나오는 api이다")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findRankingByGameId(@PathVariable("id") int playGameId) {
+    public ResponseEntity<ResponseDTO> findRankingByGameId(@PathVariable("id") int playGameId) {
 
         List<PlayRankData> GameRanking = playQueryService.findRankingByGameId(playGameId);
 
-        return ResponseEntity.ok().body(GameRanking);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "플레이 랭킹 조회", GameRanking));
     }
 }
