@@ -117,7 +117,7 @@ public class Game {
             throw new IllegalArgumentException("유효하지 않은 게임 상태 값 입니다");
         }
         System.out.println(status);
-        this.gameStatus = GameStatus.APPROVED;
+        this.gameStatus = GameStatus.fromString(status);
     }
 
 
