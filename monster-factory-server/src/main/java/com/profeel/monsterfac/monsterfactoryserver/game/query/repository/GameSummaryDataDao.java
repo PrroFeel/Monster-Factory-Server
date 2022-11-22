@@ -21,6 +21,9 @@ import java.util.List;
  */
 public interface GameSummaryDataDao extends JpaRepository<GameSummaryData, Integer> {
     List<GameSummaryData> findAllByDeveloperMemberId(String developerMemberId);
-    List<GameSummaryData> findAllByGameStatus(String gameStatus);
+    List<GameSummaryData> findAllByGameStatusOrderBySubmitDatetime(String gameStatus);
+
+    List<GameSummaryData> findAllByGameStatusOrderBySubmitDatetimeDesc(String gameStatus);
+    List<GameSummaryData> findAllByGameStatusInOrderBySubmitDatetime(List<String> gameStatusList);
 }
 

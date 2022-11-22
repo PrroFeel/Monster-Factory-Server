@@ -46,15 +46,11 @@ public class GameSummaryData {
     @Column(name="developer_member_id")
     private String developerMemberId;
 
-    protected  GameSummaryData(){}
+    @Column(name="game_submit_datetime")
+    private String submitDatetime;
 
-    public GameSummaryData(Integer id, String name, ImageFileData thumbnailFile, String gameStatus, String developerMemberId) {
-        this.id = id;
-        this.name = name;
-        this.thumbnailFile = thumbnailFile;
-        this.gameStatus = gameStatus;
-        this.developerMemberId = developerMemberId;
-    }
+
+    protected  GameSummaryData(){}
 
     public String getDeveloperMemberId() {
         return developerMemberId;
@@ -74,5 +70,9 @@ public class GameSummaryData {
 
     public String getGameStatus() {
         return gameStatus;
+    }
+
+    public String getSubmitDatetime() {
+        return submitDatetime;
     }
 }

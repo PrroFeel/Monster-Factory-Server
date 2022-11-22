@@ -49,6 +49,7 @@ public class S3Service {
 
     private AmazonS3 amazonS3Client;
 
+
     @PostConstruct
     private void init(){
 
