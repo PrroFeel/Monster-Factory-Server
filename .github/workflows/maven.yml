@@ -18,35 +18,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file monster-factory-server/pom.xml
+    - uses: actions/checkout@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
 
-      # 기본 yml 설정
-      - name: yml file settings
-        with:
-          files: ../monster-factory-sever/src/main/resources/application.yml
-        env:
-          spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
-          spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
-          spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
-          jwt.secret: ${{ secrets.JWT_SECRET }}
-          cloud.aws.credentials.access-key: ${{ secrets.AWS_ACCESS_KEY }}
-          cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          cloud.aws.s3.buket: ${{ secrets.AWS_S3_BUCKET }}
+    - name: Build with Maven
+      run: mvn -B package --file monster-factory-server/pom.xml
 
-      # docker 빌드 & push 설정
-      - name: docker settings
-        run:
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t ${{ secrets.DOCKER_REPO }}/monsterfac-back ./
-          docker push ${{ secrets.DOCKER_REPO }}/monsterfac-back
+    # 기본 yml 설정
+    - name: yml file settings
+      with:
+        files: ../monster-factory-sever/src/main/resources/application.yml
+      env:
+        spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
+        spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
+        spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
+        jwt.secret: ${{ secrets.JWT_SECRET }}
+        cloud.aws.credentials.access-key: ${{ secrets.AWS_ACCESS_KEY }}
+        cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        cloud.aws.s3.buket: ${{ secrets.AWS_S3_BUCKET }}
+
+    # docker 빌드 & push 설정
+    - name: docker settings
+      run:
+        docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        docker build -t ${{ secrets.DOCKER_REPO }}/monsterfac-back ./
+        docker push ${{ secrets.DOCKER_REPO }}/monsterfac-back
+    - name: Get timestamp
+      uses: gerred/actions/current-time@master
+      id: current-time
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
