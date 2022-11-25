@@ -8,9 +8,12 @@ server:
       force: true
 
 
-
-
 spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: DATASOURCE_URL
+    username: DATASOURCE_USERNAME
+    password: DATASOURCE_PASSWORD
   profiles:
     group:
       "local": "local, common"
@@ -74,4 +77,19 @@ spring:
   file-dir: /src/ec2-user/files/
 
 
+cloud:
+  aws:
+    credentials:
+      access-key: AWS_ACCESS_KEY
+      secret-key: AWS_SECRET_ACCESS_KEY
+    region:
+      static: ap-northeast-2
+    stack:
+      #  설정 CloudForamtion 없이도 프로젝트 시작할 수 있도록 설정
+      auto: false
+    s3:
+      # 파일 업로드 및 다운로드 될 버킷
+      buket: AWS_S3_BUCKET
 
+jwt:
+  secret: JWT_SECRET
