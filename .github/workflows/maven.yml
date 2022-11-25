@@ -49,6 +49,15 @@ jobs:
       uses: gerred/actions/current-time@master
       id: current-time
 
+    - name: Run string replace
+      uses: frabert/replace-string-action@master
+      id: format-time
+      with:
+        pattern: '[:\.]+'
+        string: "${{ steps.current-time.outputs.time }}"
+        replace-with: '-'
+        flags: 'g'
+
     - name: beanstalk deploy
       uses: einaregilsson/beanstalk-deploy@v20
       with:
@@ -57,7 +66,7 @@ jobs:
         application_name: profeel-env
         environment_name: Profeelenv-env
         region: ap-northeast-2
-        version_label: profeel-env-${{ steps.current-time.outputs.formattedTime }}
+        version_label: profeel-env-${{ steps.current-time.outputs.replaced }}
         deployment_package: Dockerrun.aws.json
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
