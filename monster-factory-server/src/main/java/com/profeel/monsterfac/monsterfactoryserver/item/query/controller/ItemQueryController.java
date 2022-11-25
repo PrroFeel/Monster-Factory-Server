@@ -1,10 +1,12 @@
 package com.profeel.monsterfac.monsterfactoryserver.item.query.controller;
 
+import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.data.ItemData;
 import com.profeel.monsterfac.monsterfactoryserver.item.query.service.ItemQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,19 +44,19 @@ public class ItemQueryController {
 
     @ApiOperation(value = "아이템 목록 조회", notes = "아이템 전체 목록이 나오는 api이다")
     @GetMapping
-    public ResponseEntity<?> findItem() {
+    public ResponseEntity<ResponseDTO> findItem() {
 
         List<ItemData> itemDataList = itemQueryService.findItem();
 
-        return ResponseEntity.ok().body(itemDataList);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "아이템 목록 조회", itemDataList));
     }
 
     @ApiOperation(value = "아이템 상세 조회", notes = "아이템 하나의 정보가 나오는 api이다")
     @GetMapping("/{id}")
-    public ResponseEntity<?> findItemById(@PathVariable("id") int itemId) {
+    public ResponseEntity<ResponseDTO> findItemById(@PathVariable("id") int itemId) {
 
         List<ItemData> itemDataList = itemQueryService.findItemById(itemId);
 
-        return ResponseEntity.ok().body(itemDataList);
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK.value(), "아이템 상세 조회", itemDataList));
     }
 }

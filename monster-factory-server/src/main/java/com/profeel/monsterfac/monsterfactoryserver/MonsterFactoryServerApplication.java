@@ -13,6 +13,7 @@ public class MonsterFactoryServerApplication {
 		new SpringApplicationBuilder(MonsterFactoryServerApplication.class)
 				.properties(APPLICATION_LOCATIONS)
 						.run(args);
+//		SpringApplication.run(MonsterFactoryServerApplication.class, args);
 	}
 
 }

@@ -2,7 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.tower.command.application.se
 
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.FileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.FileService;
-import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.S3UploaderService;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.service.S3Service;
 import com.profeel.monsterfac.monsterfactoryserver.tower.command.application.dto.RegistTowerRequestDTO;
 import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.model.MonsterTower;
 import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.repostiory.TowerRepository;
@@ -33,7 +33,7 @@ public class RegistTowerService {
     private TowerRepository towerRepository;
     private TowerService towerService;
     @Autowired
-    public RegistTowerService(TowerRepository towerRepository, TowerService towerService, S3UploaderService s3UploaderService, FileService fileService){
+    public RegistTowerService(TowerRepository towerRepository, TowerService towerService, S3Service s3UploaderService, FileService fileService){
         this.towerRepository = towerRepository;
         this.towerService = towerService;
 
@@ -43,15 +43,20 @@ public class RegistTowerService {
         System.out.println("[RegistTowerService] registMonsterTower 메소드 실행");
         System.out.println("registTowerRequest : "+ registTowerRequest);
 
-        FileInfo monsetFileInfo = towerService.uploadFile(registTowerRequest.getMonsterModelingFile());
+        FileInfo monsterFileInfo = towerService.uploadFile(registTowerRequest.getMonsterModelingFile());
+        FileInfo monsterImageInfo = towerService.uploadImage(registTowerRequest.getMonsterImageFile());
+
         FileInfo towerFileInfo = towerService.uploadFile(registTowerRequest.getTowerModelingFile());
+        FileInfo towerImageInfo = towerService.uploadImage(registTowerRequest.getTowerImageFile());
 
         // MonsterTower 객체 생성
         MonsterTower monsterTower = new MonsterTower(
                 registTowerRequest.getTowerName(),
                 towerFileInfo,
+                towerImageInfo,
                 registTowerRequest.getMonsterName(),
-                monsetFileInfo,
+                monsterFileInfo,
+                monsterImageInfo,
                 registTowerRequest.getAbility()
         );
         // monsterTower insert

@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.play.query.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.play.query.data.PlayRankData;
 import com.profeel.monsterfac.monsterfactoryserver.play.query.repository.PlayQueryMapper;
+import com.profeel.monsterfac.monsterfactoryserver.play.query.repository.PlayResultDataDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,14 +26,20 @@ import java.util.List;
 public class PlayQueryService {
 
     private PlayQueryMapper playQueryMapper;
-
-    public PlayQueryService(PlayQueryMapper playQueryMapper) {
+    private PlayResultDataDao playResultDataDao;
+    public PlayQueryService(PlayQueryMapper playQueryMapper,
+                            PlayResultDataDao playResultDataDao) {
         this.playQueryMapper = playQueryMapper;
+        this.playResultDataDao = playResultDataDao;
     }
 
     public List<PlayRankData> findRankingByGameId(int playGameId) {
 
         return playQueryMapper.findRankingByGameId(playGameId);
+    }
+
+    public int findPlayCountByGameId(int gameId){
+        return playResultDataDao.countPlayResultDataByPlayGameId(gameId);
     }
 
 }

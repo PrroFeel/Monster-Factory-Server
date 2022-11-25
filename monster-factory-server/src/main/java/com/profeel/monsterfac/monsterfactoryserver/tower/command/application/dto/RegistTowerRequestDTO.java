@@ -20,20 +20,51 @@ public class RegistTowerRequestDTO {
 
     private String towerName;
     private MultipartFile towerModelingFile;
-
+    private MultipartFile towerImageFile;
     private String monsterName;
     private MultipartFile monsterModelingFile;
-
+    private MultipartFile monsterImageFile;
     private String ability;
 
     protected RegistTowerRequestDTO() {}
 
-    public RegistTowerRequestDTO(String towerName, MultipartFile towerModelingFile, String monsterName, MultipartFile monsterModelingFile, String ability) {
+    public RegistTowerRequestDTO(String towerName, MultipartFile towerModelingFile, MultipartFile towerImageFile, String monsterName, MultipartFile monsterModelingFile, MultipartFile monsterImageFile, String ability) {
         this.towerName = towerName;
         this.towerModelingFile = towerModelingFile;
+        this.towerImageFile = towerImageFile;
         this.monsterName = monsterName;
         this.monsterModelingFile = monsterModelingFile;
+        this.monsterImageFile = monsterImageFile;
         this.ability = ability;
+    }
+
+    @Override
+    public String toString() {
+        return "RegistTowerRequestDTO{" +
+                "towerName='" + towerName + '\'' +
+                ", towerModelingFile=" + towerModelingFile +
+                ", towerImageFile=" + towerImageFile +
+                ", monsterName='" + monsterName + '\'' +
+                ", monsterModelingFile=" + monsterModelingFile +
+                ", monsterImageFile=" + monsterImageFile +
+                ", ability='" + ability + '\'' +
+                '}';
+    }
+
+    public MultipartFile getTowerImageFile() {
+        return towerImageFile;
+    }
+
+    public void setTowerImageFile(MultipartFile towerImageFile) {
+        this.towerImageFile = towerImageFile;
+    }
+
+    public MultipartFile getMonsterImageFile() {
+        return monsterImageFile;
+    }
+
+    public void setMonsterImageFile(MultipartFile monsterImageFile) {
+        this.monsterImageFile = monsterImageFile;
     }
 
     public MultipartFile getTowerModelingFile() {
@@ -76,15 +107,5 @@ public class RegistTowerRequestDTO {
         this.ability = ability;
     }
 
-    @Override
-    public String toString() {
-        return "RegistTowerRequestDTO{" +
-                "towerName='" + towerName + '\'' +
-                ", towerModelingFile=" + towerModelingFile +
-                ", monsterName='" + monsterName + '\'' +
-                ", monsterModelingFile=" + monsterModelingFile +
-                ", ability='" + ability + '\'' +
-                '}';
-    }
 }
 

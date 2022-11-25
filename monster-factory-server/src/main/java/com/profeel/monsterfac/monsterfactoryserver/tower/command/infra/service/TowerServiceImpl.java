@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.tower.command.infra.service;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.annotation.DomainService;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.application.service.UploadFileService;
+import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ImageFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.file.command.domain.model.ModelingFileInfo;
 import com.profeel.monsterfac.monsterfactoryserver.tower.command.domain.service.TowerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class TowerServiceImpl implements TowerService {
 
     public ModelingFileInfo uploadFile(MultipartFile multipartFile) throws IOException {
         return uploadFileService.uploadModelingFile(multipartFile);
+    }
+
+    public ImageFileInfo uploadImage(MultipartFile multipartFile) throws IOException {
+        return uploadFileService.uploadImageFile(multipartFile);
     }
 
 

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class GameQueryController {
     public ResponseEntity<ResponseDTO> findSubmittedGameListByUser(@RequestParam("user") String userId){
         System.out.println("[GameController] findSubmittedGameListByUser -- GET");
 
-        List<GameSummaryData> gameSummaryDataList = gameQueryService.getGameSummaryDataList(userId);
+        List<GameSummaryData> gameSummaryDataList = gameQueryService.getGameSummaryDataListByMemberId(userId);
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
@@ -64,7 +65,7 @@ public class GameQueryController {
     public ResponseEntity<ResponseDTO> findUploadedGameList(){
         System.out.println("[GameController] findUploadedGameList -- GET");
 
-        List<GameSummaryData> gameSummaryDataList = gameQueryService.getUploadedGameSummaryList();
+        List<GameSummaryData> gameSummaryDataList = gameQueryService.getGameSummaryDataListByStatus("UPLOADED");
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
@@ -74,13 +75,12 @@ public class GameQueryController {
         );
     }
 
-
     @ApiOperation(value = "심사 대기 게임 목록 조회", notes = "심사 대기 중인 게임 목록을 조회하는 api" ,response = GameSummaryData.class)
     @GetMapping("/waited")
     public ResponseEntity<ResponseDTO> findWaitingGameList(){
         System.out.println("[GameController] findWaitedGameList -- GET");
 
-        List<GameSummaryData> gameSummaryDataList = gameQueryService.getWaitedGameList();
+        List<GameSummaryData> gameSummaryDataList = gameQueryService.getGameSummaryDataListByStatus("JUDGE_WAIT");
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
@@ -90,34 +90,95 @@ public class GameQueryController {
         );
     }
 
-    @ApiOperation(value = "게임 상세 정보 조회(추가 예정)", notes = "게임에 대해 각종 정보를 조회하는 api" ,response = GameInfoData.class)
-    @GetMapping("/{id}/detail")
+    @ApiOperation(value = "심사된 게임 목록 조회", notes = "심사 완료된 게임 목록을 조회하는 api" ,response = GameSummaryData.class)
+    @GetMapping("/judged")
+    public ResponseEntity<ResponseDTO> findReviewGameList(@RequestParam("filter") String filter){
+        System.out.println("[GameController] findWaitedGameList -- GET");
+
+        List<String> filters = new ArrayList<>();
+        if(filter.equals("a")){
+            filters.add("APPROVED");
+        } else if(filter.equals("r")){
+            filters.add("RETURNED");
+        } else if(filter.equals("both")) {
+            filters.add("APPROVED");
+            filters.add("RETURNED");
+        }
+
+        List<GameSummaryData> gameSummaryDataList = gameQueryService.getGameSummaryDataListByStatusIn(filters);
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"심사 대기 중인 모든 게임 목록 조회"
+                        , gameSummaryDataList
+                )
+        );
+    }
+
+    @ApiOperation(value = "게임 상세 정보 조회", notes = "게임에 대해 기본 상세 정보를 조회하는 api" ,response = GameInfoData.class)
+    @ApiImplicitParam(name = "id", value = "조회할 게임 고유 번호")
+    @GetMapping("/{id}/basic")
     public ResponseEntity<ResponseDTO> findGameInfoById(@PathVariable("id") Integer gameId){
         System.out.println("[GameController] findGameInfoById -- GET");
 
         System.out.println("gameId  : " + gameId);
 
-        GameInfoData gameInfoData = gameQueryService.getGameInfoData(gameId);
+//        GameInfoData gameInfoData = gameQueryService.getGameInfoData(gameId);
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         ,"게임 기본 정보 조회"
-                        , gameInfoData
+                        , gameQueryService.getGameInfoData(gameId)
+                )
+        );
+    }
+
+    @ApiOperation(value = "게임 플레이 상세 정보 조회", notes = "게임에 대해 각종 정보를 조회하는 api로 기본 상세 정보, 플레이수, 랭킹 정보를 포함한다" ,response = GameInfoData.class)
+    @ApiImplicitParam(name = "id", value = "조회할 게임 고유 번호")
+    @GetMapping("/{id}/details")
+    public ResponseEntity<ResponseDTO> findGameDetailsById(@PathVariable("id") Integer gameId){
+        System.out.println("[GameController] findGameInfoById -- GET");
+
+        System.out.println("gameId  : " + gameId);
+
+//        GameInfoData gameInfoData = gameQueryService.getGameInfoData(gameId);
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"게임 기본 정보, 랭킹, 조회수 조회"
+                        , gameQueryService.findGameInfoAndRangkingAndPlayCountById(gameId)
                 )
         );
     }
 
     @ApiOperation(value = "게임 로드 정보 조회", notes = "게임 load 시 필요한 각종 오브젝트 정보를 조회하는 api" ,response = GameLoadResponseDTO.class)
+    @ApiImplicitParam(name = "id", value = "조회할 게임 고유 번호")
     @GetMapping("/{id}/load")
     public ResponseEntity<ResponseDTO> findGameLoadInfoById(@PathVariable("id") Integer gameId){
         System.out.println("[GameController] findGameLoadInfoById -- GET");
-
 
         return ResponseEntity.ok().body(
                 new ResponseDTO(
                         HttpStatus.OK.value()
                         ,"게임 load 필요 정보 조회"
-                        , gameQueryService.findGameLoadInfoById(gameId)
+                        , gameQueryService.findGameLoadInfoById(gameId).getEditInfoData()
+                )
+        );
+    }
+
+
+    @ApiOperation(value = "게임 이름 중복 확인", notes = "게임 이름 중복 확인 api로 true 시 중복, false 시 중복이 아닙니다")
+    @ApiImplicitParam(name = "name", value = "확인 할 이름")
+    @GetMapping("/duplicated")
+    public ResponseEntity<ResponseDTO> checkDuplicatedName(@RequestParam("name") String gameName){
+        System.out.println("[GameController] checkDuplicatedName -- GET");
+
+        return ResponseEntity.ok().body(
+                new ResponseDTO(
+                        HttpStatus.OK.value()
+                        ,"게임 이름 중복 확인"
+                        , gameQueryService.checkDuplicatedName(gameName)
                 )
         );
     }
