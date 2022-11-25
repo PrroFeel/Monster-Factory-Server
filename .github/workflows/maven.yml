@@ -26,19 +26,15 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # 기본 yml 설정
-    - name: yml file settings
+    - name: application yml setting
       uses: microsoft/variable-substitution@v1
-#      with:
-#        files: /monster-factory-server/src/main/resources/application.yml
+      with:
+        files: ./monster-factory-server/src/main/resources/application.yml
       env:
+        spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
         spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
         spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
-        spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
         jwt.secret: ${{ secrets.JWT_SECRET }}
-        cloud.aws.credentials.access-key: ${{ secrets.AWS_ACCESS_KEY }}
-        cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        cloud.aws.s3.buket: ${{ secrets.AWS_S3_BUCKET }}
 
     - name: Build with Maven
       run: mvn -B package --file monster-factory-server/pom.xml
@@ -52,6 +48,17 @@ jobs:
     - name: Get timestamp
       uses: gerred/actions/current-time@master
       id: current-time
+
+    - name: beanstalk deploy
+      uses: einaregilsson/beanstalk-deploy@v20
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: profeel-env
+        environment_name: Profeelenv-env
+        region: ap-northeast-2
+        version_label: profeel-env-${{steps.current-time.outputs.formattedTime}}
+        deployment_package: deploy.zip
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     #- name: Update dependency graph
