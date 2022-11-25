@@ -41,7 +41,7 @@ jobs:
 
     # docker 빌드 & push 설정
     - name: docker settings
-      run:
+      run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         docker build -t ${{ secrets.DOCKER_REPO }}/monsterfac-back ./
         docker push ${{ secrets.DOCKER_REPO }}/monsterfac-back
