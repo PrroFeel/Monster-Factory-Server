@@ -26,8 +26,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-
-
     # 기본 yml 설정
     - name: yml file settings
       uses: microsoft/variable-substitution@v1
