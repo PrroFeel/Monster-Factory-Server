@@ -30,6 +30,7 @@ jobs:
 
     # 기본 yml 설정
     - name: yml file settings
+      uses: microsoft/variable-substitution@v1
       with:
         files: ../monster-factory-sever/src/main/resources/application.yml
       env:
@@ -43,7 +44,7 @@ jobs:
 
     - name: Build with Maven
       run: mvn -B package --file monster-factory-server/pom.xml
-      
+
     # docker 빌드 & push 설정
     - name: docker settings
       run:
