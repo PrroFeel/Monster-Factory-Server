@@ -26,15 +26,15 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: application yml setting
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: ./src/main/resources/application.yml
-      env:
-        spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
-        spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
-        spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
-        jwt.secret: ${{ secrets.JWT_SECRET }}
+#    - name: application yml setting
+#      uses: microsoft/variable-substitution@v1
+#      with:
+#        files: ./monster-factory-server/src/main/resources/application.yml
+#      env:
+#        spring.datasource.url: ${{ secrets.DATASOURCE_URL }}
+#        spring.datasource.username: ${{ secrets.DATASOURCE_USERNAME }}
+#        spring.datasource.password: ${{ secrets.DATASOURCE_PASSWORD }}
+#        jwt.secret: ${{ secrets.JWT_SECRET }}
 
     - name: Build with Maven
       run: mvn -B package --file monster-factory-server/pom.xml
