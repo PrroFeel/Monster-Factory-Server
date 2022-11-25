@@ -43,8 +43,8 @@ jobs:
     - name: docker settings
       run: |
         docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-        docker build -t ${{ secrets.DOCKER_REPO }}/monsterfac-back ./
-        docker push ${{ secrets.DOCKER_REPO }}/monsterfac-back
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/monsterfac-back ./
+        docker push ${{ secrets.DOCKER_USERNAME }}/monsterfac-back
     - name: Get timestamp
       uses: gerred/actions/current-time@master
       id: current-time
