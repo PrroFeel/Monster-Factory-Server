@@ -2,6 +2,7 @@ package com.profeel.monsterfac.monsterfactoryserver.review.query.controller;
 
 import com.profeel.monsterfac.monsterfactoryserver.common.dto.ResponseDTO;
 import com.profeel.monsterfac.monsterfactoryserver.review.query.service.ReviewQueryService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author 최윤서
  * @version 1
  */
+
+@Api(tags = {"review 조회 API"}, description = "review 조회 관련 api")
+@ApiResponses(value = {@ApiResponse(code = 200, message = "성공")})
 @Controller
 @RequestMapping("/reviews")
 public class ReviewQueryController {
@@ -35,7 +39,10 @@ public class ReviewQueryController {
         this.reviewQueryService = reviewQueryService;
     }
 
-    @GetMapping("/by-game")
+
+    @ApiOperation(value = "심사 내용 조회", notes = "심사 된 게임의 심사 내용을 조회하는 api")
+    @ApiImplicitParam(name = "game", value = "조회하고자 하는 게임 고유 번호")
+    @GetMapping("")
     public ResponseEntity<ResponseDTO> findReviewByGame(@RequestParam("game") int gameId){
         System.out.println("[ReviewQueryController] findReviewByGame -- GET");
         return ResponseEntity.ok().body(
