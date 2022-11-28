@@ -49,6 +49,8 @@ public class S3Service {
 
     private AmazonS3 amazonS3Client;
 
+    @Value("${cloud.aws.s3.image-domain}")
+    private String dns;
 
     @PostConstruct
     private void init(){
@@ -76,11 +78,12 @@ public class S3Service {
 //                .withCannedAcl(CannedAccessControlList.PublicRead));
 
         // 업로드 url 반환
-        return amazonS3Client.getUrl(this.bucket, savePath).toString();
+        return this.dns+savePath;
     }
 
 
-    public void modelUpload(MultipartFile uploadFile, String savePath) throws IOException {
+    public void upload(MultipartFile uploadFile, String savePath) throws IOException {
+        // S3 버킷 폴더에 업로드
         amazonS3Client.putObject(new PutObjectRequest(this.bucket, savePath, uploadFile.getInputStream(), getObjectMetadata(uploadFile)));
         System.out.println("s3 url : " + amazonS3Client.getUrl(this.bucket, savePath).toString());
     }
