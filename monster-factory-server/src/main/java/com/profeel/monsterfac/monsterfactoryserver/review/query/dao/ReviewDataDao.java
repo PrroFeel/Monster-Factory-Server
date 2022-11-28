@@ -1,9 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.review.query.dao;
 
-import com.profeel.monsterfac.monsterfactoryserver.review.query.data.reviewData;
+import com.profeel.monsterfac.monsterfactoryserver.review.query.data.ReviewData;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
 
 /**
  * <pre>
@@ -20,6 +18,6 @@ import java.util.List;
  * @version 1
  * @see 참고할 class 또는 외부 url
  */
-public interface reviewDataDao extends JpaRepository<reviewData, Integer> {
-    List<reviewData> findAllByTargetGameId(int targetGameId);
+public interface ReviewDataDao extends JpaRepository<ReviewData, Integer> {
+    ReviewData findFirstByTargetGameId(int targetGameId);
 }

@@ -1,6 +1,7 @@
 package com.profeel.monsterfac.monsterfactoryserver.review.query.data;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,8 +19,9 @@ import javax.persistence.Table;
  * @author 최윤서
  * @version 1
  */
+@Entity
 @Table(name="tbl_reviews")
-public class reviewData {
+public class ReviewData {
 
     @Id
     @Column(name = "review_id")
@@ -40,7 +42,7 @@ public class reviewData {
     @Column(name = "target_game_id")
     private int targetGameId;
 
-    protected reviewData(){}
+    protected ReviewData(){}
 
     public Integer getId() {
         return id;
