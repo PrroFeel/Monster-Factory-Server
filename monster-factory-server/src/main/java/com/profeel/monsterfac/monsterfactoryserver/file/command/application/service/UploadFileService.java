@@ -42,7 +42,7 @@ public class UploadFileService {
         ModelingFileInfo fileInfo = fileService.createModelingFileInfo(multipartFile);
 
         // s3 업로드
-        s3UploaderService.modelUpload(multipartFile, fileInfo.getSavePath());
+        s3UploaderService.upload(multipartFile, fileInfo.getSavePath());
 
         return fileInfo;
     }
