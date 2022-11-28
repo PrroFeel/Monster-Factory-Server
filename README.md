@@ -23,3 +23,5 @@
 <img src="https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white"/>
 <img src="https://img.shields.io/badge/Java-EF2D5E?style=flat-square&logo=java&logoColor=white"/>
 <img src="https://img.shields.io/badge/JPA-F3702A?style=flat-square&logo=jpa&logoColor=white"/>
+<img src="https://img.shields.io/badge/ApacheTomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=white"/>
+<img src="https://img.shields.io/badge/RestAPI-004088?style=flat-square&logo=restapi&logoColor=white"/>
