@@ -8,6 +8,17 @@
 <br/>
 <br/>
 <br/>
+<br/>
+<h3 align=center> 시장 현황 </h3>
+<hr/>
+<div> 게임계의 메타버스 하면 '로블록스'나 'ZEPETO'가 먼저 떠오릅니다 </div>
+<div> ZEPETO의 경우, 전체 이용자의 80% 이상이 10대 청소년입니다 로블록스도 미국 청소년의 반 정도가 플레이 한다고 합니다 </div>
+<div> 실제로 청소년의 방학 시즌과, 학기중 통계를 보면 현저하게 유저의 차이가 나는 것을 볼 수 있습니다 </div>
+
+
+<br/>
+<br/>
+<br/>
 <h3 align=center> 사용 언어 및 개발 환경 </h3>
 <hr/>
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
@@ -16,7 +27,7 @@
 <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white"/>
 <img src="https://img.shields.io/badge/AmazonS3-569A31?style=flat-square&logo=amazons3&logoColor=white"/>
 <img src="https://img.shields.io/badge/AmazonEC2-FF9900?style=flat-square&logo=amazonec2&logoColor=white"/>
-<img src="https://img.shields.io/badge/FrontCloud-FF4F8B?style=flat-square&logo=frontcloud&logoColor=white"/>
+<img src="https://img.shields.io/badge/CloudFront-FF4F8B?style=flat-square&logo=cloudfront&logoColor=white"/>
 <br/>
 <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"/>
 <img src="https://img.shields.io/badge/Swagger-85EA2D?style=flat-square&logo=swagger&logoColor=white"/>
