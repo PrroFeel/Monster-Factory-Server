@@ -49,7 +49,7 @@
 <br/>
 <strong> 5️⃣ 파일 관련 </strong>
 <div> 파일 업로드 및 조회에서 발생하는 파일 관련 트래픽 부하를 줄여서 성능을 높이기 위해 S3 Storage를 사용 합니다 </div>
-<div> 그리고 FrontCloud로 배포해, 원본 파일을 보호하고 보다 빠른 응답을 할 수 있도록 합니다 </div>
+<div> s3의 FrontCloud 배포를 통해 엣지 로케이션에서 보다 빠른 응답을 할 수 있도록 합니다 </div>
 <br/>
 <strong> 6️⃣ Spring Security </strong>
 <div> Spring Security를 사용해 인증된 유저만 접근을 허용하는 보안 처리를 했습니다 </div>
