@@ -59,3 +59,16 @@
 <hr/>
 <br/>
 <img width=70% src='https://user-images.githubusercontent.com/101858177/204679614-1c99056b-1211-4715-9b65-bf7aaa946d00.png'/>
+
+
+<br/><br/><br/><hr/>
+<div>개발자 : <a href="https://github.com/YSChoi123">최윤서</a>, <a href="https://github.com/carrtt1">최은진</a></div>
+<br/>
+<br/>
+<h3>MONSTER FACTORY의 다른 Repository </h3>
+<div><a href="https://github.com/PrroFeel/Monster-Factory-Client"/>MONSTER FACTORY client 페이지 REPO</div>
+<div><a href="https://github.com/PrroFeel/Monster-Factory-admin"/>MONSTER FACTORY admin 페이지 REPO</div>
+
+<br/>
+<h1></h1>
+<img align=right width= 10% src='https://user-images.githubusercontent.com/101858177/204683543-275c3810-b13a-48f8-9e5f-9ba93f721872.png'/>
