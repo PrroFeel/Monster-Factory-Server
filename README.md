@@ -55,7 +55,7 @@
 <br/>
 <br/>
 <br/>
-<h3> 인프라 아키텍처 </h3>
+<h3> 융합 구조도 </h3>
 <hr/>
 <br/>
 <img width=70% src='https://user-images.githubusercontent.com/101858177/204679614-1c99056b-1211-4715-9b65-bf7aaa946d00.png'/>
