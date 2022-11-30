@@ -2,7 +2,7 @@
 <div align=center><img width=50% src='https://user-images.githubusercontent.com/101858177/204172728-a76ab656-2d02-43a7-9c2f-1a0769f3a30d.png'/><div>
 <hr/>
 <div align=center> MONSTER FACTORY는 게임을 제작하고, 플레이할 수 있는 게임용 메타버스 플랫폼입니다 </div>
-<div align=center> 이 repository는 MONSTER FACTORY 개발용 백엔드 제작 REPO입니다 </div>
+<div align=center> MONSTER FACTORY 개발용 백엔드 제작 REPO입니다 </div>
 
 
 <br/>
@@ -31,7 +31,7 @@
 <br/>
 <br/>
 <br/>
-<h3> 프로젝트 설계 </h3>
+<h3> 프로젝트 설계 주안점 </h3>
 <hr/>
 <br/>
 <strong> 1️⃣ 도메인 주도 설계 </strong>
@@ -48,3 +48,12 @@
 <br/>
 <strong> 5️⃣ EC2 </strong>
 > 공통된 서비스를 제공하기 위해 EC2 인스턴스로 클라우드 환경을 배포합니다
+
+
+<br/>
+<br/>
+<br/>
+<h3> 인프라 아키텍처 </h3>
+<hr/>
+<br/>
+<img width=70% src='https://user-images.githubusercontent.com/101858177/204679614-1c99056b-1211-4715-9b65-bf7aaa946d00.png'/>
