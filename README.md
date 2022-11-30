@@ -8,17 +8,6 @@
 <br/>
 <br/>
 <br/>
-<br/>
-<h3 align=center> 시장 현황 </h3>
-<hr/>
-<div> 게임계의 메타버스 하면 '로블록스'나 'ZEPETO'가 먼저 떠오릅니다 </div>
-<div> ZEPETO의 경우, 전체 이용자의 80% 이상이 10대 청소년입니다 </div>
-<div> 로블록스도 미국 청소년의 반 정도가 플레이 한다고 합니다 </div>
-
-
-<br/>
-<br/>
-<br/>
 <h3 align=center> 사용 언어 및 개발 환경 </h3>
 <hr/>
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
@@ -51,11 +40,11 @@
 <strong> 2️⃣ CQRS 패턴 </strong>
 > Query와 Command를 분리해 조회 성능을 높이고 Query를 별도의 솔루션으로 관리할 수 있도록 확장성을 고려합니다
 <br/>
-<strong> 5️⃣ CloudFront </strong>
+<strong> 3️⃣ CloudFront </strong>
 > s3의 CloudFront 배포를 통해 엣지 로케이션에서 보다 빠른 응답을 할 수 있도록 합니다
 <br/>
-<strong> 7️⃣ BCrypt </strong>
+<strong> 4️⃣ BCrypt </strong>
 > BCrypt 암호화를 이용해 DB 저장에서 이뤄지는 보안을 강화했습니다
 <br/>
-<strong> 1️⃣1️⃣ EC2 </strong>
+<strong> 5️⃣ EC2 </strong>
 > 공통된 서비스를 제공하기 위해 EC2 인스턴스로 클라우드 환경을 배포합니다
